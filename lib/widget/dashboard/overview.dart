@@ -41,19 +41,22 @@ class _OverviewState extends State<Overview> {
                       ),
                     ),
                     Expanded(child: Container()),
-                    Container(
-                      height: 30,
-                      width: 93,
-                      decoration: BoxDecoration(
-                        color: AppColor.lightGray,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Center(
-                        child: Text(
-                          'View More',
-                          style: style.copyWith(
-                            fontSize: 13,
-                            color: AppColor.white,
+                    InkWell(
+                      onTap: () {},
+                      child: Container(
+                        height: 33,
+                        width: 93,
+                        decoration: BoxDecoration(
+                          color: AppColor.lightGray,
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Center(
+                          child: Text(
+                            'View More',
+                            style: style.copyWith(
+                              fontSize: 13,
+                              color: AppColor.white,
+                            ),
                           ),
                         ),
                       ),
@@ -85,7 +88,7 @@ class _OverviewState extends State<Overview> {
                           children: [
                             Container(
                               height: 170,
-                              width: screenSize.width < 800 ? 220 : 294,
+                              width: screenSize.width, //< 800 ? 220 : 294,
                               decoration: BoxDecoration(
                                 color: AppColor.white,
                                 //borderRadius: BorderRadius.circular(6),
@@ -120,7 +123,7 @@ class _OverviewState extends State<Overview> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            'Uploaded by   David Christopher',
+                                            'Uploaded by  David Christopher',
                                             style: style.copyWith(
                                               fontSize: 12,
                                               fontWeight: FontWeight.normal,
@@ -154,9 +157,9 @@ class _OverviewState extends State<Overview> {
                                         ],
                                       ),
                                       Expanded(child: Container()),
-                                      IconButton(
-                                        onPressed: () {},
-                                        icon: Icon(
+                                      InkWell(
+                                        onTap: () {},
+                                        child: Icon(
                                           Icons.more_vert_outlined,
                                           color:
                                               AppColor.white.withOpacity(0.5),
@@ -204,19 +207,22 @@ class _OverviewState extends State<Overview> {
                       ),
                     ),
                     Expanded(child: Container()),
-                    Container(
-                      height: 30,
-                      width: 93,
-                      decoration: BoxDecoration(
-                        color: AppColor.lightGray,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Center(
-                        child: Text(
-                          'View More',
-                          style: style.copyWith(
-                            fontSize: 13,
-                            color: AppColor.white,
+                    InkWell(
+                      onTap: () {},
+                      child: Container(
+                        height: 33,
+                        width: 93,
+                        decoration: BoxDecoration(
+                          color: AppColor.lightGray,
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Center(
+                          child: Text(
+                            'View More',
+                            style: style.copyWith(
+                              fontSize: 13,
+                              color: AppColor.white,
+                            ),
                           ),
                         ),
                       ),
@@ -272,7 +278,7 @@ class _OverviewState extends State<Overview> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            'Uploaded by   David Christopher',
+                                            'Uploaded by  David Christopher',
                                             style: style.copyWith(
                                               fontSize: 12,
                                               fontWeight: FontWeight.normal,
@@ -307,9 +313,9 @@ class _OverviewState extends State<Overview> {
                                         ],
                                       ),
                                       Expanded(child: Container()),
-                                      IconButton(
-                                        onPressed: () {},
-                                        icon: Icon(
+                                      InkWell(
+                                        onTap: () {},
+                                        child: Icon(
                                           Icons.more_vert_outlined,
                                           color:
                                               AppColor.white.withOpacity(0.5),

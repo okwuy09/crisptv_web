@@ -1,8 +1,10 @@
 import 'package:crisptv_media/component/admin_button.dart';
 import 'package:crisptv_media/component/color.dart';
+import 'package:crisptv_media/component/custom_switch.dart';
 import 'package:crisptv_media/component/style.dart';
 import 'package:crisptv_media/widget/dashboard/general_setting.dart';
 import 'package:crisptv_media/widget/dashboard/overview.dart';
+import 'package:crisptv_media/widget/dashboard/video.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -17,7 +19,7 @@ class _DashBoardState extends State<DashBoard> {
   bool isdarkmode = false;
 
   List<bool> isclicked = [
-    false,
+    true,
     false,
     false,
     false,
@@ -34,12 +36,14 @@ class _DashBoardState extends State<DashBoard> {
 
   String titleHead = 'Overview';
 
+  bool switched = false;
+
   Widget _getBodyWidget(currentIndex) {
     switch (currentIndex) {
       case 0:
         return const Expanded(child: Overview());
       case 1:
-        return const Expanded(child: GeneralSettings());
+        return const Expanded(child: Videos());
 
       case 2:
         return Expanded(
@@ -51,13 +55,7 @@ class _DashBoardState extends State<DashBoard> {
         );
 
       case 3:
-        return Expanded(
-          child: Container(
-            color: Colors.yellow,
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-          ),
-        );
+        return const Expanded(child: GeneralSettings());
 
       case 4:
         return Expanded(
@@ -127,9 +125,10 @@ class _DashBoardState extends State<DashBoard> {
                   padding: const EdgeInsets.symmetric(vertical: 22),
                   child: TextField(
                     style: style.copyWith(
-                      fontSize: 14,
+                      fontSize: 13,
                       color: AppColor.white.withOpacity(0.6),
                     ),
+                    cursorColor: AppColor.white.withOpacity(0.5),
                     // controller: widget.delegate._queryTextController,
                     // focusNode: focusNode,
                     // style: theme.textTheme.headline6,
@@ -414,26 +413,36 @@ class _DashBoardState extends State<DashBoard> {
                       ),
 
                       // darkmood
-                      SizedBox(height: screenSize.height / 20),
-                      InkWell(
-                          onTap: () {
-                            setState(() {
-                              isclicked.replaceRange(0, isclicked.length, [
-                                for (int i = 0; i < isclicked.length; i++) false
-                              ]);
-                              isclicked[4] = true;
-                              titleHead = headText[4];
-                            });
-                            pageIndex = 4;
-                          },
-                          child: Container(
-                            height: 80,
-                            width: 40,
-                            decoration: BoxDecoration(
-                              color: AppColor.lightGray,
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                          )),
+                      SizedBox(height: screenSize.height / 10),
+                      CustomSwitch(
+                        value: switched,
+                        disableColor: AppColor.lightGray.withOpacity(0.6),
+                        enableColor: AppColor.white.withOpacity(0.4),
+                        onChanged: ((value) {
+                          setState(() {
+                            switched = value;
+                          });
+                        }),
+                      )
+                      // InkWell(
+                      //     onTap: () {
+                      //       setState(() {
+                      //         isclicked.replaceRange(0, isclicked.length, [
+                      //           for (int i = 0; i < isclicked.length; i++) false
+                      //         ]);
+                      //         isclicked[4] = true;
+                      //         titleHead = headText[4];
+                      //       });
+                      //       pageIndex = 4;
+                      //     },
+                      //     child: Container(
+                      //       height: 80,
+                      //       width: 40,
+                      //       decoration: BoxDecoration(
+                      //         color: AppColor.lightGray,
+                      //         borderRadius: BorderRadius.circular(8),
+                      //       ),
+                      //     )),
                     ],
                   ),
                 ),
