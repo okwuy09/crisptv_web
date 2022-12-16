@@ -171,7 +171,7 @@ class _MoreNewsContainerState extends State<MoreNewsContainer> {
                               //
                               Container(
                                 width: 284,
-                                height: 72,
+                                height: 80,
                                 padding: const EdgeInsets.only(top: 15),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,

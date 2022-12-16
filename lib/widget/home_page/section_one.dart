@@ -17,6 +17,7 @@ class _SectionOneState extends State<SectionOne> {
     return Container(
       height: screenSize.width < 800 ? 340 : 500,
       width: screenSize.width,
+      margin: EdgeInsets.only(top: screenSize.height / 5),
       padding: EdgeInsets.symmetric(horizontal: screenSize.width / 20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

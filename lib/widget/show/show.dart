@@ -63,7 +63,7 @@ class _ShowsPageState extends State<ShowsPage> {
           padding: const EdgeInsets.all(6),
           margin: const EdgeInsets.only(right: 20),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(15),
             border: Border.all(
               color: _isclicked[i]
                   ? AppColor.white.withOpacity(0.4)
@@ -74,7 +74,7 @@ class _ShowsPageState extends State<ShowsPage> {
             child: Text(
               items[i],
               style: style.copyWith(
-                fontSize: 14,
+                fontSize: 15,
                 color: _isclicked[i]
                     ? AppColor.white.withOpacity(0.9)
                     : AppColor.white.withOpacity(0.5),
@@ -95,172 +95,176 @@ class _ShowsPageState extends State<ShowsPage> {
     /// generated new pages to navigate through
     var pages = List.generate(
       _numPages,
-      (index) => Builder(builder: (context) {
-        selectedPages() {
-          switch (selectedPage) {
-            case "Popular":
-              return 16;
+      (index) => Builder(
+        builder: (context) {
+          selectedPages() {
+            switch (selectedPage) {
+              case "Popular":
+                return 16;
 
-            case "Insights":
-              return 14;
+              case "Insights":
+                return 14;
 
-            case "Conto":
-              return 12;
+              case "Conto":
+                return 12;
 
-            case "Roundtable":
-              return 10;
-            case "Streetspur":
-              return 8;
+              case "Roundtable":
+                return 10;
+              case "Streetspur":
+                return 8;
 
-            case "Business Discovery":
-              return 7;
-            case "Gamechangers":
-              return 6;
+              case "Business Discovery":
+                return 7;
+              case "Gamechangers":
+                return 6;
 
-            case "Podcasts":
-              return 5;
-            case "Mind over matters":
-              return 4;
+              case "Podcasts":
+                return 5;
+              case "Mind over matters":
+                return 4;
 
-            default:
-              break;
+              default:
+                break;
+            }
           }
-        }
 
-        return screenSize.width < 800
-            ? ListView.builder(
-                itemCount: selectedPages(),
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemBuilder: ((context, index) {
-                  return Column(
-                    children: [
-                      Stack(
-                        children: [
-                          Container(
-                            height: 320,
-                            width: screenSize.width, // < 800 ? 220 : 294,
-                            decoration: BoxDecoration(
-                              color: AppColor.white,
-                              //borderRadius: BorderRadius.circular(6),
-                              image: const DecorationImage(
-                                image: AssetImage('assets/street.jpg'),
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          ),
-                          Positioned(
-                            bottom: 0,
-                            child: InkWell(
-                              onTap: () => Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (_) => const PostDetail(),
+          return screenSize.width < 800
+              ? ListView.builder(
+                  itemCount: selectedPages(),
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemBuilder: ((context, index) {
+                    return Column(
+                      children: [
+                        Stack(
+                          children: [
+                            Container(
+                              height: 320,
+                              width: screenSize.width, // < 800 ? 220 : 294,
+                              decoration: BoxDecoration(
+                                color: AppColor.white,
+                                //borderRadius: BorderRadius.circular(6),
+                                image: const DecorationImage(
+                                  image: AssetImage('assets/street.jpg'),
+                                  fit: BoxFit.cover,
                                 ),
                               ),
-                              child: Container(
-                                width: screenSize.width, //< 800 ? 220 : 295,
-                                height: screenSize.width < 800 ? 85 : 72,
-                                color: AppColor.gray.withOpacity(0.95),
-                                padding: const EdgeInsets.all(15),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Why you should put your business i...',
-                                      style: style.copyWith(
-                                        fontSize: 14,
-                                        color: AppColor.white,
+                            ),
+                            Positioned(
+                              bottom: 0,
+                              child: InkWell(
+                                onTap: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) => const PostDetail(),
+                                  ),
+                                ),
+                                child: Container(
+                                  width: screenSize.width, //< 800 ? 220 : 295,
+                                  height: screenSize.width < 800 ? 85 : 72,
+                                  color: AppColor.gray.withOpacity(0.95),
+                                  padding: const EdgeInsets.all(15),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Why you should put your business i...',
+                                        style: style.copyWith(
+                                          fontSize: 14,
+                                          color: AppColor.white,
+                                        ),
                                       ),
+                                      const SizedBox(height: 10),
+                                      Text(
+                                        'CONTO ALLA ROVESCIA | 09.08.2022',
+                                        style: style.copyWith(
+                                          fontSize: 10,
+                                          fontWeight: FontWeight.normal,
+                                          color:
+                                              AppColor.white.withOpacity(0.6),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                        const SizedBox(height: 20)
+                      ],
+                    );
+                  }),
+                )
+              : GridView.builder(
+                  itemCount: selectedPages(),
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: screenSize.width < 800 ? 3 : 4,
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 10,
+                  ),
+                  itemBuilder: ((context, index) {
+                    return Stack(
+                      children: [
+                        Container(
+                          height: 300,
+                          width: screenSize.width < 800 ? 220 : 294,
+                          decoration: BoxDecoration(
+                            color: AppColor.white,
+                            //borderRadius: BorderRadius.circular(6),
+                            image: const DecorationImage(
+                              image: AssetImage('assets/street.jpg'),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          bottom: 0,
+                          child: InkWell(
+                            onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => const PostDetail(),
+                              ),
+                            ),
+                            child: Container(
+                              width: screenSize.width < 800 ? 220 : 295,
+                              height: screenSize.width < 800 ? 85 : 72,
+                              color: AppColor.gray.withOpacity(0.95),
+                              padding: const EdgeInsets.all(12),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Why you should put your business i...',
+                                    style: style.copyWith(
+                                      fontSize: 14,
+                                      color: AppColor.white,
                                     ),
-                                    const SizedBox(height: 10),
-                                    Text(
-                                      'CONTO ALLA ROVESCIA | 09.08.2022',
-                                      style: style.copyWith(
-                                        fontSize: 10,
-                                        fontWeight: FontWeight.normal,
-                                        color: AppColor.white.withOpacity(0.6),
-                                      ),
-                                    )
-                                  ],
-                                ),
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Text(
+                                    'CONTO ALLA ROVESCIA | 09.08.2022',
+                                    style: style.copyWith(
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.normal,
+                                      color: AppColor.white.withOpacity(0.6),
+                                    ),
+                                  )
+                                ],
                               ),
                             ),
-                          )
-                        ],
-                      ),
-                      const SizedBox(height: 20)
-                    ],
-                  );
-                }),
-              )
-            : GridView.builder(
-                itemCount: selectedPages(),
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: screenSize.width < 800 ? 3 : 4,
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 10,
-                ),
-                itemBuilder: ((context, index) {
-                  return Stack(
-                    children: [
-                      Container(
-                        height: 300,
-                        width: screenSize.width < 800 ? 220 : 294,
-                        decoration: BoxDecoration(
-                          color: AppColor.white,
-                          //borderRadius: BorderRadius.circular(6),
-                          image: const DecorationImage(
-                            image: AssetImage('assets/street.jpg'),
-                            fit: BoxFit.cover,
                           ),
-                        ),
-                      ),
-                      Positioned(
-                        bottom: 0,
-                        child: InkWell(
-                          onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (_) => const PostDetail(),
-                            ),
-                          ),
-                          child: Container(
-                            width: screenSize.width < 800 ? 220 : 295,
-                            height: screenSize.width < 800 ? 85 : 72,
-                            color: AppColor.gray.withOpacity(0.95),
-                            padding: const EdgeInsets.all(15),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Why you should put your business i...',
-                                  style: style.copyWith(
-                                    fontSize: 14,
-                                    color: AppColor.white,
-                                  ),
-                                ),
-                                const SizedBox(height: 10),
-                                Text(
-                                  'CONTO ALLA ROVESCIA | 09.08.2022',
-                                  style: style.copyWith(
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.normal,
-                                    color: AppColor.white.withOpacity(0.6),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                      )
-                    ],
-                  );
-                }),
-              );
-      }),
+                        )
+                      ],
+                    );
+                  }),
+                );
+        },
+      ),
     );
     return TopBarContents(
       backgroundColor: AppColor.primaryColor,

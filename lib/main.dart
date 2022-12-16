@@ -1,11 +1,12 @@
 import 'package:crisptv_media/component/style.dart';
+import 'package:crisptv_media/widget/dashboard/news_article/text_editor.dart';
 import 'package:crisptv_media/widget/live_session/live_session.dart';
 import 'package:crisptv_media/widget/news/news.dart';
+import 'package:crisptv_media/widget/post_detail.dart';
 import 'package:crisptv_media/widget/show/show.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:url_strategy/url_strategy.dart';
-
 import 'component/color.dart';
 import 'widget/dashboard/dashboard.dart';
 import 'widget/home_page/home_page.dart';
@@ -15,6 +16,8 @@ void main() {
   setPathUrlStrategy();
   runApp(MyApp());
 }
+
+final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
 
 class MyApp extends StatelessWidget {
   MyApp({Key? key}) : super(key: key);
@@ -29,15 +32,17 @@ class MyApp extends StatelessWidget {
       routeInformationProvider: _router.routeInformationProvider,
       title: 'Crisptv-media',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.grey,
+        primaryColor: AppColor.white,
       ),
       // home: const HomePage(),
     );
   }
 
   final GoRouter _router = GoRouter(
+    navigatorKey: _rootNavigatorKey,
     errorBuilder: ((context, state) => ErrorScreen(error: state.error)),
-    //initialLocation: '/',
+    initialLocation: '/',
     routes: <GoRoute>[
       GoRoute(
         path: '/',
@@ -53,10 +58,31 @@ class MyApp extends StatelessWidget {
         path: '/admin',
         builder: (BuildContext context, GoRouterState state) =>
             const DashBoard(),
+        routes: <RouteBase>[
+          GoRoute(
+            path: ':name',
+            name: 'new_article',
+            parentNavigatorKey: _rootNavigatorKey,
+            builder: (BuildContext context, GoRouterState state) {
+              return const TextEditor();
+            },
+          ),
+        ],
       ),
       GoRoute(
         path: '/news',
         builder: (BuildContext context, GoRouterState state) => NewsPage(),
+        routes: <RouteBase>[
+          GoRoute(
+            path: ':newsdetail',
+            name: 'news_detail',
+            parentNavigatorKey: _rootNavigatorKey,
+            builder: (BuildContext context, GoRouterState state) {
+              // state.extra; use to pass data to another page
+              return const PostDetail();
+            },
+          ),
+        ],
       ),
       GoRoute(
         path: '/live-sessions',

@@ -11,7 +11,9 @@ class MyTextForm extends StatelessWidget {
   final TextInputType? keyboardType;
   final Iterable<String>? autofillHints;
   final Function(String)? onChanged;
-  const MyTextForm(
+  final Color? fillColor;
+  Color borderColor;
+  MyTextForm(
       {Key? key,
       required this.controller,
       this.validatior,
@@ -19,6 +21,8 @@ class MyTextForm extends StatelessWidget {
       this.hintText,
       this.suffixIcon,
       this.autofillHints,
+      this.fillColor,
+      this.borderColor = const Color(0xFF000000),
       required this.obscureText,
       this.keyboardType})
       : super(key: key);
@@ -35,10 +39,13 @@ class MyTextForm extends StatelessWidget {
       onChanged: onChanged,
       validator: validatior,
       decoration: InputDecoration(
-        fillColor: AppColor.white,
+        fillColor: fillColor,
         filled: true,
         hintText: hintText,
-        hintStyle: style.copyWith(color: AppColor.gray),
+        hintStyle: style.copyWith(
+          color: AppColor.primaryColor.withOpacity(0.5),
+          fontSize: 14,
+        ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(6.0),
           borderSide: BorderSide(
@@ -61,7 +68,7 @@ class MyTextForm extends StatelessWidget {
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(6.0),
-          borderSide: BorderSide(color: AppColor.gray),
+          borderSide: BorderSide(color: borderColor),
         ),
         suffixIcon: suffixIcon,
       ),

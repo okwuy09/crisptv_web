@@ -1,7 +1,4 @@
-import 'package:crisptv_media/component/style.dart';
 import 'package:flutter/material.dart';
-
-import 'color.dart';
 
 class AdminButton extends StatelessWidget {
   final IconData icon;

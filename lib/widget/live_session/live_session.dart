@@ -4,10 +4,7 @@ import 'package:crisptv_media/widget/buttom_bar.dart';
 import 'package:crisptv_media/widget/show/show_news.dart';
 import 'package:crisptv_media/widget/topbar.dart';
 import 'package:flutter/material.dart';
-import 'package:number_paginator/number_paginator.dart';
-
 import '../../component/episodes_temp.dart';
-import '../post_detail.dart';
 
 class LiveSessions extends StatefulWidget {
   const LiveSessions({super.key});

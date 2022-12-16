@@ -1,8 +1,5 @@
 import 'package:crisptv_media/component/color.dart';
-
 import 'package:crisptv_media/component/style.dart';
-import 'package:crisptv_media/widget/home_page/section_four_display.dart';
-import 'package:crisptv_media/widget/home_page/section_one.dart';
 import 'package:crisptv_media/widget/news/business.dart';
 import 'package:crisptv_media/widget/news/career_hack.dart';
 import 'package:crisptv_media/widget/news/media.dart';
@@ -10,7 +7,7 @@ import 'package:crisptv_media/widget/news/politic_now.dart';
 import 'package:crisptv_media/widget/news/tech.dart';
 import 'package:crisptv_media/widget/topbar.dart';
 import 'package:flutter/material.dart';
-import 'Trending.dart';
+import 'trending.dart';
 
 class NewsPage extends StatefulWidget {
   NewsPage({super.key, this.selectedPage = 'Trending'});
@@ -71,7 +68,7 @@ class _NewsPageState extends State<NewsPage> {
             child: Text(
               items[i],
               style: style.copyWith(
-                fontSize: 14,
+                fontSize: 15,
                 color: widget.selectedPage == items[i] //_isclicked[i]
                     ? AppColor.white.withOpacity(0.9)
                     : AppColor.white.withOpacity(0.5),

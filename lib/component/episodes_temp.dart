@@ -1,8 +1,7 @@
 import 'package:crisptv_media/component/color.dart';
 import 'package:crisptv_media/component/style.dart';
 import 'package:flutter/material.dart';
-
-import '../widget/post_detail.dart';
+import 'package:go_router/go_router.dart';
 
 class EpisodesWidget extends StatefulWidget {
   const EpisodesWidget({super.key, required this.sectionTitle});
@@ -17,10 +16,8 @@ class _EpisodesWidgetState extends State<EpisodesWidget> {
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
-
-    return Container(
+    return SizedBox(
       height: screenSize.height / 1.9,
-      //padding: EdgeInsets.symmetric(horizontal: screenSize.width / 20),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Text(
           widget.sectionTitle,
@@ -57,15 +54,16 @@ class _EpisodesWidgetState extends State<EpisodesWidget> {
                       Positioned(
                         bottom: 0,
                         child: InkWell(
-                          onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (_) => const PostDetail(),
-                            ),
+                          onTap: () => context.goNamed(
+                            "news_detail",
+                            params: {
+                              "newsdetail": "Why you should put your business",
+                            },
+                            extra: 'ok',
                           ),
                           child: Container(
                             width: screenSize.width < 800 ? 220 : 294,
-                            height: screenSize.width < 800 ? 85 : 72,
+                            height: screenSize.width < 800 ? 85 : 84,
                             color: AppColor.gray.withOpacity(0.95),
                             padding: const EdgeInsets.all(15),
                             child: Column(

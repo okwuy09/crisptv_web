@@ -2,9 +2,10 @@ import 'package:crisptv_media/component/color.dart';
 import 'package:crisptv_media/widget/news/news.dart';
 import 'package:crisptv_media/widget/topbar.dart';
 import 'package:flutter/material.dart';
-import '../../component/newspage_container.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import '../../component/style.dart';
-import 'package:share_plus/share_plus.dart';
+//import 'package:share_plus/share_plus.dart';
+import '../component/comment_box.dart';
 import '../component/more_news.dart';
 import 'buttom_bar.dart';
 
@@ -16,6 +17,7 @@ class PostDetail extends StatefulWidget {
 }
 
 class _PostDetailState extends State<PostDetail> {
+  bool commentOnPost = false;
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
@@ -110,13 +112,24 @@ class _PostDetailState extends State<PostDetail> {
                           ),
                         ),
                         const SizedBox(height: 50),
-                        Text(
-                          'The presidential candidate of the Peoples Democratic Party (PDP) made the donation when he visited the state, among the worst hit since the deadly floods started, on Tuesday. “On my part and on behalf of my family, I wish to announce a donation of 50 million to the fund. It is a national emergency relief fund similar in scope to what was initiated during the COVID-19 pandemic,” Atiku said. He equally appealed to his friends and associates to emulate him in donating to the victims of the flooding. “And to that end, I wish to call on my friends and associates in the corporate world in their private capacity to join me in this cause,” the PDP candidate added. Atiku also promised to ensure such an incident does not reoccur if he is elected in 2023. “If elected as president in the presidential election next year, I shall commit to completing the Dadin Hausa Dam in Adamawa State to manage the releases of excess water in Lagdo Dam in the Cameroon Republic. I shall also commit to working with state governments like Bayelsa to build the required flood management infrastructures,” he pledged. His comment comes as the Federal Government said the floods have affected 3,219,780 persons, with no fewer than 612 killed. It has also displaced 1,427,370 persons and 181,600 houses have been partially damaged, while another 123,807 houses totally damaged, according to the Federal Ministry of Humanitarian Affairs. Also, 176,852 hectares of farmlands are said to have been partially damaged and 392,399 hectares totally damaged. “And to that end, I wish to call on my friends and associates in the corporate world in their private capacity to join me in this cause,” the PDP candidate added. Atiku also promised to ensure such an incident does not reoccur if he is elected in 2023. “If elected as president in the presidential election next year, I shall commit to completing the Dadin Hausa Dam in Adamawa State to manage the releases of excess water in Lagdo Dam in the Cameroon Republic. I shall also commit to working with state governments like Bayelsa to build the required flood management infrastructures,” he pledged. His comment comes as the Federal Government said the floods have affected 3,219,780 persons, with no fewer than 612 killed. It has also displaced 1,427,370 persons and 181,600 houses have been partially damaged, while another 123,807 houses totally damaged, according to the Federal Ministry of Humanitarian Affairs. Also, 176,852 hectares of farmlands are said to have been partially damaged and 392,399 hectares totally damaged.',
-                          style: style.copyWith(
-                            color: AppColor.white.withOpacity(0.7),
+                        HtmlWidget(
+                          '<p> The presidential candidate of the Peoples Democratic Party (PDP) made the donation when he visited the state, among the worst hit since the deadly floods started, on Tuesday. “On my part and on behalf of my family, I wish to announce a donation of 50 million to the fund. It is a national emergency relief fund similar in scope to what was initiated during the COVID-19 pandemic,” <p>Atiku said. He equally appealed to his friends and associates to emulate him in donating to the victims of the flooding. “And to that end, I wish to call on my friends and associates in the corporate world in their private capacity to join me in this cause,” the PDP candidate added. Atiku also promised to ensure such an incident does not reoccur if he is elected in 2023.</p> “If elected as president in the presidential election next year, I shall commit to completing the Dadin Hausa Dam in Adamawa State to manage the releases of excess water in Lagdo Dam in the Cameroon Republic. I shall also commit to working with state governments like Bayelsa to build the required flood management infrastructures,” <p> he pledged. His comment comes as the Federal Government said the floods have affected 3,219,780 persons, with no fewer than 612 killed. It has also displaced 1,427,370 persons and 181,600 houses have been partially damaged, while another 123,807 houses totally damaged, according to the Federal Ministry of Humanitarian Affairs. Also, 176,852 hectares of farmlands are said to have been partially damaged and 392,399 hectares totally damaged.</p> “And to that end, I wish to call on my friends and associates in the corporate world in their private capacity to join me in this cause,” the PDP candidate added. Atiku also promised to ensure such an incident does not reoccur if he is elected in 2023. “If elected as president in the presidential election next year, I shall commit to completing the Dadin Hausa Dam in Adamawa State to manage the releases of excess water in Lagdo Dam in the Cameroon Republic. <p> I shall also commit to working with state governments like Bayelsa to build the required flood management infrastructures,” he pledged. His comment comes as the Federal Government said the floods have affected 3,219,780 persons, with no fewer than 612 killed. It has also displaced 1,427,370 persons and 181,600 houses have been partially damaged, while another 123,807 houses totally damaged, according to the Federal Ministry of Humanitarian Affairs. Also, 176,852 hectares of farmlands are said to have been partially damaged and 392,399 hectares totally damaged.</p> <strong>strong</strong>, <em>emphasized</em>and <span style="color: yellow">colored</span> text.</p><!-- anything goes here -->'
+                          '',
+                          textStyle: style.copyWith(
+                            color: AppColor.white.withOpacity(0.8),
                             wordSpacing: 1.5,
                           ),
+                          onErrorBuilder: (context, element, error) =>
+                              Text('$element error: $error'),
                         ),
+
+                        // Text(
+                        //   'The presidential candidate of the Peoples Democratic Party (PDP) made the donation when he visited the state, among the worst hit since the deadly floods started, on Tuesday. “On my part and on behalf of my family, I wish to announce a donation of 50 million to the fund. It is a national emergency relief fund similar in scope to what was initiated during the COVID-19 pandemic,” Atiku said. He equally appealed to his friends and associates to emulate him in donating to the victims of the flooding. “And to that end, I wish to call on my friends and associates in the corporate world in their private capacity to join me in this cause,” the PDP candidate added. Atiku also promised to ensure such an incident does not reoccur if he is elected in 2023. “If elected as president in the presidential election next year, I shall commit to completing the Dadin Hausa Dam in Adamawa State to manage the releases of excess water in Lagdo Dam in the Cameroon Republic. I shall also commit to working with state governments like Bayelsa to build the required flood management infrastructures,” he pledged. His comment comes as the Federal Government said the floods have affected 3,219,780 persons, with no fewer than 612 killed. It has also displaced 1,427,370 persons and 181,600 houses have been partially damaged, while another 123,807 houses totally damaged, according to the Federal Ministry of Humanitarian Affairs. Also, 176,852 hectares of farmlands are said to have been partially damaged and 392,399 hectares totally damaged. “And to that end, I wish to call on my friends and associates in the corporate world in their private capacity to join me in this cause,” the PDP candidate added. Atiku also promised to ensure such an incident does not reoccur if he is elected in 2023. “If elected as president in the presidential election next year, I shall commit to completing the Dadin Hausa Dam in Adamawa State to manage the releases of excess water in Lagdo Dam in the Cameroon Republic. I shall also commit to working with state governments like Bayelsa to build the required flood management infrastructures,” he pledged. His comment comes as the Federal Government said the floods have affected 3,219,780 persons, with no fewer than 612 killed. It has also displaced 1,427,370 persons and 181,600 houses have been partially damaged, while another 123,807 houses totally damaged, according to the Federal Ministry of Humanitarian Affairs. Also, 176,852 hectares of farmlands are said to have been partially damaged and 392,399 hectares totally damaged.',
+                        //   style: style.copyWith(
+                        //     color: AppColor.white.withOpacity(0.7),
+                        //     wordSpacing: 1.5,
+                        //   ),
+                        // ),
 
                         SizedBox(height: screenSize.height / 8),
                         screenSize.width < 900
@@ -200,20 +213,20 @@ class _PostDetailState extends State<PostDetail> {
                                               const SizedBox(width: 10),
                                               InkWell(
                                                 onTap: () async {
-                                                  await Share.shareXFiles([
-                                                    XFile('assets/hello.txt')
-                                                  ], text: 'Great picture')
-                                                      .then(
-                                                    (value) =>
-                                                        ScaffoldMessenger.of(
-                                                                context)
-                                                            .showSnackBar(
-                                                      SnackBar(
-                                                        content: Text(
-                                                            "Share result: ${value.status}"),
-                                                      ),
-                                                    ),
-                                                  );
+                                                  // await Share.shareXFiles([
+                                                  //   XFile('assets/hello.txt')
+                                                  // ], text: 'Great picture')
+                                                  //     .then(
+                                                  //   (value) =>
+                                                  //       ScaffoldMessenger.of(
+                                                  //               context)
+                                                  //           .showSnackBar(
+                                                  //     SnackBar(
+                                                  //       content: Text(
+                                                  //           "Share result: ${value.status}"),
+                                                  //     ),
+                                                  //   ),
+                                                  // );
                                                 },
                                                 child: Icon(
                                                   Icons.share,
@@ -255,7 +268,11 @@ class _PostDetailState extends State<PostDetail> {
                                       Expanded(child: Container()),
                                       //const SizedBox(width: 20),
                                       InkWell(
-                                        onTap: () {},
+                                        onTap: () {
+                                          setState(() {
+                                            commentOnPost = !commentOnPost;
+                                          });
+                                        },
                                         child: Container(
                                           height: 36,
                                           width: 160,
@@ -353,7 +370,11 @@ class _PostDetailState extends State<PostDetail> {
                                         ),
                                         const SizedBox(width: 20),
                                         InkWell(
-                                          onTap: () {},
+                                          onTap: () {
+                                            setState(() {
+                                              commentOnPost = !commentOnPost;
+                                            });
+                                          },
                                           child: Container(
                                             height: 36,
                                             width: 183,
@@ -397,19 +418,19 @@ class _PostDetailState extends State<PostDetail> {
                                           const SizedBox(width: 10),
                                           InkWell(
                                             onTap: () async {
-                                              await Share.shareXFiles([
-                                                XFile('assets/hello.txt')
-                                              ], text: 'Great picture')
-                                                  .then(
-                                                (value) => ScaffoldMessenger.of(
-                                                        context)
-                                                    .showSnackBar(
-                                                  SnackBar(
-                                                    content: Text(
-                                                        "Share result: ${value.status}"),
-                                                  ),
-                                                ),
-                                              );
+                                              // await Share.shareXFiles([
+                                              //   XFile('assets/hello.txt')
+                                              // ], text: 'Great picture')
+                                              //     .then(
+                                              //   (value) => ScaffoldMessenger.of(
+                                              //           context)
+                                              //       .showSnackBar(
+                                              //     SnackBar(
+                                              //       content: Text(
+                                              //           "Share result: ${value.status}"),
+                                              //     ),
+                                              //   ),
+                                              // );
                                             },
                                             child: Icon(
                                               Icons.share,
@@ -426,6 +447,37 @@ class _PostDetailState extends State<PostDetail> {
                       ],
                     ),
                   ),
+
+                  ///post comment
+                  commentOnPost
+                      ? Column(
+                          children: [
+                            SizedBox(height: screenSize.height / 5),
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: screenSize.width / 6),
+                              child: CommentBox(
+                                image: ClipRRect(
+                                  borderRadius: BorderRadius.circular(5),
+                                  child: Image.asset(
+                                    "assets/ps1.png",
+                                    height: 60,
+                                    width: 60,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                                controller: TextEditingController(),
+                                onImageRemoved: () {
+                                  //on image removed
+                                },
+                                onSend: () {
+                                  //on send button pressed
+                                },
+                              ),
+                            ),
+                          ],
+                        )
+                      : Container(),
                   SizedBox(height: screenSize.height / 5),
                   MoreNewsContainer(
                     sectionTitle: 'MORE ON POLITICS ',

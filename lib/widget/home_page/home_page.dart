@@ -54,13 +54,13 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           children: [
             SizedBox(
-              height: screenSize.height * 1.1,
+              height: screenSize.height,
               width: screenSize.width,
               child: Stack(
                 fit: StackFit.expand,
                 children: [
                   Image.asset(
-                    'assets/street.jpg',
+                    'assets/homevideo.gif',
                     fit: BoxFit.cover,
                   ),
                   ClipRRect(
@@ -81,7 +81,7 @@ class _HomePageState extends State<HomePage> {
                       alignment: Alignment.center,
                       child: Column(
                         children: [
-                          SizedBox(height: screenSize.height / 2.4),
+                          SizedBox(height: screenSize.height / 1.8),
                           Text(
                             'WATCH, LEARN & ENJOY',
                             style: style.copyWith(
@@ -91,7 +91,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                             textAlign: TextAlign.center,
                           ),
-                          const SizedBox(height: 20),
+                          const SizedBox(height: 10),
                           Container(
                             width: screenSize.width < 800
                                 ? screenSize.width / 1.2
@@ -106,10 +106,10 @@ class _HomePageState extends State<HomePage> {
                               textAlign: TextAlign.center,
                             ),
                           ),
-                          SizedBox(height: screenSize.height / 20),
+                          SizedBox(height: screenSize.height / 30),
                           InkWell(
                             onTap: () => _scrollController.animateTo(
-                              screenSize.height / 1.1,
+                              screenSize.height,
                               duration: const Duration(seconds: 1),
                               curve: Curves.easeIn,
                             ),
@@ -146,10 +146,10 @@ class _HomePageState extends State<HomePage> {
                                   duration: const Duration(milliseconds: 500),
                                   curve: Curves.decelerate,
                                   margin: const EdgeInsets.only(
-                                    top: 30,
-                                    bottom: 30,
+                                    top: 15,
+                                    bottom: 15,
                                   ),
-                                  height: selected ? 50 : 0,
+                                  height: selected ? 40 : 0,
                                   width: 50,
                                   decoration: BoxDecoration(
                                     color: AppColor.primaryColor,

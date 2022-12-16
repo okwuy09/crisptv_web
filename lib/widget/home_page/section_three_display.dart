@@ -1,6 +1,6 @@
 import 'package:crisptv_media/component/style.dart';
 import 'package:flutter/material.dart';
-
+import 'package:go_router/go_router.dart';
 import '../../component/color.dart';
 
 class SectionThreeDisplay extends StatelessWidget {
@@ -61,8 +61,8 @@ class SectionThreeDisplay extends StatelessWidget {
                     textAlign: TextAlign.center,
                   ),
                   SizedBox(height: screenSize.height / 20),
-                  GestureDetector(
-                    onTap: () {},
+                  InkWell(
+                    onTap: () => context.go('/live-sessions'),
                     child: Container(
                       height: 50,
                       width: 200,

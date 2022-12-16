@@ -3,8 +3,11 @@ import 'package:crisptv_media/component/color.dart';
 import 'package:crisptv_media/component/custom_switch.dart';
 import 'package:crisptv_media/component/style.dart';
 import 'package:crisptv_media/widget/dashboard/general_setting.dart';
+import 'package:crisptv_media/widget/dashboard/news_article/news_article.dart';
 import 'package:crisptv_media/widget/dashboard/overview.dart';
-import 'package:crisptv_media/widget/dashboard/video.dart';
+import 'package:crisptv_media/widget/dashboard/task_sheet/task_sheet.dart';
+import 'package:crisptv_media/widget/dashboard/team/team.dart';
+import 'package:crisptv_media/widget/dashboard/video/video.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -24,6 +27,7 @@ class _DashBoardState extends State<DashBoard> {
     false,
     false,
     false,
+    false,
   ];
 
   List<String> headText = [
@@ -32,12 +36,14 @@ class _DashBoardState extends State<DashBoard> {
     'News Articles',
     'Team',
     'Task Sheet',
+    'Settings'
   ];
 
   String titleHead = 'Overview';
 
   bool switched = false;
 
+  /// switch case to navigate through dashboard pages
   Widget _getBodyWidget(currentIndex) {
     switch (currentIndex) {
       case 0:
@@ -46,25 +52,15 @@ class _DashBoardState extends State<DashBoard> {
         return const Expanded(child: Videos());
 
       case 2:
-        return Expanded(
-          child: Container(
-            color: Colors.green,
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-          ),
-        );
+        return const Expanded(child: NewsArticles());
 
       case 3:
-        return const Expanded(child: GeneralSettings());
+        return const Expanded(child: Team());
 
       case 4:
-        return Expanded(
-          child: Container(
-            color: Colors.purple,
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-          ),
-        );
+        return const Expanded(child: TaskSheet());
+      case 5:
+        return const Expanded(child: GeneralSettings());
 
       default:
         return Container();
@@ -125,7 +121,7 @@ class _DashBoardState extends State<DashBoard> {
                   padding: const EdgeInsets.symmetric(vertical: 22),
                   child: TextField(
                     style: style.copyWith(
-                      fontSize: 13,
+                      fontSize: 14,
                       color: AppColor.white.withOpacity(0.6),
                     ),
                     cursorColor: AppColor.white.withOpacity(0.5),
@@ -271,37 +267,11 @@ class _DashBoardState extends State<DashBoard> {
                 Container(
                   color: AppColor.primaryColor,
                   width: screenSize.width / 11,
-                  height: screenSize.height * 1.1,
+                  height: screenSize.height * 1.3,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      // SizedBox(height: screenSize.height / 30),
-                      // CircleAvatar(
-                      //   radius: 35,
-                      //   backgroundColor: AppColor.white,
-                      //   backgroundImage: const AssetImage('assets/ps2.jpg'),
-                      // ),
-                      // const SizedBox(height: 20),
-                      // Text(
-                      //   'Frank Okeke',
-                      //   style: style.copyWith(
-                      //     fontSize: 15,
-                      //     color: AppColor.white.withOpacity(0.8),
-                      //   ),
-                      // ),
-                      // const SizedBox(height: 2),
-                      // Text(
-                      //   'Frank@gmail.com',
-                      //   style: style.copyWith(
-                      //     fontSize: 13,
-                      //     color: AppColor.white.withOpacity(0.6),
-                      //   ),
-                      // ),
-                      //SizedBox(height: screenSize.height / 15),
-                      // Divider(
-                      //   height: 0,
-                      //   color: AppColor.white.withOpacity(0.3),
-                      // ),
+                      /// overView
                       InkWell(
                         onTap: () {
                           setState(() {
@@ -323,7 +293,8 @@ class _DashBoardState extends State<DashBoard> {
                               : AppColor.white.withOpacity(0.4),
                         ),
                       ),
-                      //
+
+                      /// videos
                       InkWell(
                         onTap: () {
                           setState(() {
@@ -345,7 +316,8 @@ class _DashBoardState extends State<DashBoard> {
                               : AppColor.white.withOpacity(0.4),
                         ),
                       ),
-                      //
+
+                      /// News articles
                       InkWell(
                         onTap: () {
                           setState(() {
@@ -367,7 +339,8 @@ class _DashBoardState extends State<DashBoard> {
                               : AppColor.white.withOpacity(0.4),
                         ),
                       ),
-                      //
+
+                      /// TEAM
                       InkWell(
                         onTap: () {
                           setState(() {
@@ -383,13 +356,14 @@ class _DashBoardState extends State<DashBoard> {
                           color: isclicked[3]
                               ? AppColor.red
                               : AppColor.primaryColor,
-                          icon: Icons.view_agenda_outlined,
+                          icon: Icons.people_outline,
                           iconcolor: isclicked[3]
                               ? AppColor.white
                               : AppColor.white.withOpacity(0.4),
                         ),
                       ),
-                      //
+
+                      /// Task Sheet
                       InkWell(
                         onTap: () {
                           setState(() {
@@ -405,8 +379,31 @@ class _DashBoardState extends State<DashBoard> {
                           color: isclicked[4]
                               ? AppColor.red
                               : AppColor.primaryColor,
-                          icon: Icons.settings_outlined,
+                          icon: Icons.view_agenda_outlined,
                           iconcolor: isclicked[4]
+                              ? AppColor.white
+                              : AppColor.white.withOpacity(0.4),
+                        ),
+                      ),
+
+                      /// Settings
+                      InkWell(
+                        onTap: () {
+                          setState(() {
+                            isclicked.replaceRange(0, isclicked.length, [
+                              for (int i = 0; i < isclicked.length; i++) false
+                            ]);
+                            isclicked[5] = true;
+                            titleHead = headText[5];
+                          });
+                          pageIndex = 5;
+                        },
+                        child: AdminButton(
+                          color: isclicked[5]
+                              ? AppColor.red
+                              : AppColor.primaryColor,
+                          icon: Icons.settings_outlined,
+                          iconcolor: isclicked[5]
                               ? AppColor.white
                               : AppColor.white.withOpacity(0.4),
                         ),
@@ -424,32 +421,12 @@ class _DashBoardState extends State<DashBoard> {
                           });
                         }),
                       )
-                      // InkWell(
-                      //     onTap: () {
-                      //       setState(() {
-                      //         isclicked.replaceRange(0, isclicked.length, [
-                      //           for (int i = 0; i < isclicked.length; i++) false
-                      //         ]);
-                      //         isclicked[4] = true;
-                      //         titleHead = headText[4];
-                      //       });
-                      //       pageIndex = 4;
-                      //     },
-                      //     child: Container(
-                      //       height: 80,
-                      //       width: 40,
-                      //       decoration: BoxDecoration(
-                      //         color: AppColor.lightGray,
-                      //         borderRadius: BorderRadius.circular(8),
-                      //       ),
-                      //     )),
                     ],
                   ),
                 ),
                 Expanded(
                   child: SizedBox(
-                    height: screenSize.height * 1.1,
-                    //color: Colors.red,
+                    height: screenSize.height * 1.3,
                     child: Column(
                       children: [
                         //const SizedBox(height: 20),

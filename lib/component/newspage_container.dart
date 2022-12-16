@@ -93,7 +93,7 @@ class _NewsPageContainerState extends State<NewsPageContainer> {
                       //
                       Container(
                         width: screenSize.width < 800 ? screenSize.width : 284,
-                        height: 72,
+                        height: 80,
                         padding: const EdgeInsets.only(top: 15),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,

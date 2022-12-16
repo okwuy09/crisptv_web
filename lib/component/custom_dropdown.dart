@@ -23,10 +23,22 @@ class CustomDropdown<T> extends StatefulWidget {
     this.height = 33,
     this.center = false,
     this.itemText,
+    this.dropdownColor,
+    this.textColor,
+    this.containerColor,
   }) : super(key: key);
 
   /// list item
   List<T> items;
+
+  /// container colors
+  Color? containerColor;
+
+  /// text color
+  Color? textColor;
+
+  /// dropdowncolor
+  Color? dropdownColor;
 
   /// onChanged
   void Function(T value) onChanged;
@@ -83,7 +95,7 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>> {
             height: widget.height,
             padding: const EdgeInsets.only(left: 10.0),
             decoration: ShapeDecoration(
-              color: AppColor.primaryColor,
+              color: widget.containerColor,
               shape: RoundedRectangleBorder(
                 side: BorderSide(
                     width: 0.8, style: BorderStyle.solid, color: borderLine),
@@ -91,10 +103,11 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>> {
               ),
             ),
             child: Theme(
-              data: Theme.of(context).copyWith(focusColor: AppColor.lightGray),
+              data: Theme.of(context)
+                  .copyWith(focusColor: AppColor.lightGray.withOpacity(0.5)),
               child: DropdownButtonHideUnderline(
                 child: DropdownButton<T>(
-                  dropdownColor: AppColor.primaryColor,
+                  dropdownColor: widget.dropdownColor,
                   borderRadius: BorderRadius.circular(8),
                   value: _selectedValue,
                   onChanged: (newValue) {
@@ -112,7 +125,7 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>> {
                             : f.toString(),
                         style: style.copyWith(
                           fontSize: 13,
-                          color: AppColor.white.withOpacity(0.6),
+                          color: widget.textColor,
                         ),
                       ),
                     );

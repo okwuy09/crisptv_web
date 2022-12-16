@@ -1,8 +1,7 @@
 import 'package:crisptv_media/component/color.dart';
 import 'package:crisptv_media/component/style.dart';
 import 'package:flutter/material.dart';
-
-import '../widget/post_detail.dart';
+import 'package:go_router/go_router.dart';
 
 class NewsCardHomeWidget extends StatefulWidget {
   const NewsCardHomeWidget({super.key, required this.sectionTitle});
@@ -18,7 +17,7 @@ class _NewsCardHomeWidgetState extends State<NewsCardHomeWidget> {
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
 
-    return Container(
+    return SizedBox(
       height: screenSize.height / 1.8,
       //padding: EdgeInsets.symmetric(horizontal: screenSize.width / 20),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -72,12 +71,12 @@ class _NewsCardHomeWidgetState extends State<NewsCardHomeWidget> {
                             ),
                             const SizedBox(height: 10),
                             InkWell(
-                              onTap: () => Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (_) => const PostDetail(),
-                                ),
-                              ),
+                              onTap: () => context.goNamed("news_detail",
+                                  params: {
+                                    "newsdetail":
+                                        "How young women can propel their careers can propel their careers"
+                                  },
+                                  extra: 'ok'),
                               child: Text(
                                 'READ MORE',
                                 style: style.copyWith(

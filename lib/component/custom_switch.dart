@@ -2,7 +2,7 @@ import 'package:crisptv_media/component/color.dart';
 import 'package:flutter/material.dart';
 
 class CustomSwitch extends StatefulWidget {
-  bool value;
+  final bool value;
   final Color? enableColor;
   final Color? disableColor;
   final double? width;
@@ -11,7 +11,7 @@ class CustomSwitch extends StatefulWidget {
   final double? switchWidth;
   final ValueChanged<bool> onChanged;
 
-  CustomSwitch(
+  const CustomSwitch(
       {Key? key,
       this.value = false,
       this.enableColor,
@@ -35,8 +35,8 @@ class _CustomSwitchState extends State<CustomSwitch>
   @override
   void initState() {
     super.initState();
-    _animationController =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 60));
+    _animationController = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 60));
     _circleAnimation = AlignmentTween(
             begin: widget.value ? Alignment.centerRight : Alignment.centerLeft,
             end: widget.value ? Alignment.centerLeft : Alignment.centerRight)

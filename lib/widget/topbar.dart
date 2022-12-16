@@ -156,6 +156,7 @@ class _TopBarContentsState extends State<TopBarContents> {
                                         Text(
                                           'Home',
                                           style: TextStyle(
+                                            fontSize: 15,
                                             color: widget.homeIndex ==
                                                     0 //_isHovering[0]
                                                 ? AppColor.white
@@ -210,6 +211,7 @@ class _TopBarContentsState extends State<TopBarContents> {
                                       Text(
                                         'Shows',
                                         style: TextStyle(
+                                          fontSize: 15,
                                           color: widget.homeIndex ==
                                                   1 // _isHovering[1]
                                               ? AppColor.white
@@ -264,6 +266,7 @@ class _TopBarContentsState extends State<TopBarContents> {
                                       Text(
                                         'News',
                                         style: TextStyle(
+                                          fontSize: 15,
                                           color: widget.homeIndex == 2
                                               //1 _isHovering[2]
                                               ? AppColor.white
@@ -318,6 +321,7 @@ class _TopBarContentsState extends State<TopBarContents> {
                                       Text(
                                         'Live Sessions',
                                         style: TextStyle(
+                                          fontSize: 15,
                                           color: widget.homeIndex ==
                                                   3 //_isHovering[3]
                                               ? AppColor.white
