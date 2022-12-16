@@ -1,11 +1,11 @@
 import 'package:crisptv_media/component/color.dart';
+import 'package:crisptv_media/component/post_comment.dart';
 import 'package:crisptv_media/widget/news/news.dart';
 import 'package:crisptv_media/widget/topbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import '../../component/style.dart';
 //import 'package:share_plus/share_plus.dart';
-import '../component/comment_box.dart';
 import '../component/more_news.dart';
 import 'buttom_bar.dart';
 
@@ -452,29 +452,13 @@ class _PostDetailState extends State<PostDetail> {
                   commentOnPost
                       ? Column(
                           children: [
-                            SizedBox(height: screenSize.height / 5),
+                            SizedBox(height: screenSize.height / 15),
                             Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: screenSize.width / 6),
-                              child: CommentBox(
-                                image: ClipRRect(
-                                  borderRadius: BorderRadius.circular(5),
-                                  child: Image.asset(
-                                    "assets/ps1.png",
-                                    height: 60,
-                                    width: 60,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                                controller: TextEditingController(),
-                                onImageRemoved: () {
-                                  //on image removed
-                                },
-                                onSend: () {
-                                  //on send button pressed
-                                },
-                              ),
-                            ),
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: screenSize.width < 800
+                                        ? screenSize.width / 50
+                                        : screenSize.width / 8),
+                                child: const PostComment()),
                           ],
                         )
                       : Container(),
