@@ -17,7 +17,7 @@ class _EpisodesWidgetState extends State<EpisodesWidget> {
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
     return SizedBox(
-      height: screenSize.height / 1.9,
+      height: screenSize.width < 800 ? 300 : 350,
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Text(
           widget.sectionTitle,
@@ -26,7 +26,7 @@ class _EpisodesWidgetState extends State<EpisodesWidget> {
             color: AppColor.white,
           ),
         ),
-        SizedBox(height: screenSize.height / 20),
+        const SizedBox(height: 30),
         Expanded(
           child: Stack(
             children: [
@@ -39,7 +39,6 @@ class _EpisodesWidgetState extends State<EpisodesWidget> {
                   return Stack(
                     children: [
                       Container(
-                        height: 300,
                         width: screenSize.width < 800 ? 220 : 294,
                         margin: const EdgeInsets.only(right: 10),
                         decoration: BoxDecoration(
@@ -65,7 +64,7 @@ class _EpisodesWidgetState extends State<EpisodesWidget> {
                             width: screenSize.width < 800 ? 220 : 294,
                             height: screenSize.width < 800 ? 85 : 84,
                             color: AppColor.gray.withOpacity(0.95),
-                            padding: const EdgeInsets.all(15),
+                            padding: const EdgeInsets.all(10),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [

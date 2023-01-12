@@ -25,6 +25,7 @@ dependencies:
   video_thumbnail: ^0.5.3
   path_provider: ^2.0.11
   flutter_quill: ^6.1.4
+  url_launcher: ^6.1.7
   #flutter_quill_extensions: ^0.1.0
   tuple: ^2.0.1
   flutter_widget_from_html: ^0.9.0+1

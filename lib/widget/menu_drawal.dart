@@ -1,12 +1,25 @@
 import 'package:crisptv_media/component/style.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
+import 'package:url_launcher/url_launcher.dart';
 import '../component/color.dart';
 
-class MenuDrawer extends StatelessWidget {
+class MenuDrawer extends StatefulWidget {
   const MenuDrawer({Key? key}) : super(key: key);
 
+  @override
+  State<MenuDrawer> createState() => _MenuDrawerState();
+}
+
+class _MenuDrawerState extends State<MenuDrawer> {
+  final List<bool> clicked = [
+    false,
+    false,
+    false,
+    false,
+    // false,
+    // false,
+  ];
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
@@ -21,10 +34,12 @@ class MenuDrawer extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: () {
+                    // clicked.replaceRange(0, clicked.length,
+                    //     [for (int i = 0; i < clicked.length; i++) false]);
                     context.go('/');
                   },
                   child: Text(
-                    'HOME',
+                    'Home',
                     style: style.copyWith(
                       color: AppColor.white.withOpacity(0.5),
                     ),
@@ -103,7 +118,7 @@ class MenuDrawer extends StatelessWidget {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),
                       border: Border.all(
-                        color: AppColor.white.withOpacity(0.8),
+                        color: AppColor.white.withOpacity(0.6),
                       ),
                     ),
                     child: Center(
@@ -126,24 +141,36 @@ class MenuDrawer extends StatelessWidget {
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Image.asset(
-                            'assets/twitter.png',
-                            height: 25,
+                          InkWell(
+                            onTap: _twitterURL,
+                            child: Image.asset(
+                              'assets/twitter.png',
+                              height: 25,
+                            ),
                           ),
                           const SizedBox(width: 20),
-                          Image.asset(
-                            'assets/linkedin.png',
-                            height: 25,
+                          InkWell(
+                            onTap: _linkedInURL,
+                            child: Image.asset(
+                              'assets/linkedin.png',
+                              height: 25,
+                            ),
                           ),
                           const SizedBox(width: 20),
-                          Image.asset(
-                            'assets/facebook.png',
-                            height: 25,
+                          InkWell(
+                            onTap: _facebookURL,
+                            child: Image.asset(
+                              'assets/facebook.png',
+                              height: 25,
+                            ),
                           ),
                           const SizedBox(width: 20),
-                          Image.asset(
-                            'assets/dribble.png',
-                            height: 25,
+                          InkWell(
+                            onTap: _instagramURL,
+                            child: Image.asset(
+                              'assets/instagram.png',
+                              height: 25,
+                            ),
                           ),
                         ],
                       ),
@@ -192,5 +219,45 @@ class MenuDrawer extends StatelessWidget {
             ),
           ),
         ));
+  }
+
+  _twitterURL() async {
+    const url = 'https://twitter.com';
+    final uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+  _linkedInURL() async {
+    const url = 'https://www.linkedin.com';
+    final uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+  _facebookURL() async {
+    const url = 'https://www.facebook.com/';
+    final uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+  _instagramURL() async {
+    const url = 'https://www.instagram.com';
+    final uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 }

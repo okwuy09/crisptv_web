@@ -10,9 +10,7 @@ class SectionFourDisplay extends StatelessWidget {
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
     return Container(
-      height: screenSize.width < 800
-          ? screenSize.height / 2
-          : screenSize.height / 1.4,
+      height: 450,
       width: screenSize.width,
       margin: EdgeInsets.symmetric(horizontal: screenSize.width / 20),
       child: Stack(

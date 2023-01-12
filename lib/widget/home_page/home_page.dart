@@ -54,7 +54,7 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           children: [
             SizedBox(
-              height: screenSize.height,
+              height: screenSize.width < 800 ? 705 : 650,
               width: screenSize.width,
               child: Stack(
                 fit: StackFit.expand,
@@ -81,7 +81,9 @@ class _HomePageState extends State<HomePage> {
                       alignment: Alignment.center,
                       child: Column(
                         children: [
-                          SizedBox(height: screenSize.height / 1.8),
+                          const SizedBox(
+                            height: 360,
+                          ),
                           Text(
                             'WATCH, LEARN & ENJOY',
                             style: style.copyWith(
@@ -91,10 +93,10 @@ class _HomePageState extends State<HomePage> {
                             ),
                             textAlign: TextAlign.center,
                           ),
-                          const SizedBox(height: 10),
+                          //const SizedBox(height: 10),
                           Container(
                             width: screenSize.width < 800
-                                ? screenSize.width / 1.2
+                                ? screenSize.width / 1.1
                                 : screenSize.width / 3,
                             padding: const EdgeInsets.all(20),
                             child: Text(
@@ -106,7 +108,7 @@ class _HomePageState extends State<HomePage> {
                               textAlign: TextAlign.center,
                             ),
                           ),
-                          SizedBox(height: screenSize.height / 30),
+                          const SizedBox(height: 35),
                           InkWell(
                             onTap: () => _scrollController.animateTo(
                               screenSize.height,
@@ -140,6 +142,7 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ),
                           ),
+                          const SizedBox(height: 10),
                           screenSize.width < 800
                               ? AnimatedContainer(
                                   alignment: Alignment.center,
@@ -149,16 +152,16 @@ class _HomePageState extends State<HomePage> {
                                     top: 15,
                                     bottom: 15,
                                   ),
-                                  height: selected ? 40 : 0,
-                                  width: 50,
+                                  height: selected ? 30 : 0,
+                                  width: 40,
                                   decoration: BoxDecoration(
                                     color: AppColor.primaryColor,
                                     borderRadius: BorderRadius.circular(17),
                                   ),
                                   child: Icon(
                                     Icons.keyboard_double_arrow_up_outlined,
-                                    size: selected ? 50 : 25,
-                                    color: AppColor.white,
+                                    size: selected ? 40 : 20,
+                                    color: AppColor.white.withOpacity(0.6),
                                   ),
                                   onEnd: () {
                                     setState(() {
@@ -183,7 +186,7 @@ class _HomePageState extends State<HomePage> {
                       EdgeInsets.symmetric(horizontal: screenSize.width / 20),
                   child: Column(
                     children: [
-                      SizedBox(height: screenSize.height / 8),
+                      SizedBox(height: screenSize.height / 12),
                       const EpisodesWidget(
                         sectionTitle: 'LATEST INSIGHTS EPISODES',
                       ),

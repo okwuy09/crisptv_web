@@ -15,9 +15,9 @@ class _SectionOneState extends State<SectionOne> {
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
     return Container(
-      height: screenSize.width < 800 ? 340 : 500,
+      height: screenSize.width < 800 ? 380 : 450,
       width: screenSize.width,
-      margin: EdgeInsets.only(top: screenSize.height / 5),
+      margin: EdgeInsets.only(top: screenSize.height / 7),
       padding: EdgeInsets.symmetric(horizontal: screenSize.width / 20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -30,20 +30,21 @@ class _SectionOneState extends State<SectionOne> {
               fontWeight: FontWeight.bold,
             ),
           ),
-          SizedBox(height: screenSize.height / 20),
-          Expanded(
+          const SizedBox(height: 30),
+          SizedBox(
+            height: screenSize.width < 800 ? 240 : 350,
             child: Stack(
               children: [
                 ListView.builder(
                   controller: _controller,
-                  itemCount: 5,
+                  itemCount: 6,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) {
                     return Stack(
                       children: [
                         Container(
-                          height: screenSize.width < 800 ? 280 : 471,
-                          width: screenSize.width < 800 ? 220 : 350,
+                          height: screenSize.width < 800 ? 240 : 350,
+                          width: screenSize.width < 800 ? 210 : 300,
                           margin: const EdgeInsets.only(right: 10),
                           decoration: BoxDecoration(
                             color: AppColor.white,
@@ -57,13 +58,10 @@ class _SectionOneState extends State<SectionOne> {
                         Positioned(
                           bottom: 5,
                           child: Container(
-                            height: screenSize.width < 800 ? 60 : 100,
-                            width: screenSize.width < 800 ? 210 : 340,
+                            height: screenSize.width < 800 ? 50 : 70,
+                            width: screenSize.width < 800 ? 195 : 285,
                             padding: const EdgeInsets.symmetric(horizontal: 10),
-                            margin: EdgeInsets.only(
-                              right: screenSize.width < 800 ? 10 : 15,
-                              left: screenSize.width < 800 ? 5 : 5,
-                            ),
+                            margin: const EdgeInsets.symmetric(horizontal: 8),
                             decoration: BoxDecoration(
                               color: AppColor.gray.withOpacity(0.8),
                               borderRadius: BorderRadius.circular(8),
@@ -78,7 +76,7 @@ class _SectionOneState extends State<SectionOne> {
                                 Icon(
                                   Icons.arrow_forward_ios,
                                   color: AppColor.white,
-                                  size: 30,
+                                  size: 25,
                                 )
                               ],
                             ),

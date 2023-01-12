@@ -1,5 +1,6 @@
 import 'package:crisptv_media/component/style.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../component/color.dart';
 
@@ -203,24 +204,36 @@ class BottomBar extends StatelessWidget {
                         Row(
                           mainAxisSize: MainAxisSize.max,
                           children: [
-                            Image.asset(
-                              'assets/twitter.png',
-                              height: 25,
+                            InkWell(
+                              onTap: _twitterURL,
+                              child: Image.asset(
+                                'assets/twitter.png',
+                                height: 25,
+                              ),
                             ),
                             const SizedBox(width: 20),
-                            Image.asset(
-                              'assets/linkedin.png',
-                              height: 25,
+                            InkWell(
+                              onTap: _linkedInURL,
+                              child: Image.asset(
+                                'assets/linkedin.png',
+                                height: 25,
+                              ),
                             ),
                             const SizedBox(width: 20),
-                            Image.asset(
-                              'assets/facebook.png',
-                              height: 25,
+                            InkWell(
+                              onTap: _facebookURL,
+                              child: Image.asset(
+                                'assets/facebook.png',
+                                height: 25,
+                              ),
                             ),
                             const SizedBox(width: 20),
-                            Image.asset(
-                              'assets/dribble.png',
-                              height: 25,
+                            InkWell(
+                              onTap: _instagramURL,
+                              child: Image.asset(
+                                'assets/instagram.png',
+                                height: 25,
+                              ),
                             ),
                           ],
                         ),
@@ -343,5 +356,45 @@ class BottomBar extends StatelessWidget {
               ],
             ),
     );
+  }
+
+  _twitterURL() async {
+    const url = 'https://twitter.com';
+    final uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+  _linkedInURL() async {
+    const url = 'https://www.linkedin.com';
+    final uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+  _facebookURL() async {
+    const url = 'https://www.facebook.com/';
+    final uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+  _instagramURL() async {
+    const url = 'https://www.instagram.com';
+    final uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 }

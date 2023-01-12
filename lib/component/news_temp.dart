@@ -18,7 +18,7 @@ class _NewsCardHomeWidgetState extends State<NewsCardHomeWidget> {
     var screenSize = MediaQuery.of(context).size;
 
     return SizedBox(
-      height: screenSize.height / 1.8,
+      height: screenSize.width < 800 ? 330 : 350,
       //padding: EdgeInsets.symmetric(horizontal: screenSize.width / 20),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Text(
@@ -28,7 +28,7 @@ class _NewsCardHomeWidgetState extends State<NewsCardHomeWidget> {
             color: AppColor.white,
           ),
         ),
-        SizedBox(height: screenSize.height / 20),
+        const SizedBox(height: 30),
         Expanded(
           child: Stack(
             children: [
@@ -43,7 +43,7 @@ class _NewsCardHomeWidgetState extends State<NewsCardHomeWidget> {
                     children: [
                       Container(
                         height: 200,
-                        width: screenSize.width < 800 ? 230 : 284,
+                        width: screenSize.width < 800 ? 230 : 294,
                         margin: const EdgeInsets.only(right: 10),
                         decoration: BoxDecoration(
                           color: AppColor.white,
@@ -56,7 +56,7 @@ class _NewsCardHomeWidgetState extends State<NewsCardHomeWidget> {
                       ),
                       //
                       Container(
-                        width: screenSize.width < 800 ? 230 : 284,
+                        width: screenSize.width < 800 ? 230 : 294,
                         height: 72,
                         padding: const EdgeInsets.only(top: 5),
                         child: Column(

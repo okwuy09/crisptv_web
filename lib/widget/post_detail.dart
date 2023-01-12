@@ -1,5 +1,6 @@
 import 'package:crisptv_media/component/color.dart';
 import 'package:crisptv_media/component/post_comment.dart';
+import 'package:crisptv_media/component/view_comment.dart';
 import 'package:crisptv_media/widget/news/news.dart';
 import 'package:crisptv_media/widget/topbar.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,8 @@ class PostDetail extends StatefulWidget {
 }
 
 class _PostDetailState extends State<PostDetail> {
-  bool commentOnPost = false;
+  bool viewComment = false;
+  bool postComment = false;
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
@@ -244,7 +246,12 @@ class _PostDetailState extends State<PostDetail> {
                                   Row(
                                     children: [
                                       InkWell(
-                                        onTap: () {},
+                                        onTap: () {
+                                          setState(() {
+                                            viewComment = !viewComment;
+                                            postComment = false;
+                                          });
+                                        },
                                         child: Container(
                                           height: 36,
                                           width: 120,
@@ -270,7 +277,8 @@ class _PostDetailState extends State<PostDetail> {
                                       InkWell(
                                         onTap: () {
                                           setState(() {
-                                            commentOnPost = !commentOnPost;
+                                            postComment = !postComment;
+                                            viewComment = false;
                                           });
                                         },
                                         child: Container(
@@ -347,7 +355,12 @@ class _PostDetailState extends State<PostDetail> {
                                         ),
                                         Expanded(child: Container()),
                                         InkWell(
-                                          onTap: () {},
+                                          onTap: () {
+                                            setState(() {
+                                              viewComment = !viewComment;
+                                              postComment = false;
+                                            });
+                                          },
                                           child: Container(
                                             height: 36,
                                             width: 145,
@@ -372,7 +385,8 @@ class _PostDetailState extends State<PostDetail> {
                                         InkWell(
                                           onTap: () {
                                             setState(() {
-                                              commentOnPost = !commentOnPost;
+                                              postComment = !postComment;
+                                              viewComment = false;
                                             });
                                           },
                                           child: Container(
@@ -449,7 +463,7 @@ class _PostDetailState extends State<PostDetail> {
                   ),
 
                   ///post comment
-                  commentOnPost
+                  postComment
                       ? Column(
                           children: [
                             SizedBox(height: screenSize.height / 15),
@@ -462,6 +476,22 @@ class _PostDetailState extends State<PostDetail> {
                           ],
                         )
                       : Container(),
+
+                  ///view comment
+                  viewComment
+                      ? Column(
+                          children: [
+                            SizedBox(height: screenSize.height / 15),
+                            Padding(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: screenSize.width < 800
+                                        ? screenSize.width / 50
+                                        : screenSize.width / 8),
+                                child: const ViewComment()),
+                          ],
+                        )
+                      : Container(),
+
                   SizedBox(height: screenSize.height / 5),
                   MoreNewsContainer(
                     sectionTitle: 'MORE ON POLITICS ',
