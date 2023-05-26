@@ -1,4 +1,4 @@
-package com.example.crisptv_media
+package com.crisptv_media.app
 
 import io.flutter.embedding.android.FlutterActivity
 

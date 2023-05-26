@@ -1,20 +1,40 @@
 import 'package:crisptv_media/component/style.dart';
-import 'package:crisptv_media/widget/dashboard/news_article/text_editor.dart';
-import 'package:crisptv_media/widget/live_session/live_session.dart';
-import 'package:crisptv_media/widget/news/news.dart';
-import 'package:crisptv_media/widget/post_detail.dart';
-import 'package:crisptv_media/widget/show/show.dart';
+import 'package:crisptv_media/model/posts.dart';
+import 'package:crisptv_media/service/authentication_controller.dart';
+import 'package:crisptv_media/service/category_controller.dart';
+import 'package:crisptv_media/service/post_controller.dart';
+import 'package:crisptv_media/view/authentication/signin.dart';
+import 'package:crisptv_media/view/authentication/signup.dart';
+import 'package:crisptv_media/view/dashboard/news_article/text_editor.dart';
+import 'package:crisptv_media/view/live_session/live_session.dart';
+import 'package:crisptv_media/view/news/news.dart';
+import 'package:crisptv_media/view/post_detail.dart';
+import 'package:crisptv_media/view/show/show.dart';
+import 'package:crisptv_media/view/show/video_detail.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 import 'package:url_strategy/url_strategy.dart';
 import 'component/color.dart';
-import 'widget/dashboard/dashboard.dart';
-import 'widget/home_page/home_page.dart';
-import 'widget/topbar.dart';
+import 'firebase_options.dart';
+import 'service/user_controller.dart';
+import 'view/dashboard/dashboard.dart';
+import 'view/home_page/home_page.dart';
+import 'view/topbar.dart';
 
-void main() {
+void main() async {
   setPathUrlStrategy();
-  runApp(MyApp());
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(create: (_) => PostController()),
+    ChangeNotifierProvider(create: (_) => UserController()),
+    ChangeNotifierProvider(create: (_) => CategoryController()),
+    ChangeNotifierProvider(create: (_) => AuthenticationController()),
+  ], child: MyApp()));
 }
 
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -53,18 +73,15 @@ class MyApp extends StatelessWidget {
         path: '/shows',
         builder: (BuildContext context, GoRouterState state) =>
             const ShowsPage(),
-      ),
-      GoRoute(
-        path: '/admin',
-        builder: (BuildContext context, GoRouterState state) =>
-            const DashBoard(),
         routes: <RouteBase>[
           GoRoute(
-            path: ':name',
-            name: 'new_article',
+            path: ':videodetail',
+            name: 'video_detail',
             parentNavigatorKey: _rootNavigatorKey,
             builder: (BuildContext context, GoRouterState state) {
-              return const TextEditor();
+              // state.extra; use to pass data to another page
+              Posts videoPost = state.extra as Posts;
+              return VideoDetail(videopost: videoPost);
             },
           ),
         ],
@@ -79,34 +96,48 @@ class MyApp extends StatelessWidget {
             parentNavigatorKey: _rootNavigatorKey,
             builder: (BuildContext context, GoRouterState state) {
               // state.extra; use to pass data to another page
-              return const PostDetail();
+              Posts newsPost = state.extra as Posts;
+              return PostDetail(newsPost: newsPost);
             },
           ),
         ],
       ),
       GoRoute(
         path: '/live-sessions',
+        parentNavigatorKey: _rootNavigatorKey,
         builder: (BuildContext context, GoRouterState state) =>
             const LiveSessions(),
       ),
-      // GoRoute(
-      //   path: '/advice',
-      //   builder: (BuildContext context, GoRouterState state) =>
-      //       const AdvicePage(),
-      // ),
-      // GoRoute(
-      //   path: '/signup',
-      //   builder: (BuildContext context, GoRouterState state) => const SignUp(),
-      // ),
-      // GoRoute(
-      //   path: '/signin',
-      //   builder: (BuildContext context, GoRouterState state) => const SignIn(),
-      // ),
-      // GoRoute(
-      //   path: '/admin',
-      //   builder: (BuildContext context, GoRouterState state) =>
-      //       const DashBoard(),
-      // ),
+      GoRoute(
+        path: '/signup',
+        parentNavigatorKey: _rootNavigatorKey,
+        builder: (BuildContext context, GoRouterState state) => const SignUp(),
+      ),
+      GoRoute(
+        path: '/admin',
+        parentNavigatorKey: _rootNavigatorKey,
+        builder: (BuildContext context, GoRouterState state) => const SignIn(),
+        redirect: (BuildContext context, GoRouterState state) {
+          if (FirebaseAuth.instance.currentUser == null) {
+            return '/admin';
+          } else {
+            return '/dashboard';
+          }
+        },
+      ),
+      GoRoute(
+        path: '/dashboard',
+        parentNavigatorKey: _rootNavigatorKey,
+        builder: (BuildContext context, GoRouterState state) =>
+            const DashBoard(),
+        redirect: (BuildContext context, GoRouterState state) {
+          if (FirebaseAuth.instance.currentUser == null) {
+            return '/admin';
+          } else {
+            return '/dashboard';
+          }
+        },
+      ),
     ],
   );
 }

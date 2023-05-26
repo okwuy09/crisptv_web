@@ -1,11 +1,14 @@
 import 'package:crisptv_media/component/color.dart';
 import 'package:crisptv_media/component/style.dart';
+import 'package:crisptv_media/model/posts.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class NewsCardHomeWidget extends StatefulWidget {
-  const NewsCardHomeWidget({super.key, required this.sectionTitle});
+  const NewsCardHomeWidget(
+      {super.key, required this.sectionTitle, this.newsPost});
   final String sectionTitle;
+  final List<Posts>? newsPost;
 
   @override
   State<NewsCardHomeWidget> createState() => _NewsCardHomeWidgetState();
@@ -18,7 +21,7 @@ class _NewsCardHomeWidgetState extends State<NewsCardHomeWidget> {
     var screenSize = MediaQuery.of(context).size;
 
     return SizedBox(
-      height: screenSize.width < 800 ? 330 : 350,
+      height: screenSize.width < 800 ? 350 : 370,
       //padding: EdgeInsets.symmetric(horizontal: screenSize.width / 20),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Text(
@@ -34,49 +37,63 @@ class _NewsCardHomeWidgetState extends State<NewsCardHomeWidget> {
             children: [
               ListView.builder(
                 controller: _controller,
-                itemCount: 5,
+                itemCount:
+                    widget.newsPost!.length > 6 ? 6 : widget.newsPost!.length,
                 scrollDirection: Axis.horizontal,
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
+                  var news = widget.newsPost![index];
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Container(
-                        height: 200,
-                        width: screenSize.width < 800 ? 230 : 294,
-                        margin: const EdgeInsets.only(right: 10),
-                        decoration: BoxDecoration(
-                          color: AppColor.white,
-                          borderRadius: BorderRadius.circular(8),
-                          image: const DecorationImage(
-                            image: AssetImage('assets/news1.jpg'),
-                            fit: BoxFit.cover,
+                      InkWell(
+                        onTap: () => context.pushNamed(
+                          "news_detail",
+                          pathParameters: {
+                            "newsdetail": news.title,
+                          },
+                          extra: news,
+                        ),
+                        child: Container(
+                          height: screenSize.width < 800 ? 220 : 230,
+                          width: screenSize.width < 800 ? 250 : 294,
+                          margin: const EdgeInsets.only(right: 10),
+                          decoration: BoxDecoration(
+                            color: AppColor.white,
+                            borderRadius: BorderRadius.circular(8),
+                            image: DecorationImage(
+                              image: NetworkImage(news.image),
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ),
                       ),
                       //
                       Container(
                         width: screenSize.width < 800 ? 230 : 294,
-                        height: 72,
+                        height: 70,
                         padding: const EdgeInsets.only(top: 5),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              'How young women can propel their careers can propel their careers',
-                              style: style.copyWith(
-                                fontSize: 14,
-                                color: AppColor.white,
+                            Flexible(
+                              child: Text(
+                                news.title,
+                                style: style.copyWith(
+                                  fontSize: 14,
+                                  color: AppColor.white,
+                                ),
                               ),
                             ),
                             const SizedBox(height: 10),
                             InkWell(
-                              onTap: () => context.goNamed("news_detail",
-                                  params: {
-                                    "newsdetail":
-                                        "How young women can propel their careers can propel their careers"
-                                  },
-                                  extra: 'ok'),
+                              onTap: () => context.pushNamed(
+                                "news_detail",
+                                pathParameters: {
+                                  "newsdetail": news.title,
+                                },
+                                extra: news,
+                              ),
                               child: Text(
                                 'READ MORE',
                                 style: style.copyWith(

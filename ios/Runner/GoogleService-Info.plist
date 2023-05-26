@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>486276711430-popjin6uvar0caoieq5b3hgg5l8v8no9.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.486276711430-popjin6uvar0caoieq5b3hgg5l8v8no9</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDdqx-P9P6lZe2BvLgsrHBHoe52k_BIWmo</string>
+	<key>GCM_SENDER_ID</key>
+	<string>486276711430</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.crisptvMedia</string>
+	<key>PROJECT_ID</key>
+	<string>crisptv-e3355</string>
+	<key>STORAGE_BUCKET</key>
+	<string>crisptv-e3355.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:486276711430:ios:39e628b3b0ddbece22ef87</string>
+</dict>
+</plist>

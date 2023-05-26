@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "486276711430",
+    "project_id": "crisptv-e3355",
+    "storage_bucket": "crisptv-e3355.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:486276711430:android:8e21a8759c99b75422ef87",
+        "android_client_info": {
+          "package_name": "com.crisptv_media.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "486276711430-2fgq9eeocpn4rgntfpm723hfua9q5g61.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLVWz6dg6pRAJac9yHKL8l23dzZp8Q1ew"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "486276711430-2fgq9eeocpn4rgntfpm723hfua9q5g61.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "486276711430-popjin6uvar0caoieq5b3hgg5l8v8no9.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.crisptvMedia"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:486276711430:android:e0d728a583303ff322ef87",
+        "android_client_info": {
+          "package_name": "com.example.crisptv_media"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "486276711430-2fgq9eeocpn4rgntfpm723hfua9q5g61.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLVWz6dg6pRAJac9yHKL8l23dzZp8Q1ew"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "486276711430-2fgq9eeocpn4rgntfpm723hfua9q5g61.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "486276711430-popjin6uvar0caoieq5b3hgg5l8v8no9.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.crisptvMedia"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

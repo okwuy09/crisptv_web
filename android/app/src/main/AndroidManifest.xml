@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.crisptv_media">
+    package="com.crisptv_media.app">
+    <uses-permission android:name="android.permission.INTERNET" />
    <application
         android:label="crisptv_media"
         android:name="${applicationName}"
