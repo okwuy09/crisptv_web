@@ -1,11 +1,11 @@
 import 'dart:typed_data';
 
-import 'package:crisptv_media/component/getyoutubeid.dart';
-import 'package:crisptv_media/constant.dart';
-import 'package:crisptv_media/model/category.dart';
-import 'package:crisptv_media/model/comment.dart';
-import 'package:crisptv_media/model/posts.dart';
-import 'package:crisptv_media/view/dashboard/video/successful_publish.dart';
+import 'package:crisptv/component/getyoutubeid.dart';
+import 'package:crisptv/constant.dart';
+import 'package:crisptv/model/category.dart';
+import 'package:crisptv/model/comment.dart';
+import 'package:crisptv/model/posts.dart';
+import 'package:crisptv/view/dashboard/video/successful_publish.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 

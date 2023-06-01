@@ -3,28 +3,35 @@ import 'package:crisptv/component/datefield.dart';
 import 'package:crisptv/component/mytextform.dart';
 import 'package:crisptv/component/style.dart';
 import 'package:crisptv/constant.dart';
+import 'package:crisptv/model/task.dart';
 import 'package:crisptv/model/team.dart';
 import 'package:crisptv/service/task_controller.dart';
 import 'package:crisptv/service/user_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class CreateTask extends StatefulWidget {
-  const CreateTask({super.key});
+class UpdateTask extends StatefulWidget {
+  final Tasks task;
+  const UpdateTask({super.key, required this.task});
 
   @override
-  State<CreateTask> createState() => _CreateTaskState();
+  State<UpdateTask> createState() => _UpdateTaskState();
 }
 
-class _CreateTaskState extends State<CreateTask> {
-  final TextEditingController _taskName = TextEditingController();
-  DateTime dueDate = DateTime.now();
-
+class _UpdateTaskState extends State<UpdateTask> {
+  TextEditingController? _taskName;
+  DateTime? dueDate;
+  String? selectedStatus;
   TeamMember? _selectedValue;
+  String? assignee;
   late Stream<List<TeamMember>> _category; //= 'Choose from the dropdown';
 
   @override
   void initState() {
+    assignee = widget.task.assignee;
+    selectedStatus = widget.task.status;
+    dueDate = widget.task.dueDate;
+    _taskName = TextEditingController(text: widget.task.taskName);
     _category = Provider.of<UserController>(context, listen: false)
         .fetchAllTeamMember();
     super.initState();
@@ -34,8 +41,6 @@ class _CreateTaskState extends State<CreateTask> {
     'Not Started',
     'In Progress',
   ];
-
-  String selectedStatus = 'Not Started';
 
   @override
   Widget build(BuildContext context) {
@@ -143,7 +148,7 @@ class _CreateTaskState extends State<CreateTask> {
                                               borderRadius:
                                                   BorderRadius.circular(8),
                                               hint: Text(
-                                                'Choose team member',
+                                                assignee!,
                                                 style: style.copyWith(
                                                     fontSize: 14,
                                                     color: AppColor.primaryColor
@@ -153,6 +158,7 @@ class _CreateTaskState extends State<CreateTask> {
                                               onChanged: (newValue) {
                                                 setState(() {
                                                   _selectedValue = newValue;
+                                                  assignee = newValue!.userName;
                                                 });
                                               },
                                               items: categories
@@ -255,7 +261,7 @@ class _CreateTaskState extends State<CreateTask> {
                           DateField(
                             onPressed: () => _taskDate(context),
                             pickedDate:
-                                '${dueDate.day} ${months[dueDate.month - 1]}, ${dueDate.year}',
+                                '${dueDate!.day} ${months[dueDate!.month - 1]}, ${dueDate!.year}',
                           ),
                         ],
                       ),
@@ -265,12 +271,13 @@ class _CreateTaskState extends State<CreateTask> {
                 SizedBox(height: screenSize.height / 10),
                 InkWell(
                   onTap: () async {
-                    await provider.creatTask(
+                    await provider.updateTask(
                       context: context,
-                      assignee: _selectedValue!.userName,
-                      dueDate: dueDate,
-                      status: selectedStatus,
-                      taskName: _taskName.text,
+                      assignee: assignee!,
+                      dueDate: dueDate!,
+                      status: selectedStatus!,
+                      taskName: _taskName!.text,
+                      docID: widget.task.id,
                     );
                   },
                   child: Container(
@@ -281,10 +288,10 @@ class _CreateTaskState extends State<CreateTask> {
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Center(
-                      child: provider.isCreatingTask
+                      child: provider.isUpdatingTask
                           ? buttonCircularIndicator
                           : Text(
-                              'Create Task',
+                              'Update Task',
                               style: style.copyWith(
                                 fontSize: 14,
                                 color: AppColor.white,
@@ -327,7 +334,7 @@ class _CreateTaskState extends State<CreateTask> {
   _taskDate(BuildContext context) async {
     final DateTime? selected = await showDatePicker(
       context: context,
-      initialDate: dueDate,
+      initialDate: dueDate!,
       firstDate: DateTime(2020),
       lastDate: DateTime(2100),
     );

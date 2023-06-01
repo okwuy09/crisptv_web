@@ -1,8 +1,8 @@
-import 'package:crisptv_media/component/color.dart';
-import 'package:crisptv_media/component/style.dart';
-import 'package:crisptv_media/model/category.dart';
-import 'package:crisptv_media/model/posts.dart';
-import 'package:crisptv_media/service/post_controller.dart';
+import 'package:crisptv/component/color.dart';
+import 'package:crisptv/component/style.dart';
+import 'package:crisptv/model/category.dart';
+import 'package:crisptv/model/posts.dart';
+import 'package:crisptv/service/post_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -83,7 +83,7 @@ class _NewsPageContainerState extends State<NewsPageContainer> {
                         .toList();
                     return ListView.builder(
                       controller: _controller,
-                      itemCount: newsPost.length > 4 ? 4 : newsPost.length,
+                      itemCount: newsPost.length > 6 ? 6 : newsPost.length,
                       scrollDirection: screenSize.width < 800
                           ? Axis.vertical
                           : Axis.horizontal,

@@ -1,7 +1,7 @@
-import 'package:crisptv_media/component/color.dart';
-import 'package:crisptv_media/component/signtextform.dart';
-import 'package:crisptv_media/component/style.dart';
-import 'package:crisptv_media/service/authentication_controller.dart';
+import 'package:crisptv/component/color.dart';
+import 'package:crisptv/component/signtextform.dart';
+import 'package:crisptv/component/style.dart';
+import 'package:crisptv/service/authentication_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -25,7 +25,7 @@ class _SignInState extends State<SignIn> {
     return Scaffold(
       body: SingleChildScrollView(
         child: SizedBox(
-          height: 750, //screenSize.height * 1.2,
+          height: screenSize.height,
           child: Stack(
             fit: StackFit.expand,
             children: [
@@ -86,8 +86,8 @@ class _SignInState extends State<SignIn> {
                                     width: 105,
                                     decoration: BoxDecoration(
                                       border: Border.all(
-                                          color:
-                                              AppColor.white.withOpacity(0.5)),
+                                        color: AppColor.white.withOpacity(0.5),
+                                      ),
                                       borderRadius: BorderRadius.circular(8),
                                     ),
                                     child: Center(
@@ -117,7 +117,7 @@ class _SignInState extends State<SignIn> {
                                 ),
                         ),
                       ),
-                      const SizedBox(height: 60),
+                      SizedBox(height: screenSize.height / 8),
                       Expanded(
                         child: Container(
                           width: screenSize.width < 800

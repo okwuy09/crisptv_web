@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:crisptv_media/component/style.dart';
-import 'package:crisptv_media/constant.dart';
-import 'package:crisptv_media/model/team.dart';
-import 'package:crisptv_media/model/users.dart';
-import 'package:crisptv_media/view/dashboard/video/successful_publish.dart';
+import 'package:crisptv/component/style.dart';
+import 'package:crisptv/constant.dart';
+import 'package:crisptv/model/team.dart';
+import 'package:crisptv/model/users.dart';
+import 'package:crisptv/view/dashboard/video/successful_publish.dart';
 import 'package:flutter/material.dart';
 
 import '../view/dashboard/team/success_member_remove.dart';

@@ -1,11 +1,11 @@
-import 'package:crisptv_media/component/color.dart';
-import 'package:crisptv_media/component/style.dart';
-import 'package:crisptv_media/model/category.dart';
-import 'package:crisptv_media/model/posts.dart';
-import 'package:crisptv_media/service/category_controller.dart';
-import 'package:crisptv_media/service/post_controller.dart';
-import 'package:crisptv_media/view/show/show_news.dart';
-import 'package:crisptv_media/view/show/video_detail.dart';
+import 'package:crisptv/component/color.dart';
+import 'package:crisptv/component/style.dart';
+import 'package:crisptv/model/category.dart';
+import 'package:crisptv/model/posts.dart';
+import 'package:crisptv/service/category_controller.dart';
+import 'package:crisptv/service/post_controller.dart';
+import 'package:crisptv/view/show/show_news.dart';
+import 'package:crisptv/view/show/video_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:number_paginator/number_paginator.dart';
 import 'package:provider/provider.dart';
@@ -146,40 +146,44 @@ class _PopularVideoState extends State<PopularVideo> {
                                 physics: const NeverScrollableScrollPhysics(),
                                 gridDelegate:
                                     SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount:
-                                      screenSize.width < 800 ? 3 : 4,
+                                  crossAxisCount: screenSize.width < 800
+                                      ? 3
+                                      : screenSize.width < 1500
+                                          ? 4
+                                          : 5,
                                   crossAxisSpacing: 10,
                                   mainAxisSpacing: 10,
+                                  mainAxisExtent: 330,
                                 ),
                                 itemBuilder: ((context, index) {
-                                  return Stack(
-                                    children: [
-                                      InkWell(
-                                        onTap: () => showDialog(
-                                            context: context,
-                                            builder: (_) => VideoDetail(
-                                                videopost: videoPost[
-                                                    index]) // PublishVideo(),
-                                            ),
-                                        child: Container(
-                                          height: 300,
-                                          width: screenSize.width < 800
-                                              ? 220
-                                              : 294,
-                                          decoration: BoxDecoration(
-                                            color: AppColor.white,
-                                            //borderRadius: BorderRadius.circular(6),
-                                            image: DecorationImage(
-                                              image: NetworkImage(
-                                                  videoPost[index].image),
-                                              fit: BoxFit.cover,
+                                  return SizedBox(
+                                    height: 330,
+                                    child: Column(
+                                      children: [
+                                        InkWell(
+                                          onTap: () => showDialog(
+                                              context: context,
+                                              builder: (_) => VideoDetail(
+                                                  videopost: videoPost[
+                                                      index]) // PublishVideo(),
+                                              ),
+                                          child: Container(
+                                            height: 240,
+                                            width: screenSize.width < 800
+                                                ? 220
+                                                : 294,
+                                            decoration: BoxDecoration(
+                                              color: AppColor.white,
+                                              //borderRadius: BorderRadius.circular(6),
+                                              image: DecorationImage(
+                                                image: NetworkImage(
+                                                    videoPost[index].image),
+                                                fit: BoxFit.cover,
+                                              ),
                                             ),
                                           ),
                                         ),
-                                      ),
-                                      Positioned(
-                                        bottom: 0,
-                                        child: InkWell(
+                                        InkWell(
                                           onTap: () => showDialog(
                                               context: context,
                                               builder: (_) => VideoDetail(
@@ -190,9 +194,9 @@ class _PopularVideoState extends State<PopularVideo> {
                                             width: screenSize.width < 800
                                                 ? 220
                                                 : 295,
-                                            height: screenSize.width < 800
-                                                ? 85
-                                                : 72,
+                                            // height: screenSize.width < 800
+                                            //     ? 85
+                                            //     : 72,
                                             color:
                                                 AppColor.gray.withOpacity(0.95),
                                             padding: const EdgeInsets.all(12),
@@ -200,7 +204,8 @@ class _PopularVideoState extends State<PopularVideo> {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
-                                                Flexible(
+                                                SizedBox(
+                                                  height: 40,
                                                   child: Text(
                                                     videoPost[index].title,
                                                     style: style.copyWith(
@@ -223,9 +228,9 @@ class _PopularVideoState extends State<PopularVideo> {
                                               ],
                                             ),
                                           ),
-                                        ),
-                                      )
-                                    ],
+                                        )
+                                      ],
+                                    ),
                                   );
                                 }),
                               ),

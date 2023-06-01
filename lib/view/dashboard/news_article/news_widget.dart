@@ -1,9 +1,9 @@
-import 'package:crisptv_media/component/color.dart';
-import 'package:crisptv_media/component/style.dart';
-import 'package:crisptv_media/model/category.dart';
-import 'package:crisptv_media/model/posts.dart';
-import 'package:crisptv_media/service/category_controller.dart';
-import 'package:crisptv_media/service/post_controller.dart';
+import 'package:crisptv/component/color.dart';
+import 'package:crisptv/component/style.dart';
+import 'package:crisptv/model/category.dart';
+import 'package:crisptv/model/posts.dart';
+import 'package:crisptv/service/category_controller.dart';
+import 'package:crisptv/service/post_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -32,10 +32,11 @@ class NewsWidget extends StatelessWidget {
           crossAxisCount: screenSize.width < 800 ? 1 : bulderRowNum,
           crossAxisSpacing: 20,
           mainAxisSpacing: 20,
-          mainAxisExtent: 220,
+          mainAxisExtent: 200,
         ),
         itemBuilder: ((context, index) {
           return Container(
+            height: 200,
             decoration: BoxDecoration(
               border: Border.all(
                 color: AppColor.white.withOpacity(0.6),
@@ -49,7 +50,7 @@ class NewsWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(
-                        height: screenSize.height / 9,
+                        height: 70,
                         child: Text(
                           newsPost[index].title,
                           style: style.copyWith(

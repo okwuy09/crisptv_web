@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:crisptv_media/constant.dart';
-import 'package:crisptv_media/model/category.dart';
-import 'package:crisptv_media/view/dashboard/video/success_create.dart';
+import 'package:crisptv/constant.dart';
+import 'package:crisptv/model/category.dart';
+import 'package:crisptv/view/dashboard/video/success_create.dart';
 import 'package:flutter/material.dart';
 
 class CategoryController with ChangeNotifier {

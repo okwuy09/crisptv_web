@@ -1,18 +1,18 @@
 import 'package:crisptv/component/color.dart';
 import 'package:crisptv/component/style.dart';
-import 'package:crisptv/model/team.dart';
-import 'package:crisptv/service/user_controller.dart';
+import 'package:crisptv/model/task.dart';
+import 'package:crisptv/service/task_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class RemoveTeamMemeber extends StatelessWidget {
-  final TeamMember teamMember;
-  const RemoveTeamMemeber({super.key, required this.teamMember});
+class RemoveTasks extends StatelessWidget {
+  final Tasks tasks;
+  const RemoveTasks({super.key, required this.tasks});
 
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
-    var provider = Provider.of<UserController>(context);
+    var provider = Provider.of<TaskController>(context);
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Stack(
@@ -27,18 +27,21 @@ class RemoveTeamMemeber extends StatelessWidget {
               left: screenSize.width / 2.5,
             ),
             decoration: BoxDecoration(
-              color: AppColor.white,
+              color: AppColor.primaryColor,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Column(
               children: [
                 Text(
-                  'Are you sure you want to remove team member?',
-                  style: style.copyWith(fontSize: 20),
+                  'Are you sure you want to Delete this Task?',
+                  style: style.copyWith(
+                    fontSize: 20,
+                    color: AppColor.white,
+                  ),
                 ),
                 SizedBox(height: screenSize.height / 50),
                 Divider(
-                  color: AppColor.primaryColor.withOpacity(0.1),
+                  color: AppColor.white.withOpacity(0.1),
                 ),
                 SizedBox(height: screenSize.height / 40),
                 Row(
@@ -46,10 +49,9 @@ class RemoveTeamMemeber extends StatelessWidget {
                   children: [
                     InkWell(
                       onTap: () async {
-                        await provider.deleteTeamMember(
+                        await provider.deleteTask(
+                          docID: tasks.id,
                           context: context,
-                          userName: teamMember.userName,
-                          docID: teamMember.id,
                         );
                       },
                       child: Container(
@@ -64,7 +66,7 @@ class RemoveTeamMemeber extends StatelessWidget {
                         ),
                         child: Center(
                           child: Text(
-                            'Yes I\'m 100% Sure',
+                            'Delete',
                             style: style.copyWith(
                               color: AppColor.white.withOpacity(0.8),
                               fontSize: 14,
@@ -85,14 +87,14 @@ class RemoveTeamMemeber extends StatelessWidget {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
                           border: Border.all(
-                            color: AppColor.primaryColor.withOpacity(0.5),
+                            color: AppColor.white.withOpacity(0.5),
                           ),
                         ),
                         child: Center(
                           child: Text(
-                            'No! Not yet',
+                            'Cancel',
                             style: style.copyWith(
-                              color: AppColor.primaryColor,
+                              color: AppColor.white,
                               fontSize: 14,
                             ),
                           ),
@@ -113,13 +115,13 @@ class RemoveTeamMemeber extends StatelessWidget {
                 height: 40,
                 width: 40,
                 decoration: BoxDecoration(
-                  color: AppColor.white,
+                  color: AppColor.primaryColor,
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Center(
                     child: Icon(
                   Icons.close,
-                  color: AppColor.primaryColor,
+                  color: AppColor.white,
                 )),
               ),
             ),

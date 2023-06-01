@@ -1,16 +1,16 @@
-import 'package:crisptv_media/component/style.dart';
-import 'package:crisptv_media/model/posts.dart';
-import 'package:crisptv_media/service/authentication_controller.dart';
-import 'package:crisptv_media/service/category_controller.dart';
-import 'package:crisptv_media/service/post_controller.dart';
-import 'package:crisptv_media/view/authentication/signin.dart';
-import 'package:crisptv_media/view/authentication/signup.dart';
-import 'package:crisptv_media/view/dashboard/news_article/text_editor.dart';
-import 'package:crisptv_media/view/live_session/live_session.dart';
-import 'package:crisptv_media/view/news/news.dart';
-import 'package:crisptv_media/view/post_detail.dart';
-import 'package:crisptv_media/view/show/show.dart';
-import 'package:crisptv_media/view/show/video_detail.dart';
+import 'package:crisptv/component/style.dart';
+import 'package:crisptv/model/posts.dart';
+import 'package:crisptv/service/authentication_controller.dart';
+import 'package:crisptv/service/category_controller.dart';
+import 'package:crisptv/service/post_controller.dart';
+import 'package:crisptv/service/task_controller.dart';
+import 'package:crisptv/view/authentication/signin.dart';
+import 'package:crisptv/view/authentication/signup.dart';
+import 'package:crisptv/view/live_session/live_session.dart';
+import 'package:crisptv/view/news/news.dart';
+import 'package:crisptv/view/post_detail.dart';
+import 'package:crisptv/view/show/show.dart';
+import 'package:crisptv/view/show/video_detail.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -33,6 +33,7 @@ void main() async {
     ChangeNotifierProvider(create: (_) => PostController()),
     ChangeNotifierProvider(create: (_) => UserController()),
     ChangeNotifierProvider(create: (_) => CategoryController()),
+    ChangeNotifierProvider(create: (_) => TaskController()),
     ChangeNotifierProvider(create: (_) => AuthenticationController()),
   ], child: MyApp()));
 }
@@ -50,7 +51,7 @@ class MyApp extends StatelessWidget {
       routeInformationParser: _router.routeInformationParser,
       routerDelegate: _router.routerDelegate,
       routeInformationProvider: _router.routeInformationProvider,
-      title: 'Crisptv-media',
+      title: 'Crisptv',
       theme: ThemeData(
         primarySwatch: Colors.grey,
         primaryColor: AppColor.white,

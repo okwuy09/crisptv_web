@@ -1,12 +1,12 @@
 import 'dart:typed_data';
 
-import 'package:crisptv_media/component/color.dart';
-import 'package:crisptv_media/component/mytextform.dart';
-import 'package:crisptv_media/component/style.dart';
-import 'package:crisptv_media/constant.dart';
-import 'package:crisptv_media/model/category.dart';
-import 'package:crisptv_media/service/category_controller.dart';
-import 'package:crisptv_media/service/post_controller.dart';
+import 'package:crisptv/component/color.dart';
+import 'package:crisptv/component/mytextform.dart';
+import 'package:crisptv/component/style.dart';
+import 'package:crisptv/constant.dart';
+import 'package:crisptv/model/category.dart';
+import 'package:crisptv/service/category_controller.dart';
+import 'package:crisptv/service/post_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

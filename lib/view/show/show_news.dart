@@ -1,8 +1,8 @@
-import 'package:crisptv_media/component/color.dart';
-import 'package:crisptv_media/component/style.dart';
-import 'package:crisptv_media/model/posts.dart';
-import 'package:crisptv_media/service/post_controller.dart';
-import 'package:crisptv_media/view/post_detail.dart';
+import 'package:crisptv/component/color.dart';
+import 'package:crisptv/component/style.dart';
+import 'package:crisptv/model/posts.dart';
+import 'package:crisptv/service/post_controller.dart';
+import 'package:crisptv/view/post_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -47,7 +47,7 @@ class _ShowNewsContainerState extends State<ShowNewsContainer> {
                           .toList();
                       return ListView.builder(
                         controller: _controller,
-                        itemCount: newsPost.length > 5 ? 5 : newsPost.length,
+                        itemCount: newsPost.length > 6 ? 6 : newsPost.length,
                         scrollDirection: screenSize.width < 800
                             ? Axis.vertical
                             : Axis.horizontal,

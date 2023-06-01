@@ -1,5 +1,5 @@
-import 'package:crisptv_media/component/color.dart';
-import 'package:crisptv_media/component/style.dart';
+import 'package:crisptv/component/color.dart';
+import 'package:crisptv/component/style.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable

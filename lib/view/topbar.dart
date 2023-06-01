@@ -1,6 +1,6 @@
-import 'package:crisptv_media/component/color.dart';
-import 'package:crisptv_media/component/style.dart';
-import 'package:crisptv_media/view/menu_drawal.dart';
+import 'package:crisptv/component/color.dart';
+import 'package:crisptv/component/style.dart';
+import 'package:crisptv/view/menu_drawal.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -106,7 +106,7 @@ class _TopBarContentsState extends State<TopBarContents> {
                 child: Padding(
                   padding: EdgeInsets.symmetric(
                     horizontal: screenSize.width / 20,
-                    vertical: screenSize.height / 40,
+                    vertical: 5,
                   ),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -425,7 +425,7 @@ class _TopBarContentsState extends State<TopBarContents> {
                             const SizedBox(width: 10),
                             InkWell(
                               onTap: () {
-                                context.go('/signin');
+                                context.go('/admin');
                               },
                               child: Container(
                                 width: 109,

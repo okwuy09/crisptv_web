@@ -1,18 +1,17 @@
 import 'dart:ui';
 
-import 'package:crisptv_media/component/color.dart';
-import 'package:crisptv_media/component/style.dart';
-import 'package:crisptv_media/constant.dart';
-import 'package:crisptv_media/model/category.dart';
-import 'package:crisptv_media/model/posts.dart';
-import 'package:crisptv_media/model/team.dart';
-import 'package:crisptv_media/service/category_controller.dart';
-import 'package:crisptv_media/service/post_controller.dart';
-import 'package:crisptv_media/service/user_controller.dart';
-import 'package:crisptv_media/view/dashboard/team/add_team_member.dart';
-import 'package:crisptv_media/view/dashboard/team/edit_team_member.dart';
-import 'package:crisptv_media/view/dashboard/team/member_removal.dart';
-import 'package:crisptv_media/view/dashboard/team/success_member_remove.dart';
+import 'package:crisptv/component/color.dart';
+import 'package:crisptv/component/style.dart';
+import 'package:crisptv/constant.dart';
+import 'package:crisptv/model/category.dart';
+import 'package:crisptv/model/posts.dart';
+import 'package:crisptv/model/team.dart';
+import 'package:crisptv/service/category_controller.dart';
+import 'package:crisptv/service/post_controller.dart';
+import 'package:crisptv/service/user_controller.dart';
+import 'package:crisptv/view/dashboard/team/add_team_member.dart';
+import 'package:crisptv/view/dashboard/team/edit_team_member.dart';
+import 'package:crisptv/view/dashboard/team/member_removal.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

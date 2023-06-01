@@ -1,9 +1,9 @@
-import 'package:crisptv_media/component/color.dart';
-import 'package:crisptv_media/model/category.dart';
-import 'package:crisptv_media/model/posts.dart';
-import 'package:crisptv_media/service/category_controller.dart';
-import 'package:crisptv_media/view/show/show_news.dart';
-import 'package:crisptv_media/view/show/video_detail.dart';
+import 'package:crisptv/component/color.dart';
+import 'package:crisptv/model/category.dart';
+import 'package:crisptv/model/posts.dart';
+import 'package:crisptv/service/category_controller.dart';
+import 'package:crisptv/view/show/show_news.dart';
+import 'package:crisptv/view/show/video_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:number_paginator/number_paginator.dart';
 import 'package:provider/provider.dart';
@@ -148,50 +148,67 @@ class _VideoFeedWidgetState extends State<VideoFeedWidget> {
                           physics: const NeverScrollableScrollPhysics(),
                           gridDelegate:
                               SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: screenSize.width < 800 ? 3 : 4,
+                            crossAxisCount: screenSize.width < 800
+                                ? 3
+                                : screenSize.width < 1500
+                                    ? 4
+                                    : 5,
                             crossAxisSpacing: 10,
                             mainAxisSpacing: 10,
+                            mainAxisExtent: 330,
                           ),
                           itemBuilder: ((context, index) {
-                            return Stack(
-                              children: [
-                                Container(
-                                  height: 300,
-                                  width: screenSize.width < 800 ? 220 : 294,
-                                  decoration: BoxDecoration(
-                                    color: AppColor.white,
-                                    //borderRadius: BorderRadius.circular(6),
-                                    image: DecorationImage(
-                                      image: NetworkImage(
-                                          widget.videopost[index].image),
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                ),
-                                Positioned(
-                                  bottom: 0,
-                                  child: InkWell(
+                            return SizedBox(
+                              height: 330,
+                              child: Column(
+                                children: [
+                                  InkWell(
                                     onTap: () => showDialog(
                                         context: context,
                                         builder: (_) => VideoDetail(
-                                              videopost:
-                                                  widget.videopost[index],
-                                            ) // PublishVideo(),
+                                            videopost: widget.videopost[
+                                                index]) // PublishVideo(),
+                                        ),
+                                    child: Container(
+                                      height: 240,
+                                      width: screenSize.width < 800 ? 220 : 294,
+                                      decoration: BoxDecoration(
+                                        color: AppColor.white,
+                                        //borderRadius: BorderRadius.circular(6),
+                                        image: DecorationImage(
+                                          image: NetworkImage(
+                                              widget.videopost[index].image),
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  InkWell(
+                                    onTap: () => showDialog(
+                                        context: context,
+                                        builder: (_) => VideoDetail(
+                                            videopost: widget.videopost[
+                                                index]) // PublishVideo(),
                                         ),
                                     child: Container(
                                       width: screenSize.width < 800 ? 220 : 295,
-                                      height: screenSize.width < 800 ? 85 : 72,
+                                      // height: screenSize.width < 800
+                                      //     ? 85
+                                      //     : 72,
                                       color: AppColor.gray.withOpacity(0.95),
                                       padding: const EdgeInsets.all(12),
                                       child: Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Text(
-                                            widget.videopost[index].title,
-                                            style: style.copyWith(
-                                              fontSize: 14,
-                                              color: AppColor.white,
+                                          SizedBox(
+                                            height: 40,
+                                            child: Text(
+                                              widget.videopost[index].title,
+                                              style: style.copyWith(
+                                                fontSize: 14,
+                                                color: AppColor.white,
+                                              ),
                                             ),
                                           ),
                                           const SizedBox(height: 10),
@@ -207,9 +224,9 @@ class _VideoFeedWidgetState extends State<VideoFeedWidget> {
                                         ],
                                       ),
                                     ),
-                                  ),
-                                )
-                              ],
+                                  )
+                                ],
+                              ),
                             );
                           }),
                         ),

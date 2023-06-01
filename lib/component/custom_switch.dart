@@ -1,4 +1,4 @@
-import 'package:crisptv_media/component/color.dart';
+import 'package:crisptv/component/color.dart';
 import 'package:flutter/material.dart';
 
 class CustomSwitch extends StatefulWidget {

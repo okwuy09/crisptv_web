@@ -1,8 +1,8 @@
-import 'package:crisptv_media/component/color.dart';
-import 'package:crisptv_media/model/category.dart';
-import 'package:crisptv_media/model/posts.dart';
-import 'package:crisptv_media/service/category_controller.dart';
-import 'package:crisptv_media/view/news/news.dart';
+import 'package:crisptv/component/color.dart';
+import 'package:crisptv/model/category.dart';
+import 'package:crisptv/model/posts.dart';
+import 'package:crisptv/service/category_controller.dart';
+import 'package:crisptv/view/news/news.dart';
 import 'package:flutter/material.dart';
 import 'package:number_paginator/number_paginator.dart';
 import 'package:provider/provider.dart';

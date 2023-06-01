@@ -1,6 +1,6 @@
-import 'package:crisptv_media/component/color.dart';
-import 'package:crisptv_media/component/signtextform.dart';
-import 'package:crisptv_media/component/style.dart';
+import 'package:crisptv/component/color.dart';
+import 'package:crisptv/component/signtextform.dart';
+import 'package:crisptv/component/style.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 

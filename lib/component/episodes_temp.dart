@@ -1,8 +1,8 @@
-import 'package:crisptv_media/component/color.dart';
-import 'package:crisptv_media/component/style.dart';
-import 'package:crisptv_media/model/category.dart';
-import 'package:crisptv_media/model/posts.dart';
-import 'package:crisptv_media/service/post_controller.dart';
+import 'package:crisptv/component/color.dart';
+import 'package:crisptv/component/style.dart';
+import 'package:crisptv/model/category.dart';
+import 'package:crisptv/model/posts.dart';
+import 'package:crisptv/service/post_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -54,7 +54,7 @@ class _EpisodesWidgetState extends State<EpisodesWidget> {
                   children: [
                     ListView.builder(
                       controller: _controller,
-                      itemCount: videoPost.length > 5 ? 5 : videoPost.length,
+                      itemCount: videoPost.length > 6 ? 6 : videoPost.length,
                       scrollDirection: Axis.horizontal,
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
@@ -128,37 +128,41 @@ class _EpisodesWidgetState extends State<EpisodesWidget> {
                     ),
                     screenSize.width < 800
                         ? Container()
-                        : Positioned(
-                            right: 0,
-                            top: 100,
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 2),
-                              child: InkWell(
-                                onTap: () {
-                                  _controller.animateTo(
-                                    _controller.position.maxScrollExtent,
-                                    duration: const Duration(milliseconds: 800),
-                                    curve: Curves.ease,
-                                  );
-                                },
-                                child: Container(
-                                  height: 60,
-                                  width: 60,
-                                  decoration: BoxDecoration(
-                                    color: AppColor.gray.withOpacity(0.7),
-                                    borderRadius: BorderRadius.circular(100),
-                                  ),
-                                  child: Center(
-                                    child: Icon(
-                                      Icons.arrow_forward_ios,
-                                      color: AppColor.white,
+                        : videoPost.length < 5
+                            ? Container()
+                            : Positioned(
+                                right: 0,
+                                top: 100,
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(horizontal: 2),
+                                  child: InkWell(
+                                    onTap: () {
+                                      _controller.animateTo(
+                                        _controller.position.maxScrollExtent,
+                                        duration:
+                                            const Duration(milliseconds: 800),
+                                        curve: Curves.ease,
+                                      );
+                                    },
+                                    child: Container(
+                                      height: 60,
+                                      width: 60,
+                                      decoration: BoxDecoration(
+                                        color: AppColor.gray.withOpacity(0.7),
+                                        borderRadius:
+                                            BorderRadius.circular(100),
+                                      ),
+                                      child: Center(
+                                        child: Icon(
+                                          Icons.arrow_forward_ios,
+                                          color: AppColor.white,
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                            ),
-                          )
+                              )
                   ],
                 ),
               ),

@@ -1,9 +1,9 @@
-import 'package:crisptv_media/component/color.dart';
-import 'package:crisptv_media/model/category.dart';
-import 'package:crisptv_media/model/posts.dart';
-import 'package:crisptv_media/service/category_controller.dart';
-import 'package:crisptv_media/service/post_controller.dart';
-import 'package:crisptv_media/view/news/news.dart';
+import 'package:crisptv/component/color.dart';
+import 'package:crisptv/model/category.dart';
+import 'package:crisptv/model/posts.dart';
+import 'package:crisptv/service/category_controller.dart';
+import 'package:crisptv/service/post_controller.dart';
+import 'package:crisptv/view/news/news.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../component/newspage_container.dart';
@@ -459,7 +459,7 @@ class _TreandingNewsState extends State<TreandingNews> {
                                 );
                         }
                       }),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 50),
                   NewsPageContainer(
                     newsCategory: newsCategory[2],
                     sectionTitle: newsCategory[2].name.toUpperCase(),

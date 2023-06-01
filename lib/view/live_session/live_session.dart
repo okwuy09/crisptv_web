@@ -1,11 +1,11 @@
-import 'package:crisptv_media/component/color.dart';
-import 'package:crisptv_media/component/style.dart';
-import 'package:crisptv_media/model/category.dart';
-import 'package:crisptv_media/service/category_controller.dart';
-import 'package:crisptv_media/view/buttom_bar.dart';
-import 'package:crisptv_media/view/live_session/youtube_player.dart';
-import 'package:crisptv_media/view/show/show_news.dart';
-import 'package:crisptv_media/view/topbar.dart';
+import 'package:crisptv/component/color.dart';
+import 'package:crisptv/component/style.dart';
+import 'package:crisptv/model/category.dart';
+import 'package:crisptv/service/category_controller.dart';
+import 'package:crisptv/view/buttom_bar.dart';
+import 'package:crisptv/view/live_session/youtube_player.dart';
+import 'package:crisptv/view/show/show_news.dart';
+import 'package:crisptv/view/topbar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
