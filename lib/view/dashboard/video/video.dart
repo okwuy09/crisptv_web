@@ -190,7 +190,7 @@ class _VideosState extends State<Videos> {
                 if (_selectedValue == null) {
                   return VideoWidget(
                     videoPost: videoPost,
-                    bulderRowNum: 4,
+                    bulderRowNum: screenSize.width < 1500 ? 4 : 5,
                     length: videoPost.length,
                   );
                 } else {
@@ -200,7 +200,7 @@ class _VideosState extends State<Videos> {
                       .toList();
                   return VideoWidget(
                     videoPost: selectedPost,
-                    bulderRowNum: 4,
+                    bulderRowNum: screenSize.width < 1500 ? 4 : 5,
                     length: selectedPost.length,
                   );
                 }

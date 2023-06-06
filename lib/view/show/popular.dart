@@ -34,7 +34,7 @@ class _PopularVideoState extends State<PopularVideo> {
           var postCategory = snapshot.data!;
           return Padding(
             padding: EdgeInsets.only(
-              top: screenSize.width / 15,
+              top: screenSize.height / 25,
               right: screenSize.width / 20,
               left: screenSize.width / 20,
             ),
@@ -58,7 +58,7 @@ class _PopularVideoState extends State<PopularVideo> {
                             fontSize: 25,
                           ),
                         ),
-                        SizedBox(height: screenSize.height / 10),
+                        SizedBox(height: screenSize.height / 15),
                         // Video widget
                         screenSize.width < 800
                             ? ListView.builder(
@@ -153,11 +153,11 @@ class _PopularVideoState extends State<PopularVideo> {
                                           : 5,
                                   crossAxisSpacing: 10,
                                   mainAxisSpacing: 10,
-                                  mainAxisExtent: 330,
+                                  mainAxisExtent: 300,
                                 ),
                                 itemBuilder: ((context, index) {
                                   return SizedBox(
-                                    height: 330,
+                                    height: 300,
                                     child: Column(
                                       children: [
                                         InkWell(
@@ -168,7 +168,7 @@ class _PopularVideoState extends State<PopularVideo> {
                                                       index]) // PublishVideo(),
                                               ),
                                           child: Container(
-                                            height: 240,
+                                            height: 210,
                                             width: screenSize.width < 800
                                                 ? 220
                                                 : 294,

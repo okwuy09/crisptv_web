@@ -83,7 +83,7 @@ class _OverviewState extends State<Overview> {
 
                       return VideoWidget(
                         videoPost: newsPost,
-                        bulderRowNum: 2,
+                        bulderRowNum: screenSize.width < 1500 ? 2 : 3,
                         length: newsPost.length > 10 ? 10 : newsPost.length,
                       );
                     }
@@ -157,7 +157,7 @@ class _OverviewState extends State<Overview> {
 
                       return NewsWidget(
                         newsPost: newsPost,
-                        bulderRowNum: 2,
+                        bulderRowNum: screenSize.width < 1500 ? 2 : 3,
                         length: newsPost.length > 10 ? 10 : newsPost.length,
                       );
                     }

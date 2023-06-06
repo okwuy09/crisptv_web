@@ -107,6 +107,78 @@ class PostController with ChangeNotifier {
   }
 
   /// Add new Post to the database
+  bool isupdatingNews = false;
+  Future updateNewsPosts({
+    required BuildContext context,
+    required String docID,
+    Uint8List? imageFile,
+    required String imageName,
+    required Category category,
+    required String title,
+    required String imageUrls,
+    required String writeUp,
+    required bool allowComment,
+  }) async {
+    try {
+      isupdatingNews = true;
+      notifyListeners();
+      final docPost = firebaseStore.collection('post').doc(docID);
+      if (imageFile != null) {
+        var snapshot = await firebaseStorage
+            .ref()
+            .child('images/$imageName')
+            .putData(imageFile);
+
+        var imageUrl = await snapshot.ref.getDownloadURL();
+
+        docPost.update({
+          "categoryID": category.id,
+          "image": imageUrl,
+          "title": title,
+          "writeUp": writeUp,
+          "allowComment": allowComment,
+        }).then((value) {
+          Navigator.pop(context, false);
+          showDialog(
+            context: context,
+            builder: (_) => SuccessUpload(
+              title: 'Your Post has been Updated successfully',
+              subTitle: 'The Post was published under',
+              category: category.name,
+            ),
+          );
+        });
+        isupdatingNews = false;
+        notifyListeners();
+      } else {
+        docPost.update({
+          "categoryID": category.id,
+          "image": imageUrls,
+          "title": title,
+          "writeUp": writeUp,
+          "allowComment": allowComment,
+        }).then((value) {
+          Navigator.pop(context, false);
+          showDialog(
+            context: context,
+            builder: (_) => SuccessUpload(
+              title: 'Your Post has been Updated successfully',
+              subTitle: 'The Post was published under',
+              category: category.name,
+            ),
+          );
+        });
+        isupdatingNews = false;
+        notifyListeners();
+      }
+    } on FirebaseException catch (e) {
+      isupdatingNews = false;
+      notifyListeners();
+      return e.toString();
+    }
+  }
+
+  /// Add new Post to the database
   bool isposting = false;
   Future posts({
     required BuildContext context,

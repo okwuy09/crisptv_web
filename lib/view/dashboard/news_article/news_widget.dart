@@ -4,6 +4,7 @@ import 'package:crisptv/model/category.dart';
 import 'package:crisptv/model/posts.dart';
 import 'package:crisptv/service/category_controller.dart';
 import 'package:crisptv/service/post_controller.dart';
+import 'package:crisptv/view/dashboard/news_article/edit_post.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -32,11 +33,11 @@ class NewsWidget extends StatelessWidget {
           crossAxisCount: screenSize.width < 800 ? 1 : bulderRowNum,
           crossAxisSpacing: 20,
           mainAxisSpacing: 20,
-          mainAxisExtent: 200,
+          mainAxisExtent: 180,
         ),
         itemBuilder: ((context, index) {
           return Container(
-            height: 200,
+            height: 180,
             decoration: BoxDecoration(
               border: Border.all(
                 color: AppColor.white.withOpacity(0.6),
@@ -50,7 +51,7 @@ class NewsWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(
-                        height: 70,
+                        height: 50,
                         child: Text(
                           newsPost[index].title,
                           style: style.copyWith(
@@ -124,7 +125,32 @@ class NewsWidget extends StatelessWidget {
                               color: AppColor.white.withOpacity(0.5),
                             ),
                             shadowColor: AppColor.white.withOpacity(0.4),
-                            itemBuilder: (context) => [
+                            onSelected: (result) {
+                              if (result == 0) {
+                                
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) =>
+                                        EditPost(post: newsPost[index]),
+                                  ),
+                                );
+                              }
+                            },
+                            itemBuilder: (ctx) => [
+                              PopupMenuItem(
+                                value: 0,
+                                onTap: () => {
+                                  //Navigator.of(context).pop(),
+                                },
+                                child: Text(
+                                  'Edit',
+                                  style: style.copyWith(
+                                    color: AppColor.white,
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ),
                               PopupMenuItem(
                                 onTap: () => postProvider.deletePost(
                                     newsPost[index].id, context),

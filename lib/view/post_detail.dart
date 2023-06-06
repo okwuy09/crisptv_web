@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:crisptv/component/color.dart';
 import 'package:crisptv/component/news_temp.dart';
 import 'package:crisptv/component/view_comment.dart';
@@ -7,6 +9,7 @@ import 'package:crisptv/model/posts.dart';
 import 'package:crisptv/service/post_controller.dart';
 import 'package:crisptv/view/show/show_news.dart';
 import 'package:crisptv/view/topbar.dart';
+import 'package:delta_to_html/delta_to_html.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:provider/provider.dart';
@@ -155,7 +158,8 @@ class _PostDetailState extends State<PostDetail> {
                           ),
                           const SizedBox(height: 50),
                           HtmlWidget(
-                            widget.newsPost!.writeUp,
+                            DeltaToHTML.encodeJson(
+                                jsonDecode(widget.newsPost!.writeUp)),
                             textStyle: style.copyWith(
                               color: AppColor.white.withOpacity(0.9),
                               wordSpacing: 1.5,

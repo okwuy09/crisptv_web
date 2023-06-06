@@ -64,6 +64,7 @@ class _HomePageState extends State<HomePage> {
         child: SingleChildScrollView(
           controller: _scrollController,
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
                 height: screenSize.width < 800 ? screenSize.height : 650,

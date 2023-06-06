@@ -22,6 +22,7 @@ class UserController with ChangeNotifier {
         .snapshots()
         .map((snapshot) =>
             snapshot.docs.map((doc) => Users.fromJson(doc.data())).toList());
+    notifyListeners();
     return usersDoc;
   }
 

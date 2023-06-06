@@ -32,11 +32,11 @@ class VideoWidget extends StatelessWidget {
           crossAxisCount: screenSize.width < 800 ? 1 : bulderRowNum,
           crossAxisSpacing: 10,
           mainAxisSpacing: 10,
-          mainAxisExtent: 320,
+          mainAxisExtent: 300,
         ),
         itemBuilder: ((context, index) {
           return Container(
-            height: 320,
+            height: 300,
             decoration: BoxDecoration(
               border: Border.all(
                 color: AppColor.white.withOpacity(0.6),
@@ -62,7 +62,7 @@ class VideoWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(
-                        height: 70,
+                        height: 50,
                         child: Text(
                           videoPost[index].title,
                           style: style.copyWith(
