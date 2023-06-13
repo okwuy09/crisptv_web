@@ -1,6 +1,7 @@
 import 'package:crisptv/component/color.dart';
 import 'package:crisptv/component/style.dart';
 import 'package:crisptv/view/menu_drawal.dart';
+import 'package:crisptv/view/search/post_search.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -68,10 +69,18 @@ class _TopBarContentsState extends State<TopBarContents> {
                     ),
                   ),
                   Expanded(child: Container()),
-                  Icon(
-                    Icons.search,
-                    color: AppColor.white,
-                    size: 30,
+                  InkWell(
+                    onTap: () {
+                      showSearch(
+                        context: context,
+                        delegate: CustomSearchDelegate(),
+                      );
+                    },
+                    child: Icon(
+                      Icons.search,
+                      color: AppColor.white,
+                      size: 30,
+                    ),
                   ),
                   const SizedBox(width: 20),
                   InkWell(
@@ -417,10 +426,18 @@ class _TopBarContentsState extends State<TopBarContents> {
                             // ),
                             //SizedBox(width: screenSize.width / 5),
                             Expanded(child: Container()),
-                            Icon(
-                              Icons.search,
-                              color: AppColor.white,
-                              size: 30,
+                            InkWell(
+                              onTap: () {
+                                showSearch(
+                                  context: context,
+                                  delegate: CustomSearchDelegate(),
+                                );
+                              },
+                              child: Icon(
+                                Icons.search,
+                                color: AppColor.white,
+                                size: 30,
+                              ),
                             ),
                             const SizedBox(width: 10),
                             InkWell(

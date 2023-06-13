@@ -95,12 +95,14 @@ class _VideoFeedWidgetState extends State<VideoFeedWidget> {
                                     Positioned(
                                       bottom: 0,
                                       child: InkWell(
-                                        onTap: () => showDialog(
-                                            context: context,
+                                        onTap: () => Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
                                             builder: (_) => VideoDetail(
-                                                videopost: widget.videopost[
-                                                    index]) // PublishVideo(),
-                                            ),
+                                                videopost:
+                                                    widget.videopost[index]),
+                                          ),
+                                        ),
                                         child: Container(
                                           width: screenSize
                                               .width, //< 800 ? 220 : 295,
@@ -163,12 +165,13 @@ class _VideoFeedWidgetState extends State<VideoFeedWidget> {
                               child: Column(
                                 children: [
                                   InkWell(
-                                    onTap: () => showDialog(
-                                        context: context,
+                                    onTap: () => Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
                                         builder: (_) => VideoDetail(
-                                            videopost: widget.videopost[
-                                                index]) // PublishVideo(),
-                                        ),
+                                            videopost: widget.videopost[index]),
+                                      ),
+                                    ),
                                     child: Container(
                                       height: 210,
                                       width: screenSize.width < 800 ? 220 : 294,
