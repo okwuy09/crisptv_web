@@ -55,7 +55,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyCLVWz6dg6pRAJac9yHKL8l23dzZp8Q1ew',
-    appId: '1:486276711430:android:8e21a8759c99b75422ef87',
+    appId: '1:486276711430:android:7d96708cb736c61322ef87',
     messagingSenderId: '486276711430',
     projectId: 'crisptv-e3355',
     storageBucket: 'crisptv-e3355.appspot.com',

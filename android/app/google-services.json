@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:486276711430:android:8e21a8759c99b75422ef87",
+        "mobilesdk_app_id": "1:486276711430:android:7d96708cb736c61322ef87",
         "android_client_info": {
-          "package_name": "com.crisptv_media.app"
+          "package_name": "com.crisptv.app"
         }
       },
       "oauth_client": [
@@ -43,9 +43,9 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:486276711430:android:e0d728a583303ff322ef87",
+        "mobilesdk_app_id": "1:486276711430:android:8e21a8759c99b75422ef87",
         "android_client_info": {
-          "package_name": "com.example.crisptv_media"
+          "package_name": "com.crisptv_media.app"
         }
       },
       "oauth_client": [
