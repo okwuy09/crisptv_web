@@ -17,8 +17,7 @@ class SearchPostWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: size.width / 20,
+      padding: const EdgeInsets.symmetric(
         vertical: 6,
       ),
       child: InkWell(
@@ -38,8 +37,8 @@ class SearchPostWidget extends StatelessWidget {
         child: Row(
           children: [
             Container(
-              height: 100,
-              width: 150,
+              height: size.width < 800 ? 100 : 150,
+              width: size.width < 800 ? 140 : 220,
               decoration: BoxDecoration(
                 color: AppColor.blue,
                 borderRadius: BorderRadius.circular(6),

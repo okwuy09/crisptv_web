@@ -9,6 +9,7 @@ import 'package:crisptv/view/authentication/signup.dart';
 import 'package:crisptv/view/live_session/live_session.dart';
 import 'package:crisptv/view/news/news.dart';
 import 'package:crisptv/view/post_detail.dart';
+import 'package:crisptv/view/search/search.dart';
 import 'package:crisptv/view/show/show.dart';
 import 'package:crisptv/view/show/video_detail.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -108,6 +109,12 @@ class MyApp extends StatelessWidget {
         parentNavigatorKey: _rootNavigatorKey,
         builder: (BuildContext context, GoRouterState state) =>
             const LiveSessions(),
+      ),
+      GoRoute(
+        path: '/search',
+        parentNavigatorKey: _rootNavigatorKey,
+        builder: (BuildContext context, GoRouterState state) =>
+            const SearchPost(),
       ),
       GoRoute(
         path: '/signup',

@@ -58,7 +58,9 @@ class _VideoDetailState extends State<VideoDetail> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Divider(color: AppColor.white),
+                    Divider(
+                      color: AppColor.white.withOpacity(0.4),
+                    ),
                     Padding(
                       padding: EdgeInsets.only(
                         right: screenSize.width < 800

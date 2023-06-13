@@ -1,7 +1,7 @@
 import 'package:crisptv/component/color.dart';
 import 'package:crisptv/component/style.dart';
 import 'package:crisptv/view/menu_drawal.dart';
-import 'package:crisptv/view/search/post_search.dart';
+import 'package:crisptv/view/search/search.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -70,16 +70,11 @@ class _TopBarContentsState extends State<TopBarContents> {
                   ),
                   Expanded(child: Container()),
                   InkWell(
-                    onTap: () {
-                      showSearch(
-                        context: context,
-                        delegate: CustomSearchDelegate(),
-                      );
-                    },
+                    onTap: () => context.go('/search'),
                     child: Icon(
                       Icons.search,
                       color: AppColor.white,
-                      size: 30,
+                      size: 25,
                     ),
                   ),
                   const SizedBox(width: 20),
@@ -359,87 +354,17 @@ class _TopBarContentsState extends State<TopBarContents> {
                                 ),
                               ],
                             ),
-                            // GestureDetector(
-                            //   onTap: () {
-                            //     setState(() {
-                            //       clicked.replaceRange(0, clicked.length,
-                            //           [for (int i = 0; i < clicked.length; i++) false]);
-                            //       homeIndex = 5;
-                            //     });
-                            //     context.go('/signin');
-                            //   },
-                            //   child: Container(
-                            //     width: 80,
-                            //     height: 30,
-                            //     decoration: BoxDecoration(
-                            //       color: homeIndex == 5
-                            //           ? AppColor.primaryColor
-                            //           : AppColor.white,
-                            //       borderRadius: BorderRadius.circular(6),
-                            //     ),
-                            //     child: Center(
-                            //       child: Text(
-                            //         'SIGN IN',
-                            //         style: style.copyWith(
-                            //           fontSize: 12,
-                            //           fontWeight: FontWeight.w500,
-                            //           color: homeIndex == 5
-                            //               ? AppColor.white
-                            //               : AppColor.primaryColor,
-                            //         ),
-                            //       ),
-                            //     ),
-                            //   ),
-                            // ),
-                            // const SizedBox(width: 20),
-                            // GestureDetector(
-                            //   onTap: () {
-                            //     setState(() {
-                            //       clicked.replaceRange(0, clicked.length,
-                            //           [for (int i = 0; i < clicked.length; i++) false]);
-                            //       homeIndex = 6;
-                            //     });
-                            //     context.go('/signup');
-                            //   },
-                            //   child: Container(
-                            //     width: 80,
-                            //     height: 30,
-                            //     decoration: BoxDecoration(
-                            //       color: homeIndex == 6
-                            //           ? AppColor.primaryColor
-                            //           : AppColor.white,
-                            //       borderRadius: BorderRadius.circular(6),
-                            //     ),
-                            //     child: Center(
-                            //       child: Text(
-                            //         'SIGN UP',
-                            //         style: style.copyWith(
-                            //           fontSize: 12,
-                            //           fontWeight: FontWeight.w500,
-                            //           color: homeIndex == 6
-                            //               ? AppColor.white
-                            //               : AppColor.primaryColor,
-                            //         ),
-                            //       ),
-                            //     ),
-                            //   ),
-                            // ),
-                            //SizedBox(width: screenSize.width / 5),
+
                             Expanded(child: Container()),
                             InkWell(
-                              onTap: () {
-                                showSearch(
-                                  context: context,
-                                  delegate: CustomSearchDelegate(),
-                                );
-                              },
+                              onTap: () => context.go('/search'),
                               child: Icon(
                                 Icons.search,
                                 color: AppColor.white,
-                                size: 30,
+                                size: 25,
                               ),
                             ),
-                            const SizedBox(width: 10),
+                            const SizedBox(width: 20),
                             InkWell(
                               onTap: () {
                                 context.go('/admin');
