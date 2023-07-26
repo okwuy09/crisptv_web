@@ -19,6 +19,7 @@ class PopularVideo extends StatefulWidget {
 
 class _PopularVideoState extends State<PopularVideo> {
   final int _numPages = 10;
+  // ignore: unused_field
   int _currentIndex = 0;
   @override
   Widget build(BuildContext context) {

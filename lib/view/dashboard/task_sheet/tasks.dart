@@ -3,7 +3,6 @@ import 'package:crisptv/component/style.dart';
 import 'package:crisptv/constant.dart';
 import 'package:crisptv/model/category.dart';
 import 'package:crisptv/model/task.dart';
-import 'package:crisptv/service/category_controller.dart';
 import 'package:crisptv/service/task_controller.dart';
 import 'package:crisptv/view/dashboard/task_sheet/create_task.dart';
 import 'package:crisptv/view/dashboard/task_sheet/remove_task.dart';
@@ -19,13 +18,11 @@ class UserTask extends StatefulWidget {
 }
 
 class _UserTaskState extends State<UserTask> {
+  // ignore: unused_field
   Category? _selectedValue;
-  late Stream<List<Category>> _category; //= 'Choose from the dropdown';
 
   @override
   void initState() {
-    _category = Provider.of<CategoryController>(context, listen: false)
-        .fetchAllVideoCategory();
     super.initState();
   }
 

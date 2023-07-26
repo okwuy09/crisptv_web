@@ -1,5 +1,6 @@
 import 'package:crisptv/component/color.dart';
 import 'package:crisptv/component/style.dart';
+import 'package:crisptv/constant.dart';
 import 'package:crisptv/model/category.dart';
 import 'package:crisptv/model/posts.dart';
 import 'package:crisptv/service/category_controller.dart';
@@ -106,7 +107,7 @@ class NewsWidget extends StatelessWidget {
                                   ),
                                   const SizedBox(width: 5),
                                   Text(
-                                    '-  30 mins ago',
+                                    '-  ${timeEn(newsPost[index].time.toString())}',
                                     style: style.copyWith(
                                       fontSize: 11,
                                       fontWeight: FontWeight.normal,
@@ -127,7 +128,6 @@ class NewsWidget extends StatelessWidget {
                             shadowColor: AppColor.white.withOpacity(0.4),
                             onSelected: (result) {
                               if (result == 0) {
-                                
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(

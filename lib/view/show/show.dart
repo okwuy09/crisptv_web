@@ -186,7 +186,9 @@ class _ShowsPageState extends State<ShowsPage> {
                           .where((item) =>
                               selectedCategory!.id.contains(item.categoryID))
                           .toList();
-                      return VideoFeedWidget(videopost: selectedPost);
+                      return selectedPost.isEmpty
+                          ? Container()
+                          : VideoFeedWidget(videopost: selectedPost);
                     }
                   }
                 },

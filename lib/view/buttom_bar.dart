@@ -325,8 +325,8 @@ class BottomBar extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 50),
-                const Divider(
-                  color: Colors.white,
+                Divider(
+                  color: Colors.white.withOpacity(0.5),
                   thickness: 0,
                 ),
                 const SizedBox(height: 20),

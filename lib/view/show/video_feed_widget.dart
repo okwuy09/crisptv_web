@@ -19,6 +19,7 @@ class VideoFeedWidget extends StatefulWidget {
 
 class _VideoFeedWidgetState extends State<VideoFeedWidget> {
   final int _numPages = 10;
+  // ignore: unused_field
   int _currentIndex = 0;
 
   // Capitalize text after dot
@@ -216,7 +217,7 @@ class _VideoFeedWidgetState extends State<VideoFeedWidget> {
                                           ),
                                           const SizedBox(height: 10),
                                           Text(
-                                            '${postCategory[0].name} |  0${widget.videopost[index].time.day.toDouble()}. 0${widget.videopost[index].time.month.toDouble()}. ${widget.videopost[index].time.year}',
+                                            '${postCategory[0].name} | ${widget.videopost[index].time.day.toDouble()}. 0${widget.videopost[index].time.month.toDouble()}. ${widget.videopost[index].time.year}',
                                             style: style.copyWith(
                                               fontSize: 10,
                                               fontWeight: FontWeight.normal,

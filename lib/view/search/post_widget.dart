@@ -40,7 +40,7 @@ class SearchPostWidget extends StatelessWidget {
               height: size.width < 800 ? 100 : 150,
               width: size.width < 800 ? 140 : 220,
               decoration: BoxDecoration(
-                color: AppColor.blue,
+                color: AppColor.primaryColor,
                 borderRadius: BorderRadius.circular(6),
                 image: DecorationImage(
                   image: NetworkImage(post.image),

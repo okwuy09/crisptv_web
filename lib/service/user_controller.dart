@@ -33,10 +33,10 @@ class UserController with ChangeNotifier {
         .collection('users')
         .doc(user.uid)
         .snapshots()
-        .listen((event) => {
+        .listen((event) => 
               userData = Users.fromJson(event.data()!),
               //notifyListeners(),
-            });
+            );
     return Users.fromJson(userDoc.data()!);
   }
 

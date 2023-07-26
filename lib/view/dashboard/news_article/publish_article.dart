@@ -6,6 +6,7 @@ import 'package:crisptv/constant.dart';
 import 'package:crisptv/model/category.dart';
 import 'package:crisptv/service/category_controller.dart';
 import 'package:crisptv/service/post_controller.dart';
+import 'package:crisptv/service/user_controller.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dropzone/flutter_dropzone.dart';
@@ -46,6 +47,7 @@ class _PublishArticleState extends State<PublishArticle> {
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
     var provider = Provider.of<PostController>(context);
+    var user = Provider.of<UserController>(context);
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Stack(
@@ -75,8 +77,11 @@ class _PublishArticleState extends State<PublishArticle> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Add a header image',
-                            style: style.copyWith(fontSize: 24),
+                            'Add header image',
+                            style: style.copyWith(
+                              fontSize: 24,
+                              fontWeight: FontWeight.w500,
+                            ),
                           ),
                           SizedBox(height: screenSize.height / 20),
                           webImageUrl == null
@@ -295,8 +300,15 @@ class _PublishArticleState extends State<PublishArticle> {
                                               dropdownColor: AppColor.white,
                                               borderRadius:
                                                   BorderRadius.circular(8),
-                                              value: _selectedValue ??
-                                                  categories[0],
+                                              hint: Text(
+                                                'Select category',
+                                                style: style.copyWith(
+                                                  fontSize: 13,
+                                                  color: AppColor.primaryColor
+                                                      .withOpacity(0.6),
+                                                ),
+                                              ),
+                                              value: _selectedValue,
                                               onChanged: (newValue) {
                                                 setState(() {
                                                   _selectedValue = newValue;
@@ -332,7 +344,8 @@ class _PublishArticleState extends State<PublishArticle> {
                                 : () async {
                                     await provider.posts(
                                       context: context,
-                                      posterName: 'okwuchukwu',
+                                      posterName:
+                                          user.userData.fullName ?? 'Admin',
                                       imageFile: imagefile!,
                                       imageName: imageName!,
                                       category: _selectedValue!,
@@ -342,16 +355,6 @@ class _PublishArticleState extends State<PublishArticle> {
                                       allowComment: allowCommenting,
                                       postType: 'news',
                                     );
-                                    // Navigator.pop(context, false);
-                                    // showDialog(
-                                    //   context: context,
-                                    //   builder: (_) => SuccessUpload(
-                                    //     title:
-                                    //         'Your article has been published successfully',
-                                    //     subTitle: 'The article was published under',
-                                    //     category: selectedValue,
-                                    //   ),
-                                    // );
                                   },
                             child: Container(
                               height: 45,

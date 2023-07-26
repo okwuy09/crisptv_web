@@ -1,17 +1,63 @@
+import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:crisptv/component/getyoutubeid.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:crisptv/constant.dart';
 import 'package:crisptv/model/category.dart';
 import 'package:crisptv/model/comment.dart';
 import 'package:crisptv/model/posts.dart';
 import 'package:crisptv/view/dashboard/video/successful_publish.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 
 class PostController with ChangeNotifier {
   PostController() {
     fetchAllPost('news');
+  }
+
+  // final Stream<List<Posts>> _postsDoc = <Posts>[];
+
+  // get fetchPost => _postsDoc;
+
+  /// Fetch all videoPost
+  Stream<List<Posts>> fetchAllPost(String postType) {
+    var postsDoc = firebaseStore
+        .collection('post')
+        .orderBy('time', descending: true)
+        //.limit(20)
+        .snapshots()
+        .map((snapshot) =>
+            snapshot.docs.map((doc) => Posts.fromJson(doc.data())).toList());
+    return postsDoc;
+  }
+
+  /// Test
+  List<DocumentSnapshot> documentList = [];
+  Future fetchFirstList() async {
+    try {
+      documentList = (await firebaseStore
+              .collection('post')
+              .orderBy('time', descending: true)
+              .limit(20)
+              .get())
+          .docs;
+    } on SocketException catch (e) {
+      return Text(e.toString());
+    }
+  }
+
+  fetchNextMovies() async {
+    try {
+      List<DocumentSnapshot> newDocumentList = (await firebaseStore
+              .collection('post')
+              .orderBy('time', descending: true)
+              .startAfterDocument(documentList[documentList.length - 1])
+              .limit(20)
+              .get())
+          .docs;
+      documentList.addAll(newDocumentList);
+    } on SocketException catch (e) {
+      return e.toString();
+    }
   }
 
   /// Add newsPost Cooment to the database
@@ -33,18 +79,6 @@ class PostController with ChangeNotifier {
       notifyListeners();
       return e.toString();
     }
-  }
-
-  /// Fetch all videoPost
-  Stream<List<Posts>> fetchAllPost(String postType) {
-    var postsDoc = firebaseStore
-        .collection('post')
-        .limit(20)
-        .orderBy('time', descending: true)
-        .snapshots()
-        .map((snapshot) =>
-            snapshot.docs.map((doc) => Posts.fromJson(doc.data())).toList());
-    return postsDoc;
   }
 
   /// Fetch all News Post comment
@@ -107,8 +141,8 @@ class PostController with ChangeNotifier {
   }
 
   /// Add new Post to the database
-  bool isupdatingNews = false;
-  Future updateNewsPosts({
+  bool isupdatingPost = false;
+  Future updatePosts({
     required BuildContext context,
     required String docID,
     Uint8List? imageFile,
@@ -117,10 +151,11 @@ class PostController with ChangeNotifier {
     required String title,
     required String imageUrls,
     required String writeUp,
+    required String videoUrl,
     required bool allowComment,
   }) async {
     try {
-      isupdatingNews = true;
+      isupdatingPost = true;
       notifyListeners();
       final docPost = firebaseStore.collection('post').doc(docID);
       if (imageFile != null) {
@@ -137,6 +172,7 @@ class PostController with ChangeNotifier {
           "title": title,
           "writeUp": writeUp,
           "allowComment": allowComment,
+          "videoUrl": videoUrl,
         }).then((value) {
           Navigator.pop(context, false);
           showDialog(
@@ -148,7 +184,7 @@ class PostController with ChangeNotifier {
             ),
           );
         });
-        isupdatingNews = false;
+        isupdatingPost = false;
         notifyListeners();
       } else {
         docPost.update({
@@ -157,6 +193,7 @@ class PostController with ChangeNotifier {
           "title": title,
           "writeUp": writeUp,
           "allowComment": allowComment,
+          "videoUrl": videoUrl,
         }).then((value) {
           Navigator.pop(context, false);
           showDialog(
@@ -168,11 +205,11 @@ class PostController with ChangeNotifier {
             ),
           );
         });
-        isupdatingNews = false;
+        isupdatingPost = false;
         notifyListeners();
       }
     } on FirebaseException catch (e) {
-      isupdatingNews = false;
+      isupdatingPost = false;
       notifyListeners();
       return e.toString();
     }
@@ -196,74 +233,41 @@ class PostController with ChangeNotifier {
       isposting = true;
       notifyListeners();
       final docPost = firebaseStore.collection('post').doc();
-      if (postType == 'news') {
-        var snapshot = await firebaseStorage
-            .ref()
-            .child('images/$imageName')
-            .putData(imageFile);
+      var snapshot = await firebaseStorage
+          .ref()
+          .child('images/$imageName')
+          .putData(imageFile);
 
-        var imageUrl = await snapshot.ref.getDownloadURL();
+      var imageUrl = await snapshot.ref.getDownloadURL();
 
-        final post = Posts(
-          id: docPost.id,
-          categoryID: category.id,
-          image: imageUrl,
-          posterName: posterName,
-          time: DateTime.now(),
-          title: title,
-          writeUp: writeUp,
-          videoUrl: '',
-          likes: [],
-          allowComment: allowComment,
-          postType: postType,
+      final post = Posts(
+        id: docPost.id,
+        categoryID: category.id,
+        image: imageUrl,
+        posterName: posterName,
+        time: DateTime.now(),
+        title: title,
+        writeUp: writeUp,
+        videoUrl: videoUrl,
+        likes: [],
+        allowComment: allowComment,
+        postType: postType,
+      );
+
+      final json = post.toJson();
+      docPost.set(json).then((value) {
+        Navigator.pop(context, false);
+        showDialog(
+          context: context,
+          builder: (_) => SuccessUpload(
+            title: 'Your Post has been published successfully',
+            subTitle: 'The Post was published under',
+            category: category.name,
+          ),
         );
-
-        final json = post.toJson();
-        docPost.set(json).then((value) {
-          Navigator.pop(context, false);
-          showDialog(
-            context: context,
-            builder: (_) => SuccessUpload(
-              title: 'Your Post has been published successfully',
-              subTitle: 'The Post was published under',
-              category: category.name,
-            ),
-          );
-        });
-        isposting = false;
-        notifyListeners();
-      } else {
-        /// Youtube thumnail
-        var image = getYoutubeThumbnail(videoUrl);
-        final post = Posts(
-          id: docPost.id,
-          categoryID: category.id,
-          image: image,
-          posterName: posterName,
-          time: DateTime.now(),
-          title: title,
-          videoUrl: videoUrl,
-          likes: [],
-          allowComment: true,
-          postType: postType,
-          writeUp: '',
-        );
-
-        final json = post.toJson();
-        docPost.set(json).then((value) {
-          Navigator.pop(context, false);
-          showDialog(
-            context: context,
-            builder: (_) => SuccessUpload(
-              title: 'Your video has been published successfully',
-              subTitle: 'The video was published under',
-              category: category.name,
-            ),
-          );
-        });
-        isposting = false;
-        notifyListeners();
-      }
+      });
+      isposting = false;
+      notifyListeners();
     } on FirebaseException catch (e) {
       isposting = false;
       notifyListeners();

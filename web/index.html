@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link rel="stylesheet" href="loader.css" />
     <!--
     If you are serving your web app in a path other than the root, change the
     href value below to reflect the base path you are serving from.
@@ -14,7 +15,7 @@
     This is a placeholder for base href that will be replaced by the value of
     the `--base-href` argument provided to `flutter build`.
   -->
-    <base href="$FLUTTER_BASE_HREF" />
+    <base href="/" />
 
     <meta charset="UTF-8" />
     <meta content="IE=Edge" http-equiv="X-UA-Compatible" />
@@ -40,6 +41,32 @@
     <script src="flutter.js" defer></script>
   </head>
   <body>
+    <div id="loader">
+      <!--<h1 id="loader-title">CrispTv</h1>-->
+      <div class="lds-spinner">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+
+    <!-- We'll tell flutter to remove the loader when it has finished loading -->
+
+    <script
+      src="main.dart.js"
+      type="application/javascript"
+      onendload="document.getElementById('loader').remove();"
+    ></script>
+    <!-- End-->
     <script type="text/javascript">
       window.flutterWebRenderer = "html";
     </script>

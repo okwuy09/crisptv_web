@@ -1,4 +1,5 @@
 import 'package:crisptv/component/color.dart';
+import 'package:crisptv/constant.dart';
 import 'package:crisptv/model/category.dart';
 import 'package:crisptv/model/posts.dart';
 import 'package:crisptv/service/category_controller.dart';
@@ -69,203 +70,27 @@ class _TreandingNewsState extends State<TreandingNews> {
                           var newsPost = snapshot.data!
                               .where((element) => element.postType == 'news')
                               .toList();
-                          return screenSize.width < 800
-                              ? Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Column(
+                          return newsPost.isEmpty
+                              ? Container()
+                              : screenSize.width < 800
+                                  ? Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Container(
-                                          height: screenSize.width < 800
-                                              ? 400
-                                              : 547,
-                                          width: screenSize.width < 800
-                                              ? screenSize.width
-                                              : 654,
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(6),
-                                            image: DecorationImage(
-                                              image: NetworkImage(
-                                                  newsPost[0].image),
-                                              fit: BoxFit.cover,
-                                            ),
-                                          ),
-                                        ),
-                                        const SizedBox(height: 10),
-                                        SizedBox(
-                                          width: screenSize.width < 800
-                                              ? screenSize.width
-                                              : 654,
-                                          child: InkWell(
-                                            onTap: () => Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (_) => PostDetail(
-                                                    newsPost: newsPost[0]),
-                                              ),
-                                            ),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  newsPost[0].title,
-                                                  style: style.copyWith(
-                                                    color: AppColor.white,
-                                                  ),
-                                                ),
-                                                const SizedBox(height: 10),
-                                                Text(
-                                                  'By ${newsPost[0].posterName}  |  50 Mins read',
-                                                  style: style.copyWith(
-                                                    fontSize: 14,
-                                                    color: AppColor.white
-                                                        .withOpacity(0.6),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    const SizedBox(height: 15),
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Container(
-                                          height: screenSize.width < 800
-                                              ? 200
-                                              : 232,
-                                          width: screenSize.width,
-                                          decoration: BoxDecoration(
-                                            image: DecorationImage(
-                                              image: NetworkImage(
-                                                  newsPost[1].image),
-                                              fit: BoxFit.cover,
-                                            ),
-                                          ),
-                                        ),
-                                        const SizedBox(height: 10),
-                                        SizedBox(
-                                          width: screenSize.width,
-                                          child: InkWell(
-                                            onTap: () => Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (_) => PostDetail(
-                                                    newsPost: newsPost[1]),
-                                              ),
-                                            ),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  newsPost[1].title,
-                                                  style: style.copyWith(
-                                                    color: AppColor.white,
-                                                  ),
-                                                ),
-                                                const SizedBox(height: 10),
-                                                Text(
-                                                  'By ${newsPost[1].posterName}  |  50 Mins read',
-                                                  style: style.copyWith(
-                                                    fontSize: 14,
-                                                    color: AppColor.white
-                                                        .withOpacity(0.6),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    const SizedBox(height: 15),
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Container(
-                                          height: screenSize.width < 800
-                                              ? 200
-                                              : 232,
-                                          width: screenSize.width,
-                                          decoration: BoxDecoration(
-                                            image: DecorationImage(
-                                              image: NetworkImage(
-                                                  newsPost[2].image),
-                                              fit: BoxFit.cover,
-                                            ),
-                                          ),
-                                        ),
-                                        const SizedBox(height: 10),
-                                        SizedBox(
-                                          width: screenSize.width,
-                                          child: InkWell(
-                                            onTap: () => Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (_) => PostDetail(
-                                                    newsPost: newsPost[2]),
-                                              ),
-                                            ),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  newsPost[2].title,
-                                                  style: style.copyWith(
-                                                    color: AppColor.white,
-                                                  ),
-                                                ),
-                                                const SizedBox(height: 10),
-                                                Text(
-                                                  'By ${newsPost[2].posterName}  |  50 Mins read',
-                                                  style: style.copyWith(
-                                                    fontSize: 14,
-                                                    color: AppColor.white
-                                                        .withOpacity(0.6),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                )
-                              : Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Expanded(
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          InkWell(
-                                            onTap: () => Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (_) => PostDetail(
-                                                    newsPost: newsPost[0]),
-                                              ),
-                                            ),
-                                            child: Container(
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Container(
                                               height: screenSize.width < 800
-                                                  ? 300
+                                                  ? 400
                                                   : 547,
                                               width: screenSize.width < 800
                                                   ? screenSize.width
                                                   : 654,
                                               decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(6),
                                                 image: DecorationImage(
                                                   image: NetworkImage(
                                                       newsPost[0].image),
@@ -273,51 +98,188 @@ class _TreandingNewsState extends State<TreandingNews> {
                                                 ),
                                               ),
                                             ),
-                                          ),
-                                          const SizedBox(height: 10),
-                                          SizedBox(
-                                            width: screenSize.width < 800
-                                                ? screenSize.width
-                                                : 654,
-                                            child: InkWell(
-                                              onTap: () => Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (_) => PostDetail(
-                                                      newsPost: newsPost[0]),
+                                            const SizedBox(height: 10),
+                                            SizedBox(
+                                              width: screenSize.width < 800
+                                                  ? screenSize.width
+                                                  : 654,
+                                              child: InkWell(
+                                                onTap: () => Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (_) => PostDetail(
+                                                        newsPost: newsPost[0]),
+                                                  ),
+                                                ),
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      newsPost[0].title,
+                                                      style: style.copyWith(
+                                                        color: AppColor.white,
+                                                      ),
+                                                    ),
+                                                    const SizedBox(height: 10),
+                                                    Text(
+                                                      'By ${newsPost[0].posterName}  |  ${timeEn(newsPost[0].time.toString())}',
+                                                      style: style.copyWith(
+                                                        fontSize: 14,
+                                                        color: AppColor.white
+                                                            .withOpacity(0.6),
+                                                      ),
+                                                    ),
+                                                  ],
                                                 ),
                                               ),
-                                              child: Column(
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(height: 15),
+                                        newsPost.length < 2
+                                            ? Container()
+                                            : Column(
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
                                                 children: [
-                                                  Text(
-                                                    newsPost[0].title,
-                                                    style: style.copyWith(
-                                                      color: AppColor.white,
+                                                  Container(
+                                                    height:
+                                                        screenSize.width < 800
+                                                            ? 200
+                                                            : 232,
+                                                    width: screenSize.width,
+                                                    decoration: BoxDecoration(
+                                                      image: DecorationImage(
+                                                        image: NetworkImage(
+                                                            newsPost[1].image),
+                                                        fit: BoxFit.cover,
+                                                      ),
                                                     ),
                                                   ),
                                                   const SizedBox(height: 10),
-                                                  Text(
-                                                    'By ${newsPost[0].posterName}  |  50 Mins read',
-                                                    style: style.copyWith(
-                                                      fontSize: 14,
-                                                      color: AppColor.white
-                                                          .withOpacity(0.6),
+                                                  SizedBox(
+                                                    width: screenSize.width,
+                                                    child: InkWell(
+                                                      onTap: () =>
+                                                          Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                          builder: (_) =>
+                                                              PostDetail(
+                                                                  newsPost:
+                                                                      newsPost[
+                                                                          1]),
+                                                        ),
+                                                      ),
+                                                      child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Text(
+                                                            newsPost[1].title,
+                                                            style:
+                                                                style.copyWith(
+                                                              color: AppColor
+                                                                  .white,
+                                                            ),
+                                                          ),
+                                                          const SizedBox(
+                                                              height: 10),
+                                                          Text(
+                                                            'By ${newsPost[1].posterName}  |  ${timeEn(newsPost[1].time.toString())}',
+                                                            style:
+                                                                style.copyWith(
+                                                              fontSize: 14,
+                                                              color: AppColor
+                                                                  .white
+                                                                  .withOpacity(
+                                                                      0.6),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
                                                     ),
                                                   ),
                                                 ],
                                               ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    const SizedBox(width: 20),
-                                    Expanded(
-                                      child: Column(
-                                        children: [
-                                          Column(
+                                        const SizedBox(height: 15),
+                                        newsPost.length < 3
+                                            ? Container()
+                                            : Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Container(
+                                                    height:
+                                                        screenSize.width < 800
+                                                            ? 200
+                                                            : 232,
+                                                    width: screenSize.width,
+                                                    decoration: BoxDecoration(
+                                                      image: DecorationImage(
+                                                        image: NetworkImage(
+                                                            newsPost[2].image),
+                                                        fit: BoxFit.cover,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  const SizedBox(height: 10),
+                                                  SizedBox(
+                                                    width: screenSize.width,
+                                                    child: InkWell(
+                                                      onTap: () =>
+                                                          Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                          builder: (_) =>
+                                                              PostDetail(
+                                                                  newsPost:
+                                                                      newsPost[
+                                                                          2]),
+                                                        ),
+                                                      ),
+                                                      child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Text(
+                                                            newsPost[2].title,
+                                                            style:
+                                                                style.copyWith(
+                                                              color: AppColor
+                                                                  .white,
+                                                            ),
+                                                          ),
+                                                          const SizedBox(
+                                                              height: 10),
+                                                          Text(
+                                                            'By ${newsPost[2].posterName}  |  ${timeEn(newsPost[2].time.toString())}',
+                                                            style:
+                                                                style.copyWith(
+                                                              fontSize: 14,
+                                                              color: AppColor
+                                                                  .white
+                                                                  .withOpacity(
+                                                                      0.6),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                      ],
+                                    )
+                                  : Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Expanded(
+                                          child: Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
@@ -326,20 +288,20 @@ class _TreandingNewsState extends State<TreandingNews> {
                                                   context,
                                                   MaterialPageRoute(
                                                     builder: (_) => PostDetail(
-                                                        newsPost: newsPost[1]),
+                                                        newsPost: newsPost[0]),
                                                   ),
                                                 ),
                                                 child: Container(
                                                   height: screenSize.width < 800
                                                       ? 300
-                                                      : 232,
-                                                  // width: screenSize.width < 800
-                                                  //     ? screenSize.width
-                                                  //     : 511,
+                                                      : 547,
+                                                  width: screenSize.width < 800
+                                                      ? screenSize.width
+                                                      : 654,
                                                   decoration: BoxDecoration(
                                                     image: DecorationImage(
                                                       image: NetworkImage(
-                                                          newsPost[1].image),
+                                                          newsPost[0].image),
                                                       fit: BoxFit.cover,
                                                     ),
                                                   ),
@@ -347,9 +309,9 @@ class _TreandingNewsState extends State<TreandingNews> {
                                               ),
                                               const SizedBox(height: 10),
                                               SizedBox(
-                                                // width: screenSize.width < 800
-                                                //     ? screenSize.width
-                                                //     : 654,
+                                                width: screenSize.width < 800
+                                                    ? screenSize.width
+                                                    : 654,
                                                 child: InkWell(
                                                   onTap: () => Navigator.push(
                                                     context,
@@ -357,7 +319,7 @@ class _TreandingNewsState extends State<TreandingNews> {
                                                       builder: (_) =>
                                                           PostDetail(
                                                               newsPost:
-                                                                  newsPost[1]),
+                                                                  newsPost[0]),
                                                     ),
                                                   ),
                                                   child: Column(
@@ -366,7 +328,7 @@ class _TreandingNewsState extends State<TreandingNews> {
                                                             .start,
                                                     children: [
                                                       Text(
-                                                        newsPost[1].title,
+                                                        newsPost[0].title,
                                                         style: style.copyWith(
                                                           color: AppColor.white,
                                                         ),
@@ -374,7 +336,7 @@ class _TreandingNewsState extends State<TreandingNews> {
                                                       const SizedBox(
                                                           height: 10),
                                                       Text(
-                                                        'By ${newsPost[1].posterName}  |  50 Mins read',
+                                                        'By ${newsPost[0].posterName}  |  ${timeEn(newsPost[0].time.toString())}',
                                                         style: style.copyWith(
                                                           fontSize: 14,
                                                           color: AppColor.white
@@ -387,89 +349,211 @@ class _TreandingNewsState extends State<TreandingNews> {
                                               ),
                                             ],
                                           ),
-                                          const SizedBox(height: 30),
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                        ),
+                                        const SizedBox(width: 20),
+                                        Expanded(
+                                          child: Column(
                                             children: [
-                                              InkWell(
-                                                onTap: () => Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                    builder: (_) => PostDetail(
-                                                        newsPost: newsPost[2]),
-                                                  ),
-                                                ),
-                                                child: Container(
-                                                  height: screenSize.width < 800
-                                                      ? 300
-                                                      : 232,
-                                                  decoration: BoxDecoration(
-                                                    image: DecorationImage(
-                                                      image: NetworkImage(
-                                                          newsPost[2].image),
-                                                      fit: BoxFit.cover,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              const SizedBox(height: 10),
-                                              SizedBox(
-                                                child: InkWell(
-                                                  onTap: () => Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                      builder: (_) =>
-                                                          PostDetail(
-                                                              newsPost:
-                                                                  newsPost[2]),
-                                                    ),
-                                                  ),
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text(
-                                                        newsPost[2].title,
-                                                        style: style.copyWith(
-                                                          color: AppColor.white,
+                                              newsPost.length < 2
+                                                  ? Container()
+                                                  : Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        InkWell(
+                                                          onTap: () =>
+                                                              Navigator.push(
+                                                            context,
+                                                            MaterialPageRoute(
+                                                              builder: (_) =>
+                                                                  PostDetail(
+                                                                      newsPost:
+                                                                          newsPost[
+                                                                              1]),
+                                                            ),
+                                                          ),
+                                                          child: Container(
+                                                            height: screenSize
+                                                                        .width <
+                                                                    800
+                                                                ? 300
+                                                                : 232,
+                                                            // width: screenSize.width < 800
+                                                            //     ? screenSize.width
+                                                            //     : 511,
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              image:
+                                                                  DecorationImage(
+                                                                image: NetworkImage(
+                                                                    newsPost[1]
+                                                                        .image),
+                                                                fit: BoxFit
+                                                                    .cover,
+                                                              ),
+                                                            ),
+                                                          ),
                                                         ),
-                                                      ),
-                                                      const SizedBox(
-                                                          height: 10),
-                                                      Text(
-                                                        'By ${newsPost[2].posterName}  |  50 Mins read',
-                                                        style: style.copyWith(
-                                                          fontSize: 14,
-                                                          color: AppColor.white
-                                                              .withOpacity(0.6),
+                                                        const SizedBox(
+                                                            height: 10),
+                                                        SizedBox(
+                                                          // width: screenSize.width < 800
+                                                          //     ? screenSize.width
+                                                          //     : 654,
+                                                          child: InkWell(
+                                                            onTap: () =>
+                                                                Navigator.push(
+                                                              context,
+                                                              MaterialPageRoute(
+                                                                builder: (_) =>
+                                                                    PostDetail(
+                                                                        newsPost:
+                                                                            newsPost[1]),
+                                                              ),
+                                                            ),
+                                                            child: Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Text(
+                                                                  newsPost[1]
+                                                                      .title,
+                                                                  style: style
+                                                                      .copyWith(
+                                                                    color: AppColor
+                                                                        .white,
+                                                                  ),
+                                                                ),
+                                                                const SizedBox(
+                                                                    height: 10),
+                                                                Text(
+                                                                  'By ${newsPost[1].posterName}  |  ${timeEn(newsPost[1].time.toString())}',
+                                                                  style: style
+                                                                      .copyWith(
+                                                                    fontSize:
+                                                                        14,
+                                                                    color: AppColor
+                                                                        .white
+                                                                        .withOpacity(
+                                                                            0.6),
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
                                                         ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
+                                                      ],
+                                                    ),
+                                              const SizedBox(height: 30),
+                                              newsPost.length < 3
+                                                  ? Container()
+                                                  : Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        InkWell(
+                                                          onTap: () =>
+                                                              Navigator.push(
+                                                            context,
+                                                            MaterialPageRoute(
+                                                              builder: (_) =>
+                                                                  PostDetail(
+                                                                      newsPost:
+                                                                          newsPost[
+                                                                              2]),
+                                                            ),
+                                                          ),
+                                                          child: Container(
+                                                            height: screenSize
+                                                                        .width <
+                                                                    800
+                                                                ? 300
+                                                                : 232,
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              image:
+                                                                  DecorationImage(
+                                                                image: NetworkImage(
+                                                                    newsPost[2]
+                                                                        .image),
+                                                                fit: BoxFit
+                                                                    .cover,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        const SizedBox(
+                                                            height: 10),
+                                                        SizedBox(
+                                                          child: InkWell(
+                                                            onTap: () =>
+                                                                Navigator.push(
+                                                              context,
+                                                              MaterialPageRoute(
+                                                                builder: (_) =>
+                                                                    PostDetail(
+                                                                        newsPost:
+                                                                            newsPost[2]),
+                                                              ),
+                                                            ),
+                                                            child: Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Text(
+                                                                  newsPost[2]
+                                                                      .title,
+                                                                  style: style
+                                                                      .copyWith(
+                                                                    color: AppColor
+                                                                        .white,
+                                                                  ),
+                                                                ),
+                                                                const SizedBox(
+                                                                    height: 10),
+                                                                Text(
+                                                                  'By ${newsPost[2].posterName}  |  ${timeEn(newsPost[2].time.toString())}',
+                                                                  style: style
+                                                                      .copyWith(
+                                                                    fontSize:
+                                                                        14,
+                                                                    color: AppColor
+                                                                        .white
+                                                                        .withOpacity(
+                                                                            0.6),
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
                                             ],
                                           ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                );
+                                        ),
+                                      ],
+                                    );
                         }
                       }),
                   const SizedBox(height: 50),
-                  NewsPageContainer(
-                    newsCategory: newsCategory[2],
-                    sectionTitle: newsCategory[2].name.toUpperCase(),
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => NewsPage(selectedPage: newsCategory[2]),
-                      ),
-                    ),
-                  ),
+                  newsCategory.length < 3
+                      ? Container()
+                      : NewsPageContainer(
+                          newsCategory: newsCategory[2],
+                          sectionTitle: newsCategory[2].name.toUpperCase(),
+                          onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) =>
+                                  NewsPage(selectedPage: newsCategory[2]),
+                            ),
+                          ),
+                        ),
                   const SizedBox(height: 20),
                   Container(
                     height: screenSize.width < 800 ? 180 : 404,
@@ -482,27 +566,33 @@ class _TreandingNewsState extends State<TreandingNews> {
                     ),
                   ),
                   const SizedBox(height: 20),
-                  NewsPageContainer(
-                    sectionTitle: newsCategory[0].name.toUpperCase(),
-                    newsCategory: newsCategory[0],
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => NewsPage(selectedPage: newsCategory[0]),
-                      ),
-                    ),
-                  ),
+                  newsCategory.isEmpty
+                      ? Container()
+                      : NewsPageContainer(
+                          sectionTitle: newsCategory[0].name.toUpperCase(),
+                          newsCategory: newsCategory[0],
+                          onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) =>
+                                  NewsPage(selectedPage: newsCategory[0]),
+                            ),
+                          ),
+                        ),
                   const SizedBox(height: 20),
-                  NewsPageContainer(
-                    newsCategory: newsCategory[1],
-                    sectionTitle: newsCategory[1].name.toUpperCase(),
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => NewsPage(selectedPage: newsCategory[1]),
-                      ),
-                    ),
-                  ),
+                  newsCategory.length < 2
+                      ? Container()
+                      : NewsPageContainer(
+                          newsCategory: newsCategory[1],
+                          sectionTitle: newsCategory[1].name.toUpperCase(),
+                          onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) =>
+                                  NewsPage(selectedPage: newsCategory[1]),
+                            ),
+                          ),
+                        ),
                   const SizedBox(height: 20),
                   Container(
                     height: screenSize.width < 800 ? 180 : 404,
@@ -515,27 +605,33 @@ class _TreandingNewsState extends State<TreandingNews> {
                     ),
                   ),
                   const SizedBox(height: 20),
-                  NewsPageContainer(
-                    newsCategory: newsCategory[3],
-                    sectionTitle: newsCategory[3].name.toUpperCase(),
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => NewsPage(selectedPage: newsCategory[3]),
-                      ),
-                    ),
-                  ),
+                  newsCategory.length < 4
+                      ? Container()
+                      : NewsPageContainer(
+                          newsCategory: newsCategory[3],
+                          sectionTitle: newsCategory[3].name.toUpperCase(),
+                          onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) =>
+                                  NewsPage(selectedPage: newsCategory[3]),
+                            ),
+                          ),
+                        ),
                   const SizedBox(height: 20),
-                  NewsPageContainer(
-                    newsCategory: newsCategory[2],
-                    sectionTitle: newsCategory[2].name.toUpperCase(),
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => NewsPage(selectedPage: newsCategory[2]),
-                      ),
-                    ),
-                  ),
+                  newsCategory.length < 3
+                      ? Container()
+                      : NewsPageContainer(
+                          newsCategory: newsCategory[2],
+                          sectionTitle: newsCategory[2].name.toUpperCase(),
+                          onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) =>
+                                  NewsPage(selectedPage: newsCategory[2]),
+                            ),
+                          ),
+                        ),
                 ],
               ),
             );

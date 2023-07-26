@@ -5,10 +5,9 @@ import 'package:crisptv/component/style.dart';
 import 'package:crisptv/view/dashboard/news_article/publish_article.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
-import 'package:tuple/tuple.dart';
 // ignore: implementation_imports
 import 'package:flutter/src/widgets/text.dart' as text;
-import 'package:delta_to_html/delta_to_html.dart';
+import 'package:tuple/tuple.dart';
 
 class TextEditor extends StatefulWidget {
   const TextEditor({super.key});

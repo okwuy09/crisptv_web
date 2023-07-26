@@ -1,7 +1,8 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:crisptv/component/color.dart';
 import 'package:crisptv/component/style.dart';
 import 'package:crisptv/view/menu_drawal.dart';
-import 'package:crisptv/view/search/search.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 

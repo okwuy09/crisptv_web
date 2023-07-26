@@ -24,7 +24,7 @@ class CustomSwitch extends StatefulWidget {
       : super(key: key);
 
   @override
-  _CustomSwitchState createState() => _CustomSwitchState();
+  State<CustomSwitch> createState() => _CustomSwitchState();
 }
 
 class _CustomSwitchState extends State<CustomSwitch>

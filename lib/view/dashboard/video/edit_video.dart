@@ -1,5 +1,7 @@
 import 'dart:typed_data';
+
 import 'package:crisptv/component/color.dart';
+import 'package:crisptv/component/mytextform.dart';
 import 'package:crisptv/component/style.dart';
 import 'package:crisptv/constant.dart';
 import 'package:crisptv/model/category.dart';
@@ -10,38 +12,32 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dropzone/flutter_dropzone.dart';
 import 'package:provider/provider.dart';
 
-class EditArticle extends StatefulWidget {
-  final String title;
-  final String writeUp;
+class EditVideo extends StatefulWidget {
   final Posts post;
-  const EditArticle({
-    super.key,
-    required this.title,
-    required this.writeUp,
-    required this.post,
-  });
+  const EditVideo({super.key, required this.post});
 
   @override
-  State<EditArticle> createState() => _EditArticleState();
+  State<EditVideo> createState() => _EditVideoState();
 }
 
-class _EditArticleState extends State<EditArticle> {
+class _EditVideoState extends State<EditVideo> {
+  TextEditingController? _videoURL;
+  TextEditingController? _videoTitle;
+  String? imageName;
   String? webImageUrl;
   Uint8List? imagefile;
-  String? imageName;
   late DropzoneViewController controller;
   bool isHighLighted = false;
-  bool? allowCommenting;
-
   Category? _selectedValue;
   late Stream<List<Category>> _category; //= 'Choose from the dropdown';
 
   @override
   void initState() {
-    webImageUrl = widget.post.image;
-    allowCommenting = widget.post.allowComment;
     _category = Provider.of<CategoryController>(context, listen: false)
-        .fetchAllNewsCategory();
+        .fetchAllVideoCategory();
+    webImageUrl = widget.post.image;
+    _videoURL = TextEditingController(text: widget.post.videoUrl);
+    _videoTitle = TextEditingController(text: widget.post.title);
     super.initState();
   }
 
@@ -67,116 +63,145 @@ class _EditArticleState extends State<EditArticle> {
               color: AppColor.white,
               borderRadius: BorderRadius.circular(32),
             ),
-            child: Column(
+            child: Row(
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Add a header image',
-                            style: style.copyWith(fontSize: 24),
-                          ),
-                          SizedBox(height: screenSize.height / 20),
-                          Container(
-                            height: screenSize.height / 2.8,
-                            width: screenSize.width / 3.5,
-                            decoration: BoxDecoration(
-                              color: isHighLighted
-                                  ? AppColor.lightGray.withOpacity(0.2)
-                                  : AppColor.lightGray.withOpacity(0.1),
-                              borderRadius: BorderRadius.circular(16),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Add a header image',
+                        style: style.copyWith(fontSize: 24),
+                      ),
+                      SizedBox(height: screenSize.height / 20),
+                      Container(
+                        height: screenSize.height / 2.8,
+                        width: screenSize.width / 3.5,
+                        decoration: BoxDecoration(
+                          color: isHighLighted
+                              ? AppColor.lightGray.withOpacity(0.2)
+                              : AppColor.lightGray.withOpacity(0.1),
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        child: Stack(
+                          children: [
+                            DropzoneView(
+                              onCreated: (controller) =>
+                                  this.controller = controller,
+                              onHover: () =>
+                                  setState(() => isHighLighted = true),
+                              onLeave: () =>
+                                  setState(() => isHighLighted = false),
+                              onDrop: acceptFile,
                             ),
-                            child: Stack(
-                              children: [
-                                DropzoneView(
-                                  onCreated: (controller) =>
-                                      this.controller = controller,
-                                  onHover: () =>
-                                      setState(() => isHighLighted = true),
-                                  onLeave: () =>
-                                      setState(() => isHighLighted = false),
-                                  onDrop: acceptFile,
-                                ),
-                                Container(
-                                  height: screenSize.height / 2.8,
-                                  width: screenSize.width / 3.5,
-                                  padding: const EdgeInsets.all(15),
-                                  decoration: BoxDecoration(
-                                    //color: AppColor.gray,
-                                    borderRadius: BorderRadius.circular(16),
-                                    image: DecorationImage(
-                                        image: NetworkImage(webImageUrl!),
-                                        fit: BoxFit.cover),
-                                  ),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      InkWell(
-                                        onTap: () async {
-                                          final events =
-                                              await controller.pickFiles();
-                                          if (events.isEmpty) return;
-                                          acceptFile(events.first);
-                                        },
-                                        child: Container(
-                                          height: 30,
-                                          width: 116,
-                                          decoration: BoxDecoration(
-                                            color: AppColor.white,
-                                            borderRadius:
-                                                BorderRadius.circular(8),
-                                          ),
-                                          child: Center(
-                                            child: Text(
-                                              'Change Cover',
-                                              style: style.copyWith(
-                                                fontSize: 13,
-                                              ),
-                                            ),
+                            Container(
+                              height: screenSize.height / 2.8,
+                              width: screenSize.width / 3.5,
+                              padding: const EdgeInsets.all(15),
+                              decoration: BoxDecoration(
+                                //color: AppColor.gray,
+                                borderRadius: BorderRadius.circular(16),
+                                image: DecorationImage(
+                                    image: NetworkImage(webImageUrl!),
+                                    fit: BoxFit.cover),
+                              ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  InkWell(
+                                    onTap: () async {
+                                      final events =
+                                          await controller.pickFiles();
+                                      if (events.isEmpty) return;
+                                      acceptFile(events.first);
+                                    },
+                                    child: Container(
+                                      height: 30,
+                                      width: 116,
+                                      decoration: BoxDecoration(
+                                        color: AppColor.white,
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          'Change Cover',
+                                          style: style.copyWith(
+                                            fontSize: 13,
                                           ),
                                         ),
                                       ),
-                                    ],
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                    SizedBox(width: screenSize.width / 20),
-                    Expanded(
-                      child: Column(
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: Column(
+                    children: [
+                      SizedBox(width: screenSize.width / 40),
+                      Text(
+                        '',
+                        style: style.copyWith(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          SizedBox(height: screenSize.height / 10),
+                          // textfield for video Title
                           Text(
-                            'Allow commenting',
+                            'Video Title',
                             style: style.copyWith(fontSize: 14),
                           ),
                           const SizedBox(height: 5),
-                          Switch(
-                            value: allowCommenting!,
-                            activeColor: AppColor.primaryColor,
-                            onChanged: ((value) {
-                              setState(() {
-                                allowCommenting = value;
-                              });
-                            }),
+                          SizedBox(
+                            height: 40,
+                            width: 300,
+                            child: MyTextForm(
+                              controller: _videoTitle,
+                              obscureText: false,
+                              borderColor: Colors.transparent,
+                              hintText: 'Enter video title here',
+                              fillColor: AppColor.primaryColor.withOpacity(0.1),
+                            ),
                           ),
-                          SizedBox(height: screenSize.height / 35),
+                          const SizedBox(height: 20),
+                          // textfield for video URL
                           Text(
-                            'Select Category',
+                            'Video URL',
                             style: style.copyWith(fontSize: 14),
                           ),
                           const SizedBox(height: 5),
+                          SizedBox(
+                            height: 40,
+                            width: 300,
+                            child: MyTextForm(
+                              controller: _videoURL,
+                              obscureText: false,
+                              borderColor: Colors.transparent,
+                              hintText: 'Enter video URL here',
+                              fillColor: AppColor.primaryColor.withOpacity(0.1),
+                            ),
+                          ),
+                          const SizedBox(height: 20),
+                          // textfield for video Category
+                          Text(
+                            'Video Category',
+                            style: style.copyWith(fontSize: 14),
+                          ),
+                          const SizedBox(height: 5),
+
                           StreamBuilder<List<Category>>(
                             stream: _category,
                             builder: (context, snapshot) {
@@ -184,7 +209,7 @@ class _EditArticleState extends State<EditArticle> {
                                 return buttonCircularIndicator;
                               } else {
                                 var categories = snapshot.data!;
-                                var postcategory = categories
+                                var postCategories = categories
                                     .where(
                                         (e) => e.id == widget.post.categoryID)
                                     .toList();
@@ -192,7 +217,7 @@ class _EditArticleState extends State<EditArticle> {
                                   children: [
                                     Container(
                                       height: 40,
-                                      width: 250,
+                                      width: 300,
                                       padding:
                                           const EdgeInsets.only(left: 10.0),
                                       decoration: ShapeDecoration(
@@ -229,7 +254,7 @@ class _EditArticleState extends State<EditArticle> {
                                                   borderRadius:
                                                       BorderRadius.circular(8),
                                                   hint: Text(
-                                                    postcategory[0].name,
+                                                    postCategories[0].name,
                                                     style: style.copyWith(
                                                       fontSize: 13,
                                                       fontWeight:
@@ -267,21 +292,21 @@ class _EditArticleState extends State<EditArticle> {
                                               ),
                                       ),
                                     ),
-                                    SizedBox(height: screenSize.height / 10),
+                                    SizedBox(height: screenSize.height / 20),
                                     InkWell(
                                       onTap: () async {
                                         await provider.updatePosts(
                                           context: context,
                                           imageFile: imagefile,
                                           imageName: imageName ?? '',
-                                          category:
-                                              _selectedValue ?? postcategory[0],
-                                          title: widget.title,
-                                          writeUp: widget.writeUp,
-                                          allowComment: allowCommenting!,
+                                          category: _selectedValue ??
+                                              postCategories[0],
+                                          title: _videoTitle!.text,
+                                          writeUp: widget.post.writeUp,
+                                          allowComment: true,
                                           docID: widget.post.id,
                                           imageUrls: webImageUrl!,
-                                          videoUrl: widget.post.videoUrl,
+                                          videoUrl: _videoURL!.text,
                                         );
                                       },
                                       child: Container(
@@ -312,15 +337,15 @@ class _EditArticleState extends State<EditArticle> {
                           ),
                         ],
                       ),
-                    )
-                  ],
+                    ],
+                  ),
                 ),
               ],
             ),
           ),
           Positioned(
             top: screenSize.height / 20,
-            right: screenSize.width / 4.5,
+            right: screenSize.width / 3,
             child: InkWell(
               onTap: () => Navigator.pop(context),
               child: Container(

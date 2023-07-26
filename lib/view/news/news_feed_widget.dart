@@ -1,4 +1,5 @@
 import 'package:crisptv/component/color.dart';
+import 'package:crisptv/constant.dart';
 import 'package:crisptv/model/category.dart';
 import 'package:crisptv/model/posts.dart';
 import 'package:crisptv/service/category_controller.dart';
@@ -20,6 +21,7 @@ class NewsFeedWidget extends StatefulWidget {
 
 class _NewsFeedWidgetState extends State<NewsFeedWidget> {
   final int _numPages = 10;
+  // ignore: unused_field
   int _currentIndex = 0;
   @override
   Widget build(BuildContext context) {
@@ -113,7 +115,7 @@ class _NewsFeedWidgetState extends State<NewsFeedWidget> {
                                             ),
                                             const SizedBox(height: 10),
                                             Text(
-                                              'By ${widget.newspost[0].posterName}  |  50 Mins read',
+                                              'By ${widget.newspost[0].posterName}  |  ${timeEn(widget.newspost[0].time.toString())}',
                                               style: style.copyWith(
                                                 fontSize: 14,
                                                 color: AppColor.white

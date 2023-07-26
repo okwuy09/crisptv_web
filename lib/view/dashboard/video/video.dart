@@ -96,7 +96,14 @@ class _VideosState extends State<Videos> {
                                 child: DropdownButton<Category>(
                                   dropdownColor: AppColor.primaryColor,
                                   borderRadius: BorderRadius.circular(8),
-                                  value: _selectedValue ?? categories[0],
+                                  hint: Text(
+                                    'Select category',
+                                    style: style.copyWith(
+                                      fontSize: 13,
+                                      color: AppColor.white.withOpacity(0.6),
+                                    ),
+                                  ),
+                                  value: _selectedValue,
                                   onChanged: (newValue) {
                                     setState(() {
                                       _selectedValue = newValue;
@@ -126,7 +133,7 @@ class _VideosState extends State<Videos> {
               InkWell(
                 onTap: () => showDialog(
                   context: context,
-                  builder: (_) => const CreateCategory(),
+                  builder: (_) => const CreateVideoCategory(),
                 ),
                 child: Container(
                   height: 33,

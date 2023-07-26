@@ -6,9 +6,9 @@ import 'package:crisptv/model/posts.dart';
 import 'package:crisptv/view/dashboard/news_article/edit_article.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
-import 'package:tuple/tuple.dart';
 // ignore: implementation_imports
 import 'package:flutter/src/widgets/text.dart' as text;
+import 'package:tuple/tuple.dart';
 
 class EditPost extends StatefulWidget {
   final Posts post;
