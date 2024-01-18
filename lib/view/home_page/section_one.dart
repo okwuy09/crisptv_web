@@ -83,37 +83,37 @@ class _SectionOneState extends State<SectionOne> {
                                     ),
                                   ),
                                 ),
-                                Positioned(
-                                  bottom: 0,
-                                  child: InkWell(
-                                    onTap: () => context.goNamed(
-                                      "video_detail",
-                                      pathParameters: {
-                                        "videodetail": videoPost[index].title,
-                                      },
-                                      extra: videoPost[index],
-                                    ),
-                                    child: Container(
-                                      height: screenSize.width < 800 ? 70 : 80,
-                                      width: screenSize.width < 800 ? 270 : 300,
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 10),
-                                      // margin: const EdgeInsets.symmetric(
-                                      //     horizontal: 8),
-                                      decoration: BoxDecoration(
-                                        color: AppColor.gray.withOpacity(0.8),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      child: Center(
-                                        child: Text(
-                                          videoPost[index].title,
-                                          style: style.copyWith(
-                                              color: AppColor.white),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                )
+                                // Positioned(
+                                //   bottom: 0,
+                                //   child: InkWell(
+                                //     onTap: () => context.goNamed(
+                                //       "video_detail",
+                                //       pathParameters: {
+                                //         "videodetail": videoPost[index].title,
+                                //       },
+                                //       extra: videoPost[index],
+                                //     ),
+                                //     child: Container(
+                                //       height: screenSize.width < 800 ? 70 : 80,
+                                //       width: screenSize.width < 800 ? 270 : 300,
+                                //       padding: const EdgeInsets.symmetric(
+                                //           horizontal: 10),
+                                //       // margin: const EdgeInsets.symmetric(
+                                //       //     horizontal: 8),
+                                //       decoration: BoxDecoration(
+                                //         color: AppColor.gray.withOpacity(0.8),
+                                //         borderRadius: BorderRadius.circular(8),
+                                //       ),
+                                //       child: Center(
+                                //         child: Text(
+                                //           videoPost[index].title,
+                                //           style: style.copyWith(
+                                //               color: AppColor.white),
+                                //         ),
+                                //       ),
+                                //     ),
+                                //   ),
+                                // )
                               ],
                             );
                           },

@@ -109,7 +109,7 @@ class _EpisodesWidgetState extends State<EpisodesWidget> {
                                       ),
                                       const SizedBox(height: 10),
                                       Text(
-                                        'CONTO ALLA ROVESCIA | 0${videoPost[index].time.day.toDouble()}. 0${videoPost[index].time.month.toDouble()}. ${videoPost[index].time.year}',
+                                        'videoPost[index] | 0${videoPost[index].time.day.toDouble()}. 0${videoPost[index].time.month.toDouble()}. ${videoPost[index].time.year}',
                                         style: style.copyWith(
                                           fontSize: 10,
                                           fontWeight: FontWeight.normal,
