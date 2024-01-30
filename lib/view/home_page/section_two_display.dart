@@ -1,31 +1,39 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:crisptv/component/style.dart';
+import 'package:crisptv/model/ads.dart';
+import 'package:crisptv/service/setting_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../component/color.dart';
 
-class SectionTwoDisplay extends StatelessWidget {
-  const SectionTwoDisplay({super.key});
+class BusinessDisplay extends StatelessWidget {
+  const BusinessDisplay({super.key});
 
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
+    var provider = Provider.of<SettingController>(context);
     return Container(
       height: 450,
       width: screenSize.width,
       margin: EdgeInsets.symmetric(horizontal: screenSize.width / 20),
-      // decoration: const BoxDecoration(
-      //   image: DecorationImage(
-      //     image: AssetImage('assets/news.jpg'),
-      //     fit: BoxFit.cover,
-      //   ),
-      // ),
       child: Stack(
         fit: StackFit.expand,
         children: [
-          Image.asset(
-            'assets/news1.jpg',
-            fit: BoxFit.cover,
-          ),
+          StreamBuilder<Ads>(
+              stream: provider.fetchAd1().asStream(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return Container();
+                } else {
+                  var image = snapshot.data!;
+                  return CachedNetworkImage(
+                    imageUrl: image.imageURL,
+                    fit: BoxFit.cover,
+                  );
+                }
+              }),
           ClipRRect(
             // Clip it cleanly.
             child: Container(
@@ -43,7 +51,6 @@ class SectionTwoDisplay extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  //SizedBox(height: screenSize.height / 4),
                   Text(
                     'BUSINESS DISCOVERY',
                     style: style.copyWith(

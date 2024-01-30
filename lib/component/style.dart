@@ -5,6 +5,7 @@ final style = TextStyle(
   fontSize: 16,
   fontWeight: FontWeight.w400,
   color: AppColor.primaryColor,
+  fontFamily: 'SF Pro Display',
 );
 
 failedOperation({context, required String message}) =>

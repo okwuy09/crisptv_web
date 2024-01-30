@@ -254,7 +254,10 @@ class _EditVideoState extends State<EditVideo> {
                                                   borderRadius:
                                                       BorderRadius.circular(8),
                                                   hint: Text(
-                                                    postCategories[0].name,
+                                                    postCategories.isEmpty
+                                                        ? 'Select category'
+                                                        : postCategories[0]
+                                                            .name,
                                                     style: style.copyWith(
                                                       fontSize: 13,
                                                       fontWeight:

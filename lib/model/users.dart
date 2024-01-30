@@ -5,6 +5,7 @@ class Users {
     this.fullName,
     this.avatar,
     this.banned,
+    this.role,
     this.dateCreated,
   });
 
@@ -13,6 +14,7 @@ class Users {
   String? fullName;
   String? avatar;
   bool? banned;
+  String? role;
   DateTime? dateCreated;
 
   factory Users.fromJson(Map<String, dynamic> json) => Users(
@@ -21,6 +23,7 @@ class Users {
         fullName: json["full_name"],
         avatar: json["avatar"],
         banned: json["banned"],
+        role: json["role"] ?? '',
         dateCreated: DateTime.parse(json["date_created"]),
       );
 
@@ -30,6 +33,7 @@ class Users {
         "full_name": fullName,
         "avatar": avatar,
         "banned": banned,
+        "role": role,
         "date_created": dateCreated!.toIso8601String(),
       };
 }

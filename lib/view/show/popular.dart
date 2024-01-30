@@ -32,7 +32,7 @@ class _PopularVideoState extends State<PopularVideo> {
         if (!snapshot.hasData) {
           return Container();
         } else {
-          var postCategory = snapshot.data!;
+          var postCategories = snapshot.data!;
           return Padding(
             padding: EdgeInsets.only(
               top: screenSize.height / 25,
@@ -61,23 +61,27 @@ class _PopularVideoState extends State<PopularVideo> {
                         ),
                         SizedBox(height: screenSize.height / 15),
                         // Video widget
-                        screenSize.width < 800
+                        screenSize.width < 1000
                             ? ListView.builder(
-                                itemCount: videoPost.length,
+                                itemCount: videoPost.length < 12
+                                    ? videoPost.length
+                                    : 12,
                                 shrinkWrap: true,
                                 physics: const NeverScrollableScrollPhysics(),
                                 itemBuilder: ((context, index) {
+                                  var postCategory = postCategories
+                                      .where((e) => e.id!.contains(
+                                          videoPost[index].categoryID))
+                                      .toList();
                                   return Column(
                                     children: [
                                       Stack(
                                         children: [
                                           Container(
                                             height: 320,
-                                            width: screenSize
-                                                .width, // < 800 ? 220 : 294,
+                                            width: screenSize.width,
                                             decoration: BoxDecoration(
                                               color: AppColor.white,
-                                              //borderRadius: BorderRadius.circular(6),
                                               image: DecorationImage(
                                                 image: NetworkImage(
                                                     videoPost[index].image),
@@ -93,11 +97,9 @@ class _PopularVideoState extends State<PopularVideo> {
                                                   builder: (_) => VideoDetail(
                                                         videopost:
                                                             videoPost[index],
-                                                      ) // PublishVideo(),
-                                                  ),
+                                                      )),
                                               child: Container(
-                                                width: screenSize
-                                                    .width, //< 800 ? 220 : 295,
+                                                width: screenSize.width,
                                                 height: screenSize.width < 800
                                                     ? 85
                                                     : 72,
@@ -120,7 +122,7 @@ class _PopularVideoState extends State<PopularVideo> {
                                                     ),
                                                     const SizedBox(height: 10),
                                                     Text(
-                                                      '${postCategory[0].name} | 0${videoPost[index].time.day.toDouble()}. 0${videoPost[index].time.month.toDouble()}. ${videoPost[index].time.year}',
+                                                      '${postCategory.isEmpty ? '' : postCategory[0].name} | 0${videoPost[index].time.day.toDouble()}. 0${videoPost[index].time.month.toDouble()}. ${videoPost[index].time.year}',
                                                       style: style.copyWith(
                                                         fontSize: 10,
                                                         fontWeight:
@@ -142,7 +144,9 @@ class _PopularVideoState extends State<PopularVideo> {
                                 }),
                               )
                             : GridView.builder(
-                                itemCount: videoPost.length,
+                                itemCount: videoPost.length < 12
+                                    ? videoPost.length
+                                    : 12,
                                 shrinkWrap: true,
                                 physics: const NeverScrollableScrollPhysics(),
                                 gridDelegate:
@@ -157,6 +161,10 @@ class _PopularVideoState extends State<PopularVideo> {
                                   mainAxisExtent: 300,
                                 ),
                                 itemBuilder: ((context, index) {
+                                  var postCategory = postCategories
+                                      .where((e) => e.id!.contains(
+                                          videoPost[index].categoryID))
+                                      .toList();
                                   return SizedBox(
                                     height: 300,
                                     child: Column(
@@ -165,9 +173,7 @@ class _PopularVideoState extends State<PopularVideo> {
                                           onTap: () => showDialog(
                                               context: context,
                                               builder: (_) => VideoDetail(
-                                                  videopost: videoPost[
-                                                      index]) // PublishVideo(),
-                                              ),
+                                                  videopost: videoPost[index])),
                                           child: Container(
                                             height: 210,
                                             width: screenSize.width < 800
@@ -175,7 +181,6 @@ class _PopularVideoState extends State<PopularVideo> {
                                                 : 294,
                                             decoration: BoxDecoration(
                                               color: AppColor.white,
-                                              //borderRadius: BorderRadius.circular(6),
                                               image: DecorationImage(
                                                 image: NetworkImage(
                                                     videoPost[index].image),
@@ -188,16 +193,11 @@ class _PopularVideoState extends State<PopularVideo> {
                                           onTap: () => showDialog(
                                               context: context,
                                               builder: (_) => VideoDetail(
-                                                  videopost: videoPost[
-                                                      index]) // PublishVideo(),
-                                              ),
+                                                  videopost: videoPost[index])),
                                           child: Container(
                                             width: screenSize.width < 800
                                                 ? 220
                                                 : 295,
-                                            // height: screenSize.width < 800
-                                            //     ? 85
-                                            //     : 72,
                                             color:
                                                 AppColor.gray.withOpacity(0.95),
                                             padding: const EdgeInsets.all(12),
@@ -217,7 +217,7 @@ class _PopularVideoState extends State<PopularVideo> {
                                                 ),
                                                 const SizedBox(height: 10),
                                                 Text(
-                                                  '${postCategory[0].name} |  0${videoPost[index].time.day.toDouble()}. 0${videoPost[index].time.month.toDouble()}. ${videoPost[index].time.year}',
+                                                  '${postCategory.isEmpty ? '' : postCategory[0].name} |  0${videoPost[index].time.day.toDouble()}. 0${videoPost[index].time.month.toDouble()}. ${videoPost[index].time.year}',
                                                   style: style.copyWith(
                                                     fontSize: 10,
                                                     fontWeight:

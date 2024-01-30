@@ -24,6 +24,7 @@ List<String> months = [
   'December'
 ];
 
+// Capitalize text after dot
 String capitalizeAfterDot(String text) {
   final split = text.replaceAll(RegExp(r'\.\s+'), ' #').split(' ');
   String result = split.reduce((a, b) {

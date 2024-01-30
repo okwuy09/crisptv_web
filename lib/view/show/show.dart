@@ -184,7 +184,7 @@ class _ShowsPageState extends State<ShowsPage> {
                     } else {
                       var selectedPost = videoPost
                           .where((item) =>
-                              selectedCategory!.id.contains(item.categoryID))
+                              selectedCategory!.id!.contains(item.categoryID))
                           .toList();
                       return selectedPost.isEmpty
                           ? Container()

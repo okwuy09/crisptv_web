@@ -1,24 +1,24 @@
 import 'package:crisptv/component/color.dart';
 import 'package:crisptv/component/style.dart';
-import 'package:crisptv/model/task.dart';
-import 'package:crisptv/service/task_controller.dart';
+import 'package:crisptv/model/category.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-class RemoveTasks extends StatelessWidget {
-  final Tasks tasks;
-  const RemoveTasks({super.key, required this.tasks});
+class DeleteCategory extends StatelessWidget {
+  final Category category;
+  final void Function()? onTap;
+  const DeleteCategory(
+      {super.key, required this.category, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
-    var provider = Provider.of<TaskController>(context);
+
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Stack(
         children: [
           Container(
-            height: screenSize.height / 3.6,
+            height: screenSize.height / 3.32,
             width: screenSize.width,
             padding: EdgeInsets.all(screenSize.width / 40),
             margin: EdgeInsets.only(
@@ -27,33 +27,25 @@ class RemoveTasks extends StatelessWidget {
               left: screenSize.width / 2.5,
             ),
             decoration: BoxDecoration(
-              color: AppColor.primaryColor,
+              color: AppColor.white,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Column(
               children: [
                 Text(
-                  'Are you sure you want to Delete this Task?',
-                  style: style.copyWith(
-                    fontSize: 20,
-                    color: AppColor.white,
-                  ),
+                  'Are you sure you want to delete ${category.name} Category?',
+                  style: style.copyWith(fontSize: 18),
                 ),
                 const SizedBox(height: 10),
                 Divider(
-                  color: AppColor.white.withOpacity(0.1),
+                  color: AppColor.primaryColor.withOpacity(0.1),
                 ),
                 const SizedBox(height: 10),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     InkWell(
-                      onTap: () async {
-                        await provider.deleteTask(
-                          docID: tasks.id,
-                          context: context,
-                        );
-                      },
+                      onTap: onTap,
                       child: Container(
                         height: 40,
                         padding: const EdgeInsets.symmetric(
@@ -66,7 +58,7 @@ class RemoveTasks extends StatelessWidget {
                         ),
                         child: Center(
                           child: Text(
-                            'Delete',
+                            'Yes I\'m 100% Sure',
                             style: style.copyWith(
                               color: AppColor.white.withOpacity(0.8),
                               fontSize: 14,
@@ -87,14 +79,14 @@ class RemoveTasks extends StatelessWidget {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
                           border: Border.all(
-                            color: AppColor.white.withOpacity(0.5),
+                            color: AppColor.primaryColor.withOpacity(0.5),
                           ),
                         ),
                         child: Center(
                           child: Text(
-                            'Cancel',
+                            'No! Not yet',
                             style: style.copyWith(
-                              color: AppColor.white,
+                              color: AppColor.primaryColor,
                               fontSize: 14,
                             ),
                           ),
@@ -115,13 +107,13 @@ class RemoveTasks extends StatelessWidget {
                 height: 40,
                 width: 40,
                 decoration: BoxDecoration(
-                  color: AppColor.primaryColor,
+                  color: AppColor.white,
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Center(
                     child: Icon(
                   Icons.close,
-                  color: AppColor.white,
+                  color: AppColor.primaryColor,
                 )),
               ),
             ),

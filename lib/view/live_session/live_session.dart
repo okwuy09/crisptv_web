@@ -103,7 +103,7 @@ class _LiveSessionsState extends State<LiveSessions> {
                   StreamBuilder<List<Category>>(
                       stream: provider.fetchAllVideoCategory(),
                       builder: (context, snapshot) {
-                        if (!snapshot.hasData) {
+                        if (!snapshot.hasData || snapshot.data!.isEmpty) {
                           return Container();
                         } else {
                           return EpisodesWidget(

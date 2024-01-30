@@ -38,6 +38,7 @@ class AuthenticationController with ChangeNotifier {
     } on FirebaseAuthException catch (e) {
       isSignIn = false;
       notifyListeners();
+      // ignore: use_build_context_synchronously
       return failedOperation(
         message: e.toString(),
         context: context,
@@ -85,6 +86,7 @@ class AuthenticationController with ChangeNotifier {
               id: docUser.id,
               banned: false,
               dateCreated: DateTime.now(),
+              role: 'user',
             );
             final json = user.toJson();
             //create document and write data to firebase
@@ -114,6 +116,7 @@ class AuthenticationController with ChangeNotifier {
     } on FirebaseAuthException catch (e) {
       isSignUp = false;
       notifyListeners();
+      // ignore: use_build_context_synchronously
       return failedOperation(
         message: e.toString(),
         context: context,

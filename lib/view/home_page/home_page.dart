@@ -202,81 +202,58 @@ class _HomePageState extends State<HomePage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        // section One
                         const SectionOne(),
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: screenSize.width / 20),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              EpisodesWidget(
-                                videoCategory: videoCategory[0],
-                                sectionTitle:
-                                    'LATEST ${videoCategory[0].name.toUpperCase()} EPISODES',
-                              ),
-                              const SizedBox(height: 20),
-                              EpisodesWidget(
-                                videoCategory: videoCategory[1],
-                                sectionTitle:
-                                    'LATEST ${videoCategory[1].name.toUpperCase()} EPISODES',
-                              ),
-                            ],
-                          ),
-                        ),
 
-                        // section Two
-                        const SizedBox(height: 20),
-                        const SectionTwoDisplay(),
-                        const SizedBox(height: 20),
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: screenSize.width / 20),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              EpisodesWidget(
-                                videoCategory: videoCategory[2],
-                                sectionTitle:
-                                    'LATEST ${videoCategory[2].name.toUpperCase()} EPISODES',
+                        ///
+                        SizedBox(height: screenSize.height / 20),
+                        const ShortFilmDisplay(),
+                        //
+                        SizedBox(height: screenSize.height / 5),
+                        videoCategory.isEmpty
+                            ? Container()
+                            : Padding(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: screenSize.width / 20),
+                                child: EpisodesWidget(
+                                  videoCategory: videoCategory[1],
+                                  sectionTitle:
+                                      'LATEST ${videoCategory[1].name.toUpperCase()} EPISODES',
+                                ),
                               ),
-                              const SizedBox(height: 20),
-                              EpisodesWidget(
-                                videoCategory: videoCategory[3],
-                                sectionTitle:
-                                    'LATEST ${videoCategory[3].name.toUpperCase()} EPISODES',
-                              ),
-                            ],
-                          ),
-                        ),
 
-                        // section three
-                        const SizedBox(height: 20),
-                        const SectionThreeDisplay(),
-                        const SizedBox(height: 20),
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: screenSize.width / 20),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              EpisodesWidget(
-                                videoCategory: videoCategory[4],
-                                sectionTitle:
-                                    'LATEST ${videoCategory[4].name.toUpperCase()} EPISODES',
+                        SizedBox(height: screenSize.height / 5),
+                        const BusinessDisplay(),
+                        SizedBox(height: screenSize.height / 5),
+
+                        ///
+                        videoCategory.isEmpty
+                            ? Container()
+                            : Padding(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: screenSize.width / 20),
+                                child: EpisodesWidget(
+                                  videoCategory: videoCategory[2],
+                                  sectionTitle:
+                                      'LATEST ${videoCategory[2].name.toUpperCase()} EPISODES',
+                                ),
                               ),
-                              const SizedBox(height: 20),
-                              EpisodesWidget(
-                                videoCategory: videoCategory[5],
-                                sectionTitle:
-                                    videoCategory[5].name.toUpperCase(),
+
+                        SizedBox(height: screenSize.height / 5),
+                        const PodCastsDisplay(),
+                        SizedBox(height: screenSize.height / 5),
+
+                        ///
+                        videoCategory.isEmpty
+                            ? Container()
+                            : Padding(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: screenSize.width / 20),
+                                child: EpisodesWidget(
+                                  videoCategory: videoCategory[5],
+                                  sectionTitle:
+                                      videoCategory[5].name.toUpperCase(),
+                                ),
                               ),
-                            ],
-                          ),
-                        ),
                       ],
                     );
                   }
@@ -305,8 +282,8 @@ class _HomePageState extends State<HomePage> {
                   }
                 },
               ),
-              SizedBox(height: screenSize.height / 14),
-              const SectionFourDisplay(),
+              // SizedBox(height: screenSize.height / 14),
+              // const SectionFourDisplay(),
               SizedBox(height: screenSize.height / 5),
               const BottomBar()
             ],

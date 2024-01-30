@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:crisptv/component/color.dart';
 import 'package:crisptv/component/style.dart';
 import 'package:crisptv/model/posts.dart';
@@ -8,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 // ignore: implementation_imports
 import 'package:flutter/src/widgets/text.dart' as text;
-import 'package:tuple/tuple.dart';
 
 class EditPost extends StatefulWidget {
   final Posts post;
@@ -90,16 +88,37 @@ class _EditPostState extends State<EditPost> {
                   SizedBox(
                     height: screenSize.height / 20,
                   ),
-                  QuillToolbar.basic(
-                    controller: _controller!,
-                    //embedButtons: FlutterQuillEmbeds.buttons(),
-                    iconTheme: QuillIconTheme(
-                      iconUnselectedColor: AppColor.white.withOpacity(0.5),
-                      iconSelectedColor: AppColor.white,
-                      iconSelectedFillColor: AppColor.white.withOpacity(0.15),
-                      iconUnselectedFillColor: AppColor.white.withOpacity(0.08),
-                      disabledIconColor: AppColor.white.withOpacity(0.5),
+                  QuillToolbar.simple(
+                    configurations: QuillSimpleToolbarConfigurations(
+                      controller: _controller!,
+                      buttonOptions: QuillSimpleToolbarButtonOptions(
+                        fontSize: QuillToolbarFontSizeButtonOptions(
+                          style: style.copyWith(
+                            color: AppColor.white.withOpacity(0.6),
+                          ),
+                        ),
+                        fontFamily: QuillToolbarFontFamilyButtonOptions(
+                          style: style.copyWith(
+                            color: AppColor.white.withOpacity(0.6),
+                          ),
+                        ),
+                        selectHeaderStyleDropdownButton:
+                            QuillToolbarSelectHeaderStyleDropdownButtonOptions(
+                          textStyle: style.copyWith(
+                            color: AppColor.white.withOpacity(0.6),
+                          ),
+                        ),
+                      ),
                     ),
+
+                    //embedButtons: FlutterQuillEmbeds.buttons(),
+                    // iconTheme: QuillIconTheme(
+                    //   iconUnselectedColor: AppColor.white.withOpacity(0.5),
+                    //   iconSelectedColor: AppColor.white,
+                    //   iconSelectedFillColor: AppColor.white.withOpacity(0.15),
+                    //   iconUnselectedFillColor: AppColor.white.withOpacity(0.08),
+                    //   disabledIconColor: AppColor.white.withOpacity(0.5),
+                    // ),
                   ),
                 ],
               ),
@@ -193,88 +212,92 @@ class _EditPostState extends State<EditPost> {
                     ),
                   ),
                   child: QuillEditor(
-                    scrollable: true,
-                    autoFocus: true,
-                    expands: true,
-                    padding: const EdgeInsets.all(20),
                     focusNode: focusNode,
                     scrollController: _scrollController,
-                    controller: _controller!,
-                    readOnly: false, // true for view only mode
-                    //embedBuilders: FlutterQuillEmbeds.builders(),
-                    customStyles: DefaultStyles(
-                      paragraph: DefaultTextBlockStyle(
-                        style.copyWith(
-                          color: AppColor.white.withOpacity(0.8),
+                    configurations: QuillEditorConfigurations(
+                      controller: _controller!,
+                      scrollable: true,
+                      autoFocus: true,
+                      expands: true,
+                      padding: const EdgeInsets.all(20),
+                      readOnly: false,
+                      customStyles: DefaultStyles(
+                        paragraph: DefaultTextBlockStyle(
+                          style.copyWith(
+                            color: AppColor.white.withOpacity(0.8),
+                          ),
+                          const VerticalSpacing(16, 0),
+                          const VerticalSpacing(0, 0),
+                          null,
+                          // const Tuple2(16, 0),
+                          // const Tuple2(0, 0),
+                          // null,
                         ),
-                        const Tuple2(16, 0),
-                        const Tuple2(0, 0),
-                        null,
-                        // const Tuple2(16, 0),
-                        // const Tuple2(0, 0),
-                        // null,
-                      ),
-                      h1: DefaultTextBlockStyle(
-                        style.copyWith(
-                          fontSize: 20,
-                          color: AppColor.white.withOpacity(0.8),
+                        h1: DefaultTextBlockStyle(
+                          style.copyWith(
+                            fontSize: 20,
+                            color: AppColor.white.withOpacity(0.8),
+                          ),
+                          const VerticalSpacing(16, 0),
+                          const VerticalSpacing(0, 0),
+                          null,
                         ),
-                        const Tuple2(16, 0),
-                        const Tuple2(0, 0),
-                        null,
-                      ),
-                      h2: DefaultTextBlockStyle(
-                        style.copyWith(
-                          fontSize: 25,
-                          color: AppColor.white.withOpacity(0.8),
+                        h2: DefaultTextBlockStyle(
+                          style.copyWith(
+                            fontSize: 25,
+                            color: AppColor.white.withOpacity(0.8),
+                          ),
+                          const VerticalSpacing(16, 0),
+                          const VerticalSpacing(0, 0),
+                          null,
                         ),
-                        const Tuple2(16, 0),
-                        const Tuple2(0, 0),
-                        null,
-                      ),
-                      h3: DefaultTextBlockStyle(
-                        style.copyWith(
-                          fontSize: 30,
-                          color: AppColor.white.withOpacity(0.8),
+                        h3: DefaultTextBlockStyle(
+                          style.copyWith(
+                            fontSize: 30,
+                            color: AppColor.white.withOpacity(0.8),
+                          ),
+                          const VerticalSpacing(16, 0),
+                          const VerticalSpacing(0, 0),
+                          null,
                         ),
-                        const Tuple2(16, 0),
-                        const Tuple2(0, 0),
-                        null,
-                      ),
-                      quote: DefaultTextBlockStyle(
-                        style.copyWith(
-                          color: AppColor.white.withOpacity(0.8),
+                        quote: DefaultTextBlockStyle(
+                          style.copyWith(
+                            color: AppColor.white.withOpacity(0.8),
+                          ),
+                          const VerticalSpacing(16, 0),
+                          const VerticalSpacing(0, 0),
+                          null,
                         ),
-                        const Tuple2(16, 0),
-                        const Tuple2(0, 0),
-                        null,
-                      ),
-                      lists: DefaultListBlockStyle(
-                        style.copyWith(
-                          color: AppColor.white.withOpacity(0.8),
+                        lists: DefaultListBlockStyle(
+                          style.copyWith(
+                            color: AppColor.white.withOpacity(0.8),
+                          ),
+                          const VerticalSpacing(16, 0),
+                          const VerticalSpacing(0, 0),
+                          null,
+                          null,
                         ),
-                        const Tuple2(16, 0),
-                        const Tuple2(0, 0),
-                        null,
-                        null,
-                      ),
-                      code: DefaultTextBlockStyle(
-                        style.copyWith(
-                          color: AppColor.white.withOpacity(0.8),
+                        code: DefaultTextBlockStyle(
+                          style.copyWith(
+                            color: AppColor.white.withOpacity(0.8),
+                          ),
+                          const VerticalSpacing(16, 0),
+                          const VerticalSpacing(0, 0),
+                          null,
                         ),
-                        const Tuple2(16, 0),
-                        const Tuple2(0, 0),
-                        null,
-                      ),
-                      leading: DefaultTextBlockStyle(
-                        style.copyWith(
-                          color: AppColor.white.withOpacity(0.8),
+                        leading: DefaultTextBlockStyle(
+                          style.copyWith(
+                            color: AppColor.white.withOpacity(0.8),
+                          ),
+                          const VerticalSpacing(16, 0),
+                          const VerticalSpacing(0, 0),
+                          null,
                         ),
-                        const Tuple2(16, 0),
-                        const Tuple2(0, 0),
-                        null,
                       ),
                     ),
+
+                    // true for view only mode
+                    //embedBuilders: FlutterQuillEmbeds.builders(),
                   ),
                 ),
               ),

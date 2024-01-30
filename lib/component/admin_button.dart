@@ -15,7 +15,7 @@ class AdminButton extends StatelessWidget {
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
     return Container(
-      width: screenSize.width / 10,
+      width: screenSize.width / 9,
       height: screenSize.height / 6,
       padding: EdgeInsets.only(left: screenSize.width / 30),
       color: color,

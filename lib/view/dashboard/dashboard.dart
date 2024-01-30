@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:crisptv/component/admin_button.dart';
 import 'package:crisptv/component/color.dart';
 import 'package:crisptv/component/custom_switch.dart';
@@ -7,7 +8,7 @@ import 'package:crisptv/model/team.dart';
 import 'package:crisptv/model/users.dart';
 import 'package:crisptv/service/authentication_controller.dart';
 import 'package:crisptv/service/user_controller.dart';
-import 'package:crisptv/view/dashboard/general_setting.dart';
+import 'package:crisptv/view/dashboard/setting/general_setting.dart';
 import 'package:crisptv/view/dashboard/news_article/news_article.dart';
 import 'package:crisptv/view/dashboard/overview.dart';
 import 'package:crisptv/view/dashboard/task_sheet/tasks.dart';
@@ -26,6 +27,15 @@ class DashBoard extends StatefulWidget {
 
 class _DashBoardState extends State<DashBoard> {
   bool isdarkmode = false;
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      context.read<UserController>().fetchUserProfile();
+    });
+
+    super.initState();
+  }
 
   List<bool> isclicked = [
     true,
@@ -53,7 +63,23 @@ class _DashBoardState extends State<DashBoard> {
   Widget _getBodyWidget(currentIndex) {
     switch (currentIndex) {
       case 0:
-        return const Expanded(child: Overview());
+        return Expanded(
+            child: Overview(
+          moreNews: () => setState(() {
+            pageIndex = 2;
+            isclicked.replaceRange(0, isclicked.length,
+                [for (int i = 0; i < isclicked.length; i++) false]);
+            isclicked[2] = true;
+            titleHead = headText[2];
+          }),
+          moreVideo: () => setState(() {
+            pageIndex = 1;
+            isclicked.replaceRange(0, isclicked.length,
+                [for (int i = 0; i < isclicked.length; i++) false]);
+            isclicked[1] = true;
+            titleHead = headText[1];
+          }),
+        ));
       case 1:
         return const Expanded(child: Videos());
 
@@ -93,7 +119,7 @@ class _DashBoardState extends State<DashBoard> {
             children: [
               Container(
                 color: AppColor.primaryColor,
-                width: screenSize.width / 11,
+                width: screenSize.width / 9,
                 height: 80,
                 child: InkWell(
                   onTap: () => context.go('/'),
@@ -133,13 +159,6 @@ class _DashBoardState extends State<DashBoard> {
                       color: AppColor.white.withOpacity(0.6),
                     ),
                     cursorColor: AppColor.white.withOpacity(0.5),
-                    // controller: widget.delegate._queryTextController,
-                    // focusNode: focusNode,
-                    // style: theme.textTheme.headline6,
-                    // textInputAction: widget.delegate.textInputAction,
-                    // keyboardType: widget.delegate.keyboardType,
-                    // onChanged: widget.delegate.onChange,
-                    // onSubmitted: widget.delegate.onSubmit,
                     decoration: InputDecoration(
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(
@@ -229,8 +248,8 @@ class _DashBoardState extends State<DashBoard> {
                           ),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(12),
-                            child: Image.network(
-                              user.avatar!,
+                            child: CachedNetworkImage(
+                              imageUrl: user.avatar!,
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -304,11 +323,13 @@ class _DashBoardState extends State<DashBoard> {
               children: [
                 Container(
                   color: AppColor.primaryColor,
-                  width: screenSize.width / 11,
+                  width: screenSize.width / 9,
                   height: screenSize.height * 1.3,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
+                      Divider(height: 0.6, color: AppColor.gray),
+
                       /// overView
                       InkWell(
                         onTap: () {
@@ -332,6 +353,8 @@ class _DashBoardState extends State<DashBoard> {
                         ),
                       ),
 
+                      Divider(height: 0.6, color: AppColor.gray),
+
                       /// videos
                       InkWell(
                         onTap: () {
@@ -354,6 +377,7 @@ class _DashBoardState extends State<DashBoard> {
                               : AppColor.white.withOpacity(0.4),
                         ),
                       ),
+                      Divider(height: 0.6, color: AppColor.gray),
 
                       /// News articles
                       InkWell(
@@ -377,6 +401,7 @@ class _DashBoardState extends State<DashBoard> {
                               : AppColor.white.withOpacity(0.4),
                         ),
                       ),
+                      Divider(height: 0.6, color: AppColor.gray),
 
                       /// TEAM
                       InkWell(
@@ -400,6 +425,7 @@ class _DashBoardState extends State<DashBoard> {
                               : AppColor.white.withOpacity(0.4),
                         ),
                       ),
+                      Divider(height: 0.6, color: AppColor.gray),
 
                       /// Task Sheet
                       InkWell(
@@ -423,6 +449,7 @@ class _DashBoardState extends State<DashBoard> {
                               : AppColor.white.withOpacity(0.4),
                         ),
                       ),
+                      Divider(height: 0.6, color: AppColor.gray),
 
                       /// Settings
                       InkWell(
@@ -446,8 +473,9 @@ class _DashBoardState extends State<DashBoard> {
                               : AppColor.white.withOpacity(0.4),
                         ),
                       ),
+                      Divider(height: 0.6, color: AppColor.gray),
 
-                      // darkmood
+                      /// darkmood
                       SizedBox(height: screenSize.height / 10),
                       CustomSwitch(
                         value: switched,

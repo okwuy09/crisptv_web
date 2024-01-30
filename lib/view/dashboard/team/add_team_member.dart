@@ -391,7 +391,7 @@ class _AddNewTeamMemeberState extends State<AddNewTeamMemeber> {
                     )
                   ],
                 ),
-                SizedBox(height: screenSize.height / 22),
+                SizedBox(height: screenSize.height / 25),
                 InkWell(
                   onTap: imagefile == null
                       ? null
@@ -403,7 +403,7 @@ class _AddNewTeamMemeberState extends State<AddNewTeamMemeber> {
                               userImage: imagefile!,
                               imageName: imageName!,
                               position: _selectedValue!.name,
-                              positionID: _selectedValue!.id,
+                              positionID: _selectedValue!.id!,
                               email: _email.text,
                               password: _password.text,
                             );

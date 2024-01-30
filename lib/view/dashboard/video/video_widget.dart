@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:crisptv/component/color.dart';
 import 'package:crisptv/component/style.dart';
 import 'package:crisptv/constant.dart';
@@ -52,11 +53,10 @@ class VideoWidget extends StatelessWidget {
                   width: screenSize.width, //< 800 ? 220 : 294,
                   decoration: BoxDecoration(
                     color: AppColor.white,
-                    //borderRadius: BorderRadius.circular(6),
-                    image: DecorationImage(
-                      image: NetworkImage(videoPost[index].image),
-                      fit: BoxFit.cover,
-                    ),
+                  ),
+                  child: CachedNetworkImage(
+                    imageUrl: videoPost[index].image,
+                    fit: BoxFit.cover,
                   ),
                 ),
                 Container(
@@ -101,14 +101,16 @@ class VideoWidget extends StatelessWidget {
                                             color: AppColor.primaryColor);
                                       } else {
                                         var category = snapshot.data!
-                                            .where((element) =>
-                                                element.id ==
-                                                videoPost[index].categoryID)
+                                            .where((element) => element.id!
+                                                .contains(videoPost[index]
+                                                    .categoryID))
                                             .toList();
                                         return Text(
-                                          category[0].name.toUpperCase(),
+                                          category.isEmpty
+                                              ? ''
+                                              : category[0].name.toUpperCase(),
                                           style: style.copyWith(
-                                            fontSize: 11,
+                                            fontSize: 9.5,
                                             fontWeight: FontWeight.normal,
                                             color:
                                                 AppColor.white.withOpacity(0.5),

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:crisptv/constant.dart';
 import 'package:crisptv/model/category.dart';
@@ -5,6 +7,19 @@ import 'package:crisptv/view/dashboard/video/success_create.dart';
 import 'package:flutter/material.dart';
 
 class CategoryController with ChangeNotifier {
+  ///
+  Future<void> deleteVideoCategory(String id) {
+    return firebaseStore.collection('video_category').doc(id).delete();
+  }
+
+  Future<void> deleteNewsCategory(String id) {
+    return firebaseStore.collection('news_category').doc(id).delete();
+  }
+
+  Future<void> deleteTeamCategory(String id) async {
+    return firebaseStore.collection('team_category').doc(id).delete();
+  }
+
   /// Fetch all News Category
   Stream<List<Category>> fetchAllTeamCategory() {
     var categorysDoc = firebaseStore
@@ -102,6 +117,7 @@ class CategoryController with ChangeNotifier {
         .snapshots()
         .map((snapshot) =>
             snapshot.docs.map((doc) => Category.fromJson(doc.data())).toList());
+
     return categorysDoc;
   }
 

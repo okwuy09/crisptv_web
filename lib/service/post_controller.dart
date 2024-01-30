@@ -242,7 +242,7 @@ class PostController with ChangeNotifier {
 
       final post = Posts(
         id: docPost.id,
-        categoryID: category.id,
+        categoryID: category.id!,
         image: imageUrl,
         posterName: posterName,
         time: DateTime.now(),

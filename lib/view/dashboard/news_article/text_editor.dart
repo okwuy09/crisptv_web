@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 // ignore: implementation_imports
 import 'package:flutter/src/widgets/text.dart' as text;
-import 'package:tuple/tuple.dart';
 
 class TextEditor extends StatefulWidget {
   const TextEditor({super.key});
@@ -40,15 +39,27 @@ class _TextEditorState extends State<TextEditor> {
                 right: screenSize.width / 20,
                 left: screenSize.width / 20,
               ),
-              child: QuillToolbar.basic(
-                controller: _controller,
-                //embedButtons: FlutterQuillEmbeds.buttons(),
-                iconTheme: QuillIconTheme(
-                  iconUnselectedColor: AppColor.white.withOpacity(0.5),
-                  iconSelectedColor: AppColor.white,
-                  iconSelectedFillColor: AppColor.white.withOpacity(0.15),
-                  iconUnselectedFillColor: AppColor.white.withOpacity(0.08),
-                  disabledIconColor: AppColor.white.withOpacity(0.5),
+              child: QuillToolbar.simple(
+                configurations: QuillSimpleToolbarConfigurations(
+                  controller: _controller,
+                  buttonOptions: QuillSimpleToolbarButtonOptions(
+                    fontSize: QuillToolbarFontSizeButtonOptions(
+                      style: style.copyWith(
+                        color: AppColor.white.withOpacity(0.6),
+                      ),
+                    ),
+                    fontFamily: QuillToolbarFontFamilyButtonOptions(
+                      style: style.copyWith(
+                        color: AppColor.white.withOpacity(0.6),
+                      ),
+                    ),
+                    selectHeaderStyleDropdownButton:
+                        QuillToolbarSelectHeaderStyleDropdownButtonOptions(
+                      textStyle: style.copyWith(
+                        color: AppColor.white.withOpacity(0.6),
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ),
@@ -140,86 +151,88 @@ class _TextEditorState extends State<TextEditor> {
                     ),
                   ),
                   child: QuillEditor(
-                    scrollable: true,
-                    autoFocus: true,
-                    expands: true,
-                    padding: const EdgeInsets.all(20),
                     focusNode: focusNode,
                     scrollController: _scrollController,
-                    controller: _controller,
-                    readOnly: false, // true for view only mode
+                    // true for view only mode
                     //embedBuilders: FlutterQuillEmbeds.builders(),
-                    customStyles: DefaultStyles(
-                      paragraph: DefaultTextBlockStyle(
-                        style.copyWith(
-                          color: AppColor.white.withOpacity(0.8),
+
+                    configurations: QuillEditorConfigurations(
+                      controller: _controller,
+                      readOnly: false,
+                      scrollable: true,
+                      autoFocus: true,
+                      expands: true,
+                      padding: const EdgeInsets.all(20),
+                      customStyles: DefaultStyles(
+                        paragraph: DefaultTextBlockStyle(
+                          style.copyWith(
+                            color: AppColor.white.withOpacity(0.8),
+                          ),
+                          const VerticalSpacing(16, 0),
+                          const VerticalSpacing(0, 0),
+                          null,
+                          // const Tuple2(16, 0),
                         ),
-                        const Tuple2(16, 0),
-                        const Tuple2(0, 0),
-                        null,
-                        // const Tuple2(16, 0),
-                        // const Tuple2(0, 0),
-                        // null,
-                      ),
-                      h1: DefaultTextBlockStyle(
-                        style.copyWith(
-                          fontSize: 20,
-                          color: AppColor.white.withOpacity(0.8),
+                        h1: DefaultTextBlockStyle(
+                          style.copyWith(
+                            fontSize: 20,
+                            color: AppColor.white.withOpacity(0.8),
+                          ),
+                          const VerticalSpacing(16, 0),
+                          const VerticalSpacing(0, 0),
+                          null,
                         ),
-                        const Tuple2(16, 0),
-                        const Tuple2(0, 0),
-                        null,
-                      ),
-                      h2: DefaultTextBlockStyle(
-                        style.copyWith(
-                          fontSize: 25,
-                          color: AppColor.white.withOpacity(0.8),
+                        h2: DefaultTextBlockStyle(
+                          style.copyWith(
+                            fontSize: 25,
+                            color: AppColor.white.withOpacity(0.8),
+                          ),
+                          const VerticalSpacing(16, 0),
+                          const VerticalSpacing(0, 0),
+                          null,
                         ),
-                        const Tuple2(16, 0),
-                        const Tuple2(0, 0),
-                        null,
-                      ),
-                      h3: DefaultTextBlockStyle(
-                        style.copyWith(
-                          fontSize: 30,
-                          color: AppColor.white.withOpacity(0.8),
+                        h3: DefaultTextBlockStyle(
+                          style.copyWith(
+                            fontSize: 30,
+                            color: AppColor.white.withOpacity(0.8),
+                          ),
+                          const VerticalSpacing(16, 0),
+                          const VerticalSpacing(0, 0),
+                          null,
                         ),
-                        const Tuple2(16, 0),
-                        const Tuple2(0, 0),
-                        null,
-                      ),
-                      quote: DefaultTextBlockStyle(
-                        style.copyWith(
-                          color: AppColor.white.withOpacity(0.8),
+                        quote: DefaultTextBlockStyle(
+                          style.copyWith(
+                            color: AppColor.white.withOpacity(0.8),
+                          ),
+                          const VerticalSpacing(16, 0),
+                          const VerticalSpacing(0, 0),
+                          null,
                         ),
-                        const Tuple2(16, 0),
-                        const Tuple2(0, 0),
-                        null,
-                      ),
-                      lists: DefaultListBlockStyle(
-                        style.copyWith(
-                          color: AppColor.white.withOpacity(0.8),
+                        lists: DefaultListBlockStyle(
+                          style.copyWith(
+                            color: AppColor.white.withOpacity(0.8),
+                          ),
+                          const VerticalSpacing(16, 0),
+                          const VerticalSpacing(0, 0),
+                          null,
+                          null,
                         ),
-                        const Tuple2(16, 0),
-                        const Tuple2(0, 0),
-                        null,
-                        null,
-                      ),
-                      code: DefaultTextBlockStyle(
-                        style.copyWith(
-                          color: AppColor.white.withOpacity(0.8),
+                        code: DefaultTextBlockStyle(
+                          style.copyWith(
+                            color: AppColor.white.withOpacity(0.8),
+                          ),
+                          const VerticalSpacing(16, 0),
+                          const VerticalSpacing(0, 0),
+                          null,
                         ),
-                        const Tuple2(16, 0),
-                        const Tuple2(0, 0),
-                        null,
-                      ),
-                      leading: DefaultTextBlockStyle(
-                        style.copyWith(
-                          color: AppColor.white.withOpacity(0.8),
+                        leading: DefaultTextBlockStyle(
+                          style.copyWith(
+                            color: AppColor.white.withOpacity(0.8),
+                          ),
+                          const VerticalSpacing(16, 0),
+                          const VerticalSpacing(0, 0),
+                          null,
                         ),
-                        const Tuple2(16, 0),
-                        const Tuple2(0, 0),
-                        null,
                       ),
                     ),
                   ),

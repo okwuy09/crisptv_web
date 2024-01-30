@@ -36,11 +36,11 @@ class RemoveTeamMemeber extends StatelessWidget {
                   'Are you sure you want to remove team member?',
                   style: style.copyWith(fontSize: 20),
                 ),
-                SizedBox(height: screenSize.height / 50),
+                const SizedBox(height: 10),
                 Divider(
                   color: AppColor.primaryColor.withOpacity(0.1),
                 ),
-                SizedBox(height: screenSize.height / 40),
+                const SizedBox(height: 10),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

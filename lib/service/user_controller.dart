@@ -5,14 +5,11 @@ import 'package:crisptv/model/team.dart';
 import 'package:crisptv/model/users.dart';
 import 'package:crisptv/view/dashboard/video/successful_publish.dart';
 import 'package:flutter/material.dart';
-
 import '../view/dashboard/team/success_member_remove.dart';
 
 class UserController with ChangeNotifier {
-  // UserController() {
-  //   fetchUserProfile();
-  // }
-  Users userData = Users();
+  Users _userData = Users();
+  Users get userData => _userData;
 
   /// Fetch all users
   Stream<List<Users>> fetchAllUser() {
@@ -29,14 +26,11 @@ class UserController with ChangeNotifier {
   /// fetch user current profile
   Future<Users> fetchUserProfile() async {
     var userDoc = await firebaseStore.collection('users').doc(user.uid).get();
-    firebaseStore
-        .collection('users')
-        .doc(user.uid)
-        .snapshots()
-        .listen((event) => 
-              userData = Users.fromJson(event.data()!),
-              //notifyListeners(),
-            );
+    firebaseStore.collection('users').doc(user.uid).snapshots().listen(
+          (event) => _userData = Users.fromJson(event.data()!),
+          //notifyListeners(),
+        );
+
     return Users.fromJson(userDoc.data()!);
   }
 
@@ -69,18 +63,16 @@ class UserController with ChangeNotifier {
     required String docID,
   }) async {
     try {
-      firebaseStore
-          .collection('team_member')
-          .doc(docID)
-          .delete()
-          .then((value) => {
-                Navigator.pop(context, false),
-                notifyListeners(),
-                showDialog(
-                  context: context,
-                  builder: (_) => SuccessfulRemoveTeamMemeber(name: userName),
-                ),
-              });
+      firebaseStore.collection('team_member').doc(docID).delete().then(
+            (value) => {
+              Navigator.pop(context, false),
+              notifyListeners(),
+              showDialog(
+                context: context,
+                builder: (_) => SuccessfulRemoveTeamMemeber(name: userName),
+              ),
+            },
+          );
     } on FirebaseException catch (e) {
       return e.toString();
     }

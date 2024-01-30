@@ -1,4 +1,5 @@
 import 'package:crisptv/component/color.dart';
+import 'package:crisptv/constant.dart';
 import 'package:crisptv/model/category.dart';
 import 'package:crisptv/model/posts.dart';
 import 'package:crisptv/service/category_controller.dart';
@@ -22,20 +23,6 @@ class _VideoFeedWidgetState extends State<VideoFeedWidget> {
   // ignore: unused_field
   int _currentIndex = 0;
 
-  // Capitalize text after dot
-
-  String capitalizeAfterDot(String text) {
-    final split = text.replaceAll(RegExp(r'\.\s+'), ' #').split(' ');
-    String result = split.reduce((a, b) {
-      if (b.startsWith('#')) {
-        return a + b.replaceRange(0, 2, '. ${b[1].toUpperCase()}');
-      }
-      return '$a $b';
-    });
-
-    return result.replaceRange(0, 1, result[0].toUpperCase());
-  }
-
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
@@ -48,8 +35,8 @@ class _VideoFeedWidgetState extends State<VideoFeedWidget> {
           } else {
             var category = snapshot.data!;
             var postCategory = category
-                .where(
-                    (element) => element.id == widget.videopost[0].categoryID)
+                .where((element) =>
+                    element.id!.contains(widget.videopost[0].categoryID))
                 .toList();
             return Padding(
               padding: EdgeInsets.only(
@@ -71,7 +58,9 @@ class _VideoFeedWidgetState extends State<VideoFeedWidget> {
                   // Video widget
                   screenSize.width < 800
                       ? ListView.builder(
-                          itemCount: widget.videopost.length,
+                          itemCount: widget.videopost.length < 12
+                              ? widget.videopost.length
+                              : 12,
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
                           itemBuilder: ((context, index) {
@@ -81,11 +70,9 @@ class _VideoFeedWidgetState extends State<VideoFeedWidget> {
                                   children: [
                                     Container(
                                       height: 320,
-                                      width: screenSize
-                                          .width, // < 800 ? 220 : 294,
+                                      width: screenSize.width,
                                       decoration: BoxDecoration(
                                         color: AppColor.white,
-                                        //borderRadius: BorderRadius.circular(6),
                                         image: DecorationImage(
                                           image: NetworkImage(
                                               widget.videopost[index].image),
@@ -146,7 +133,9 @@ class _VideoFeedWidgetState extends State<VideoFeedWidget> {
                           }),
                         )
                       : GridView.builder(
-                          itemCount: widget.videopost.length,
+                          itemCount: widget.videopost.length < 12
+                              ? widget.videopost.length
+                              : 12,
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
                           gridDelegate:
@@ -178,7 +167,6 @@ class _VideoFeedWidgetState extends State<VideoFeedWidget> {
                                       width: screenSize.width < 800 ? 220 : 294,
                                       decoration: BoxDecoration(
                                         color: AppColor.white,
-                                        //borderRadius: BorderRadius.circular(6),
                                         image: DecorationImage(
                                           image: NetworkImage(
                                               widget.videopost[index].image),
@@ -191,14 +179,10 @@ class _VideoFeedWidgetState extends State<VideoFeedWidget> {
                                     onTap: () => showDialog(
                                         context: context,
                                         builder: (_) => VideoDetail(
-                                            videopost: widget.videopost[
-                                                index]) // PublishVideo(),
-                                        ),
+                                            videopost:
+                                                widget.videopost[index])),
                                     child: Container(
                                       width: screenSize.width < 800 ? 220 : 295,
-                                      // height: screenSize.width < 800
-                                      //     ? 85
-                                      //     : 72,
                                       color: AppColor.gray.withOpacity(0.95),
                                       padding: const EdgeInsets.all(12),
                                       child: Column(

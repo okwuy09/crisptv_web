@@ -169,7 +169,7 @@ class _NewsPageState extends State<NewsPage> {
                   } else {
                     var selectedPost = newsPost
                         .where((item) =>
-                            selectedCategory!.id.contains(item.categoryID))
+                            selectedCategory!.id!.contains(item.categoryID))
                         .toList();
                     return NewsFeedWidget(newspost: selectedPost);
                   }

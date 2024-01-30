@@ -1,16 +1,16 @@
 class Category {
   Category({
-    required this.id,
+    this.id,
     required this.name,
     required this.type,
   });
 
-  String id;
+  String? id;
   String name;
   String type;
 
   factory Category.fromJson(Map<String, dynamic> json) => Category(
-        id: json["id"],
+        id: json["id"] ?? '',
         name: json["name"],
         type: json["type"],
       );

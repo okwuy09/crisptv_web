@@ -1,9 +1,6 @@
 import 'package:crisptv/component/style.dart';
 import 'package:crisptv/model/posts.dart';
-import 'package:crisptv/service/authentication_controller.dart';
-import 'package:crisptv/service/category_controller.dart';
-import 'package:crisptv/service/post_controller.dart';
-import 'package:crisptv/service/task_controller.dart';
+import 'package:crisptv/service/controller.dart';
 import 'package:crisptv/view/authentication/signin.dart';
 import 'package:crisptv/view/authentication/signup.dart';
 import 'package:crisptv/view/live_session/live_session.dart';
@@ -20,7 +17,6 @@ import 'package:provider/provider.dart';
 import 'package:url_strategy/url_strategy.dart';
 import 'component/color.dart';
 import 'firebase_options.dart';
-import 'service/user_controller.dart';
 import 'view/dashboard/dashboard.dart';
 import 'view/home_page/home_page.dart';
 import 'view/topbar.dart';
@@ -30,13 +26,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(MultiProvider(providers: [
-    ChangeNotifierProvider(create: (_) => PostController()),
-    ChangeNotifierProvider(create: (_) => UserController()),
-    ChangeNotifierProvider(create: (_) => CategoryController()),
-    ChangeNotifierProvider(create: (_) => TaskController()),
-    ChangeNotifierProvider(create: (_) => AuthenticationController()),
-  ], child: MyApp()));
+  runApp(MyApp());
 }
 
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -47,17 +37,21 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      debugShowCheckedModeBanner: false,
-      routeInformationParser: _router.routeInformationParser,
-      routerDelegate: _router.routerDelegate,
-      routeInformationProvider: _router.routeInformationProvider,
-      title: 'Crisptv',
-      theme: ThemeData(
-        primarySwatch: Colors.grey,
-        primaryColor: AppColor.white,
+    return MultiProvider(
+      providers: AppProviders.providers,
+      child: MaterialApp.router(
+        debugShowCheckedModeBanner: false,
+        routeInformationParser: _router.routeInformationParser,
+        routerDelegate: _router.routerDelegate,
+        routeInformationProvider: _router.routeInformationProvider,
+        title: 'Crisptv',
+        theme: ThemeData(
+          primarySwatch: Colors.grey,
+          primaryColor: AppColor.white,
+          fontFamily: 'SF Pro Display',
+        ),
+        // home: const HomePage(),
       ),
-      // home: const HomePage(),
     );
   }
 
